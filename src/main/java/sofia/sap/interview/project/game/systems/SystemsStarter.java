@@ -13,7 +13,7 @@ public class SystemsStarter {
     private final Collection<User> activeUsers;
     private final List<GameSystem> systems;
 
-    public SystemsStarter(Set<User> activeUsers) {
+    public SystemsStarter(Collection<User> activeUsers) {
         this.scheduler = Executors.newScheduledThreadPool(2);
         this.activeUsers = activeUsers;
         this.systems = List.of(

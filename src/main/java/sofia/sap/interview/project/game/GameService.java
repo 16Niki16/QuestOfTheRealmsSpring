@@ -12,10 +12,9 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class GameService {
     private final Map<String, User> users = new ConcurrentHashMap<>();
-    private final SystemsStarter starter;
 
     public GameService() {
-        this.starter = new SystemsStarter(new HashSet<>(users.values()));
+        SystemsStarter starter = new SystemsStarter(users.values());
         starter.start();
     }
 

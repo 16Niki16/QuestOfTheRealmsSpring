@@ -17,7 +17,6 @@ public class AutoSaveSystem implements GameSystem {
             for (User user : users) {
                 if (user.isActiveSession()) {
                     SaveGame.saveGame(user);
-                    System.out.println("vliza: %s".formatted(user.getUsername()));
                 }
             }
         }, TIME_INTERVAL, TIME_INTERVAL, TimeUnit.SECONDS);
