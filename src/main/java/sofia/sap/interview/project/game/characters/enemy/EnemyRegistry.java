@@ -25,4 +25,7 @@ public class EnemyRegistry {
         }
         return sup.get();
     }
+
+    private EnemyRegistry() {
+    }
 }

@@ -17,7 +17,7 @@ public enum ItemType {
 
     public static ItemType getByName(String itemName) {
         for (ItemType type : values()) {
-            if (type.name.equals(itemName)) {
+            if (type.name.equalsIgnoreCase(itemName)) {
                 return type;
             }
         }

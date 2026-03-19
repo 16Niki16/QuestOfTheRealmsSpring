@@ -29,8 +29,11 @@ public class QuestList {
         int numberOfQuests = ThreadLocalRandom.current().nextInt(MIN_QUESTS, MAX_QUESTS);
 
         return quests.stream()
-                .limit(numberOfQuests)
-                .map(Supplier::get)
-                .collect(Collectors.toList());
+            .limit(numberOfQuests)
+            .map(Supplier::get)
+            .collect(Collectors.toList());
+    }
+
+    private QuestList() {
     }
 }

@@ -16,7 +16,9 @@ public class RegenerationSystem implements GameSystem {
         scheduler.scheduleAtFixedRate(
             () -> {
                 for (User user : users) {
-                    user.getSession().character().regen(AMOUNT);
+                    if (user.isActiveSession()) {
+                        user.getSession().character().regen(AMOUNT);
+                    }
                 }
             },
             TIMER, TIMER, TimeUnit.SECONDS);

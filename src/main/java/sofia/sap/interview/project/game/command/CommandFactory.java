@@ -20,16 +20,16 @@ import java.util.Map;
 
 public class CommandFactory {
     private static final Map<String, CommandParser> COMMANDS = new HashMap<>();
-    private static final Command HELP = new HelpCommand();
-    private static final Command ATTACK = new AttackCommand();
+    private static final Command HELP_COMMAND = new HelpCommand();
+    private static final Command ATTACK_COMMAND = new AttackCommand();
     private static final Command QUESTS = new CheckQuestsCommand();
     private static final Command LOOK = new LookCommand();
     private static final Command PATHS = new PathsCommand();
     private static final Command OPEN = new OpenChestCommand();
 
     static {
-        COMMANDS.put(CommandOption.HELP.getCommand(), args -> HELP);
-        COMMANDS.put(CommandOption.ATTACK.getCommand(), args -> ATTACK);
+        COMMANDS.put(CommandOption.HELP.getCommand(), args -> HELP_COMMAND);
+        COMMANDS.put(CommandOption.ATTACK.getCommand(), args -> ATTACK_COMMAND);
         COMMANDS.put(CommandOption.QUESTS.getCommand(), args -> QUESTS);
         COMMANDS.put(CommandOption.LOOK.getCommand(), args -> LOOK);
         COMMANDS.put(CommandOption.PATHS.getCommand(), args -> PATHS);
@@ -51,7 +51,6 @@ public class CommandFactory {
         }
         String[] args = Arrays.copyOfRange(commandSplit, 1, commandSplit.length);
         return parser.parse(args);
-
     }
 
     private static ItemType itemType(String itemName) {

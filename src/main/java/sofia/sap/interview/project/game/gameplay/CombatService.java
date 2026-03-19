@@ -24,13 +24,13 @@ import java.util.Collection;
 import java.util.List;
 
 public class CombatService {
-    public List<CommandResult> attack(Character character, Enemy enemy, Room room) {
+    public List<CommandResult> attack(Character character, Enemy enemy, Room currentRoom) {
         List<CommandResult> results = new ArrayList<>();
-        int damage = character.attackEnemy();
-        boolean dead = enemy.defendAgainstAllyCharacter(damage);
-        results.add(new EventResult(AttackEvent.of(character, damage, enemy)));
-        if (dead) {
-            room.killEnemy();
+        int damageDealt = character.attackEnemy();
+        boolean isEnemyDead = enemy.defendAgainstAllyCharacter(damageDealt);
+        results.add(new EventResult(AttackEvent.of(character, damageDealt, enemy)));
+        if (isEnemyDead) {
+            currentRoom.killEnemy();
             results.add(new EventResult(KillEnemyEvent.of(character, enemy)));
         }
         return results;
