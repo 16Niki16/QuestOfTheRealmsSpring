@@ -7,6 +7,7 @@ import sofia.sap.interview.project.game.gameplay.GameSession;
 import sofia.sap.interview.project.game.map.room.Room;
 import sofia.sap.interview.project.game.user.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AttackCommand implements Command {
@@ -18,7 +19,10 @@ public class AttackCommand implements Command {
         Character character = session.character();
         Room room = session.gameplay().getRoom();
 
-        return session.combat().attack(character, enemy, room);
+        List<CommandResult> results = new ArrayList<>();
+        results.addAll(session.combat().attack(character, enemy, room));
+        results.addAll(session.combat().defend(character, enemy));
+        return results;
     }
 
 }

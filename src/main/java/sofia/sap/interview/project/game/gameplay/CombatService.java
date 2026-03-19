@@ -36,8 +36,7 @@ public class CombatService {
         return results;
     }
 
-    public List<CommandResult> defend(GameSession session, Enemy enemy) {
-        Character character = session.character();
+    public List<CommandResult> defend(Character character, Enemy enemy) {
         List<CommandResult> results = new ArrayList<>();
         int damage = enemy.attackDamage();
         boolean dead = character.defendAgainstEnemy(damage);

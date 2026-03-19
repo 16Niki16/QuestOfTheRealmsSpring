@@ -18,8 +18,8 @@ public class SystemsStarter {
         this.activeUsers = activeUsers;
         this.systems = List.of(
             new AutoSaveSystem(),
-            new RegenerationSystem(),
-            new EnemyAutoAttackSystem());
+            new RegenerationSystem());
+        // new EnemyAutoAttackSystem());
     }
 
     public void start() {

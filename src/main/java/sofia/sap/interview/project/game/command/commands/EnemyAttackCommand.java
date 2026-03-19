@@ -1,5 +1,6 @@
 package sofia.sap.interview.project.game.command.commands;
 
+import sofia.sap.interview.project.game.characters.ally.Character;
 import sofia.sap.interview.project.game.characters.enemy.Enemy;
 import sofia.sap.interview.project.game.command.result.CommandResult;
 import sofia.sap.interview.project.game.gameplay.GameSession;
@@ -13,6 +14,6 @@ public class EnemyAttackCommand implements Command {
         GameSession session = user.getSession();
         Enemy enemy = session.gameplay().getEnemyOnCharacterCoordinates();
 
-        return session.combat().defend(session, enemy);
+        return session.combat().defend(session.character(), enemy);
     }
 }
