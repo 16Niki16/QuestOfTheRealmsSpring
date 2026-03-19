@@ -1,7 +1,9 @@
 package sofia.sap.interview.project.game.characters.enemy;
 
+import java.time.Duration;
+
 public class EnemyState {
-    private static final int COOLDOWN = 8000;
+    private static final Duration COOLDOWN_SECONDS = Duration.ofSeconds(8);
     private long lastAttack;
 
     public EnemyState() {
@@ -9,7 +11,7 @@ public class EnemyState {
     }
 
     public boolean canAttack() {
-        return System.currentTimeMillis() - lastAttack >= COOLDOWN;
+        return COOLDOWN_SECONDS.compareTo(Duration.ofSeconds(System.currentTimeMillis() - lastAttack)) < 0;
     }
 
     public void attacked() {
