@@ -1,0 +1,63 @@
+{
+  "rooms": [
+    [
+      {
+        "name": "dark forest",
+        "chest": {
+          "items": {
+            "HEALING_HERB": 1,
+            "IRON_DAGGER": 1
+          }
+        },
+        "enemy": null,
+        "specialItem": null
+      },
+      {
+        "name": "misty mountains",
+        "chest": {
+          "items": {
+            "HEALING_HERB": 1,
+            "IRON_DAGGER": 1
+          }
+        },
+        "enemy": "GOBLIN_KING",
+        "specialItem": "IRON_KEY"
+      },
+      {
+        "name": "salty springs",
+        "chest": null,
+        "enemy": "GOBLIN",
+        "specialItem": null
+      }
+    ],
+    [
+      {
+        "name": "tilted towers",
+        "chest": null,
+        "enemy": "BOSS",
+        "specialItem": "IRON_KEY"
+      },
+      {
+        "name": "pleasant park",
+        "chest": {
+          "items": {
+            "IRON_DAGGER": 1
+          }
+        },
+        "enemy": null,
+        "specialItem": "IRON_KEY"
+      },
+      {
+        "name": "flush factory",
+        "chest": {
+          "items": {
+            "MANA_POTION": 1,
+            "HEALING_HERB": 1
+          }
+        },
+        "enemy": "BANDIT",
+        "specialItem": "TORCH"
+      }
+    ]
+  ]
+}
