@@ -11,6 +11,7 @@ import sofia.sap.interview.project.game.command.commands.OpenChestCommand;
 import sofia.sap.interview.project.game.command.commands.PathsCommand;
 import sofia.sap.interview.project.game.command.commands.UnequipGearCommand;
 import sofia.sap.interview.project.game.command.commands.UseItemCommand;
+import sofia.sap.interview.project.game.exceptions.CommandNotAvailableException;
 import sofia.sap.interview.project.game.items.ItemType;
 import sofia.sap.interview.project.game.map.Direction;
 
@@ -47,7 +48,7 @@ public class CommandFactory {
         String clientCommand = commandSplit[0].toLowerCase();
         CommandParser parser = COMMANDS.get(clientCommand);
         if (parser == null) {
-            throw new IllegalArgumentException("Unknown command");
+            throw new CommandNotAvailableException("The provided command is not correct!");
         }
         String[] args = Arrays.copyOfRange(commandSplit, 1, commandSplit.length);
         return parser.parse(args);

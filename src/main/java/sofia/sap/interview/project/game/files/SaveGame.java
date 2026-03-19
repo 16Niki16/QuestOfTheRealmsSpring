@@ -3,6 +3,7 @@ package sofia.sap.interview.project.game.files;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import sofia.sap.interview.project.game.dto.savegame.factory.GameDataFactory;
+import sofia.sap.interview.project.game.exceptions.SaveGameException;
 import sofia.sap.interview.project.game.user.User;
 
 import java.io.IOException;
@@ -22,7 +23,7 @@ public class SaveGame {
             Files.createDirectories(path.getParent());
             MAPPER.writeValue(path.toFile(), GameDataFactory.save(user.getSession(), user.getLog()));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new SaveGameException("Server failed to save the game", e);
         }
 
     }
