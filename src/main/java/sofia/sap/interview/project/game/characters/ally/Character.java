@@ -75,7 +75,6 @@ public class Character {
     }
 
     public void applyPotion(Consumable consumable) {
-
         this.inventory.removeItem(consumable);
         consumable.consume(this);
     }

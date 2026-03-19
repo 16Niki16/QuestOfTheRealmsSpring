@@ -9,7 +9,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class AutoSaveSystem implements GameSystem {
-    private static final int TIME_INTERVAL = 5;
+    private static final int TIME_INTERVAL = 60;
 
     @Override
     public void start(ScheduledExecutorService scheduler, Collection<User> users) {
