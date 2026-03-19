@@ -8,6 +8,7 @@ import sofia.sap.interview.project.game.events.GameEvent;
 import sofia.sap.interview.project.game.map.room.Room;
 import sofia.sap.interview.project.game.user.User;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ScheduledExecutorService;
@@ -17,7 +18,7 @@ public class EnemyAutoAttackSystem implements GameSystem {
     private static final int TIME_INTERVAL = 1;
 
     @Override
-    public void start(ScheduledExecutorService scheduler, Set<User> activeUsers) {
+    public void start(ScheduledExecutorService scheduler, Collection<User> activeUsers) {
         scheduler.scheduleAtFixedRate(() -> {
             for (User user : activeUsers) {
                 if (!user.isActiveSession()) {

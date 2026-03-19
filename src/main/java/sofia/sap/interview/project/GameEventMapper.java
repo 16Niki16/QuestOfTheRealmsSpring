@@ -7,7 +7,7 @@ import sofia.sap.interview.project.game.command.result.ViewResult;
 import java.util.List;
 
 public class GameEventMapper {
-    public static List<Object> toDTO(List<CommandResult> results) {
+    public static List<Object> result(List<CommandResult> results) {
         return results.stream()
             .map(result -> switch (result) {
                 case EventResult e -> e.event();

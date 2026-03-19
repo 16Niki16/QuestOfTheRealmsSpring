@@ -17,8 +17,6 @@ import sofia.sap.interview.project.game.user.User;
 
 import java.util.List;
 
-import static sofia.sap.interview.project.GameEventMapper.toDTO;
-
 @RestController
 @RequestMapping("/game")
 public class GameRestController {
@@ -44,7 +42,7 @@ public class GameRestController {
         Command command = CommandFactory.createCommand(input);
         List<CommandResult> results = command.execute(user);
         List<CommandResult> processed = EventProcessor.process(user, results);
-        return ResponseEntity.ok(toDTO(processed));
+        return ResponseEntity.ok(GameEventMapper.result(processed));
     }
 
     @PostMapping("/load")
