@@ -9,7 +9,7 @@ public class Goblin extends Enemy {
 
     @Override
     public String getDamageMessage(int damage) {
-        return String.format("The goblin made %d damage!", damage);
+        return String.format("The goblin caused %d damage!", damage);
     }
 
 }

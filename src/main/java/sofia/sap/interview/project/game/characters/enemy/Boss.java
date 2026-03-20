@@ -9,6 +9,6 @@ public class Boss extends Enemy {
 
     @Override
     public String getDamageMessage(int damage) {
-        return String.format("The boss made %d damage!", damage);
+        return String.format("The boss caused %d damage!", damage);
     }
 }

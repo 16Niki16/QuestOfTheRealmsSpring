@@ -25,12 +25,13 @@ public class GameExceptionHandler {
     public ResponseEntity<String> handleChestNotAvailable(ChestNotAvailableException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
+
     @ExceptionHandler(CommandNotAvailableException.class)
     public ResponseEntity<String> handleCommandNotAvailable(CommandNotAvailableException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
 
-    // 409 - конфликт (вече екипиран)
+    // 409 - конфликт
     @ExceptionHandler(ItemTypeAlreadyEquippedException.class)
     public ResponseEntity<String> handleAlreadyEquipped(ItemTypeAlreadyEquippedException e) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
@@ -41,17 +42,20 @@ public class GameExceptionHandler {
     public ResponseEntity<String> handleNewGameFile(NewGameFileException e) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
+
     @ExceptionHandler(LoadGameException.class)
     public ResponseEntity<String> handleLoadGameFile(LoadGameException e) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
+
     @ExceptionHandler(SaveGameException.class)
     public ResponseEntity<String> handleSaveGameFile(SaveGameException e) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleUnexpected(Exception e) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-            .body("Unexpected error occurred");
+                .body("Unexpected error occurred");
     }
 }

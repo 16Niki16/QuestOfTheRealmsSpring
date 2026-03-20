@@ -15,9 +15,6 @@ public class ItemFactory {
         REGISTRY.put(ItemType.IRON_DAGGER, IronDagger::new);
     }
 
-    private ItemFactory() {
-    }
-
     public static Item create(ItemType type) {
         Supplier<Item> item = REGISTRY.get(type);
 
@@ -27,4 +24,6 @@ public class ItemFactory {
         return item.get();
     }
 
+    private ItemFactory() {
+    }
 }

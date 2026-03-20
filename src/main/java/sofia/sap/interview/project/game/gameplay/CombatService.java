@@ -24,60 +24,62 @@ import java.util.Collection;
 import java.util.List;
 
 public class CombatService {
-    public List<CommandResult> attack(Character character, Enemy enemy, Room currentRoom) {
-        List<CommandResult> results = new ArrayList<>();
+    public List<CommandResult> attack(Character character, Enemy currentEnemy, Room currentRoom) {
+        List<CommandResult> attackResults = new ArrayList<>();
         int damageDealt = character.attackEnemy();
-        boolean isEnemyDead = enemy.defendAgainstAllyCharacter(damageDealt);
-        results.add(new EventResult(AttackEvent.of(character, damageDealt, enemy)));
+        boolean isEnemyDead = currentEnemy.defendAgainstAllyCharacter(damageDealt);
+        attackResults.add(new EventResult(AttackEvent.of(character, damageDealt, currentEnemy)));
+
         if (isEnemyDead) {
             currentRoom.killEnemy();
-            results.add(new EventResult(KillEnemyEvent.of(character, enemy)));
+            attackResults.add(new EventResult(KillEnemyEvent.of(character, currentEnemy)));
         }
-        return results;
+        return attackResults;
     }
 
-    public List<CommandResult> defend(Character character, Enemy enemy) {
-        List<CommandResult> results = new ArrayList<>();
-        int damage = enemy.attackDamage();
-        boolean dead = character.defendAgainstEnemy(damage);
-        results.add(new EventResult(DefendEvent.of(character, damage, enemy)));
+    public List<CommandResult> defend(Character character, Enemy currentEnemy) {
+        List<CommandResult> enemyAttackResults = new ArrayList<>();
+        int damageDealt = currentEnemy.attackDamage();
+        boolean isCharacterDead = character.defendAgainstEnemy(damageDealt);
+        enemyAttackResults.add(new EventResult(DefendEvent.of(character, damageDealt, currentEnemy)));
 
-        if (dead) {
-            results.add(new EventResult(CharacterDiedEvent.of(character, enemy)));
+        if (isCharacterDead) {
+            enemyAttackResults.add(new EventResult(CharacterDiedEvent.of(character, currentEnemy)));
         }
-        return results;
+        return enemyAttackResults;
     }
 
     public List<CommandResult> useItem(Character character, ItemType itemType) {
-        Item item = character.getInventory().getItem(itemType);
+        Item itemToConsume = character.getInventory().getItem(itemType);
 
-        if (!(item instanceof Consumable consumable)) {
-            throw new ItemNotAvailableException("The provided item is not consumable!");
+        if (itemToConsume instanceof Consumable consumable) {
+            character.applyPotion(consumable);
+            return List.of(new EventResult(ItemUsedEvent.of(consumable)));
         }
-        character.applyPotion(consumable);
-        return List.of(new EventResult(ItemUsedEvent.of(consumable)));
+        throw new ItemNotAvailableException("The provided item is not correct!");
+
     }
 
     public List<CommandResult> equip(Character character, ItemType itemType) {
         Item item = character.getInventory().getItem(itemType);
 
-        if (!(item instanceof Gear gear)) {
-            throw new ItemNotAvailableException("The provided item is not gear!");
+        if (item instanceof Gear gear) {
+            character.equipGear(gear);
+            return List.of(new EventResult(ItemEquipEvent.equipEvent(item)));
         }
-        character.equipGear(gear);
+        throw new ItemNotAvailableException("The provided item is not gear!");
 
-        return List.of(new EventResult(ItemEquipEvent.equipEvent(item)));
     }
 
     public List<CommandResult> unequip(Character character, ItemType itemType) {
         Item item = character.getEquippedItem(itemType);
 
-        if (!(item instanceof Gear gear)) {
-            throw new ItemNotAvailableException("The provided item is not gear!");
+        if (item instanceof Gear gear) {
+            character.unequipGear(gear);
+            return List.of(new EventResult(ItemUnequipEvent.unequipEvent(item)));
         }
-        character.unequipGear(gear);
+        throw new ItemNotAvailableException("The provided item is not gear!");
 
-        return List.of(new EventResult(ItemUnequipEvent.unequipEvent(item)));
     }
 
     public List<CommandResult> collect(Character character, Room room) {

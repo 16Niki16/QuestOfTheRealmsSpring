@@ -1,7 +1,6 @@
 package sofia.sap.interview.project.game.characters.enemy.type;
 
 import sofia.sap.interview.project.game.characters.attack.AttackRange;
-import sofia.sap.interview.project.game.exceptions.EnemyTypeNotAvailableException;
 
 public enum EnemyType {
     BANDIT("bandit", 20, new AttackRange(5, 10, 0)),
@@ -30,15 +29,5 @@ public enum EnemyType {
 
     public AttackRange getAttackRange() {
         return this.attackRange;
-    }
-
-    public static EnemyType getByName(String name) {
-
-        for (EnemyType enemyType : values()) {
-            if (enemyType.type.equals(name)) {
-                return enemyType;
-            }
-        }
-        throw new EnemyTypeNotAvailableException("The provided enemy name is not in the list!");
     }
 }
