@@ -3,9 +3,9 @@ package sofia.sap.interview.project.game.characters.ally.type;
 import sofia.sap.interview.project.game.characters.attack.AttackRange;
 
 public enum AllyCharacterType {
-    MAGE(80, 120, new AttackRange(10, 20), 15),
-    WARRIOR(100, 100, new AttackRange(10, 30), 10),
-    ROGUE(110, 90, new AttackRange(5, 20), 10);
+    MAGE(80, 100, new AttackRange(10, 20), 15),
+    WARRIOR(90, 100, new AttackRange(10, 30), 10),
+    ROGUE(100, 90, new AttackRange(5, 20), 10);
     private final int health;
     private final int mana;
     private final AttackRange attackRange;
