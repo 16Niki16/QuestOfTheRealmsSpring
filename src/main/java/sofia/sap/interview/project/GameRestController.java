@@ -13,6 +13,11 @@ import sofia.sap.interview.project.game.command.commands.Command;
 import sofia.sap.interview.project.game.command.result.CommandResult;
 import sofia.sap.interview.project.game.events.EventProcessor;
 import sofia.sap.interview.project.game.files.SaveGame;
+import sofia.sap.interview.project.game.request.CommandRequest;
+import sofia.sap.interview.project.game.request.LoadGameRequest;
+import sofia.sap.interview.project.game.request.NewGameRequest;
+import sofia.sap.interview.project.game.request.RegisterRequest;
+import sofia.sap.interview.project.game.request.SaveGameRequest;
 import sofia.sap.interview.project.game.user.User;
 
 import java.util.List;
@@ -26,35 +31,38 @@ public class GameRestController {
         this.gameService = gameService;
     }
 
+    @PostMapping("/user")
+    public ResponseEntity<?> userRegistration(@RequestBody RegisterRequest request) {
+        gameService.getOrCreateUser(request.username());
+        return ResponseEntity.ok().build();
+    }
+
     @PostMapping("/new")
-    public ResponseEntity<?> newGame(@RequestParam String username,
-                                     @RequestParam String characterName,
-                                     @RequestParam AllyCharacterType type) {
-        User user = gameService.getOrCreateUser(username);
-        user.createNewGame(characterName, type);
+    public ResponseEntity<?> newGame(@RequestBody NewGameRequest request) {
+        User user = gameService.getUser(request.username());
+        user.createNewGame(request.characterName(), request.type());
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/command")
-    public ResponseEntity<List<?>> executeCommand(@RequestParam String username,
-                                                  @RequestBody String input) {
-        User user = gameService.getUser(username);
-        Command command = CommandFactory.createCommand(input);
+    public ResponseEntity<List<?>> executeCommand(@RequestBody CommandRequest request) {
+        User user = gameService.getUser(request.username());
+        Command command = CommandFactory.createCommand(request.command());
         List<CommandResult> results = command.execute(user);
         List<CommandResult> processed = EventProcessor.process(user, results);
         return ResponseEntity.ok(GameEventMapper.result(processed));
     }
 
     @PostMapping("/load")
-    public ResponseEntity<?> loadGame(@RequestParam String username) {
-        User user = gameService.getOrCreateUser(username);
+    public ResponseEntity<?> loadGame(@RequestBody LoadGameRequest request) {
+        User user = gameService.getUser(request.username());
         user.loadGame();
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/save")
-    public ResponseEntity<?> saveGame(@RequestParam String username) {
-        User user = gameService.getUser(username);
+    public ResponseEntity<?> saveGame(@RequestBody SaveGameRequest request) {
+        User user = gameService.getUser(request.username());
         SaveGame.saveGame(user);
         return ResponseEntity.ok().build();
     }
