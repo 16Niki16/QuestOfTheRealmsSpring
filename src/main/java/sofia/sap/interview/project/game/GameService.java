@@ -16,8 +16,8 @@ public class GameService {
         starter.start();
     }
 
-    public User getOrCreateUser(String username) {
-        return users.computeIfAbsent(username, User::createUser);
+    public void getOrCreateUser(String username) {
+        users.computeIfAbsent(username, User::createUser);
     }
 
     public User getUser(String username) {
