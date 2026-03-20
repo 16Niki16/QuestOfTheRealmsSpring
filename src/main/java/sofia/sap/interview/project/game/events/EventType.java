@@ -12,5 +12,6 @@ public enum EventType {
     USE,
     KILL_ENEMY,
     NEW_GAME,
-    QUEST_COMPLETED
+    QUEST_COMPLETED,
+    NOT_ENOUGH_MANA
 }

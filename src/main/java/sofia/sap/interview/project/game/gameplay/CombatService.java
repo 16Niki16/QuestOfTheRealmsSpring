@@ -12,6 +12,7 @@ import sofia.sap.interview.project.game.events.ItemEquipEvent;
 import sofia.sap.interview.project.game.events.ItemUnequipEvent;
 import sofia.sap.interview.project.game.events.ItemUsedEvent;
 import sofia.sap.interview.project.game.events.KillEnemyEvent;
+import sofia.sap.interview.project.game.events.NotEnoughManaEvent;
 import sofia.sap.interview.project.game.exceptions.ItemNotAvailableException;
 import sofia.sap.interview.project.game.items.Consumable;
 import sofia.sap.interview.project.game.items.Gear;
@@ -27,6 +28,10 @@ public class CombatService {
     public List<CommandResult> attack(Character character, Enemy currentEnemy, Room currentRoom) {
         List<CommandResult> attackResults = new ArrayList<>();
         int damageDealt = character.attackEnemy();
+        if (damageDealt == 0) {
+            attackResults.add(new EventResult(NotEnoughManaEvent.of(character, currentEnemy)));
+            return attackResults;
+        }
         boolean isEnemyDead = currentEnemy.defendAgainstAllyCharacter(damageDealt);
         attackResults.add(new EventResult(AttackEvent.of(character, damageDealt, currentEnemy)));
 
