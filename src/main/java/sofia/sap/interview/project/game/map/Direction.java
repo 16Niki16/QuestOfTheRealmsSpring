@@ -2,6 +2,8 @@ package sofia.sap.interview.project.game.map;
 
 import sofia.sap.interview.project.game.exceptions.DirectionNotAvailableException;
 
+import java.util.Arrays;
+
 public enum Direction {
     SOUTH(0, 1, "south"),
     NORTH(0, -1, "north"),
@@ -23,11 +25,9 @@ public enum Direction {
     }
 
     public static Direction getDirection(String input) {
-        for (Direction dir : values()) {
-            if (dir.direction.equals(input)) {
-                return dir;
-            }
-        }
-        throw new DirectionNotAvailableException("The provided direction is not in the list!");
+        return Arrays.stream(values())
+                .filter(direction -> direction.direction.equalsIgnoreCase(input))
+                .findFirst()
+                .orElseThrow(() -> new DirectionNotAvailableException("The provided direction is not in the list!"));
     }
 }

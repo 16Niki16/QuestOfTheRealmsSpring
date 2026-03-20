@@ -18,7 +18,6 @@ import sofia.sap.interview.project.game.exceptions.SaveGameException;
 public class GameExceptionHandler {
     @ExceptionHandler({
             ChestNotAvailableException.class,
-            CommandNotAvailableException.class,
             EquipmentNotEquippedException.class,
             ItemNotAvailableException.class,
             DirectionNotAvailableException.class
@@ -36,43 +35,16 @@ public class GameExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
 
-    // 400 - грешка от потребителя
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<String> handleIllegalArgument(IllegalArgumentException e) {
+    @ExceptionHandler({
+            IllegalArgumentException.class,
+            CommandNotAvailableException.class})
+    public ResponseEntity<String> handleInvalidInput(RuntimeException e) {
         return ResponseEntity.badRequest().body(e.getMessage());
     }
 
-    // 404 - нещо не е намерено
-    @ExceptionHandler(ChestNotAvailableException.class)
-    public ResponseEntity<String> handleChestNotAvailable(ChestNotAvailableException e) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-    }
-
-    @ExceptionHandler(CommandNotAvailableException.class)
-    public ResponseEntity<String> handleCommandNotAvailable(CommandNotAvailableException e) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-    }
-
-    // 409 - конфликт
     @ExceptionHandler(ItemTypeAlreadyEquippedException.class)
     public ResponseEntity<String> handleAlreadyEquipped(ItemTypeAlreadyEquippedException e) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
-    }
-
-    // 500 - сървърна грешка
-    @ExceptionHandler(NewGameFileException.class)
-    public ResponseEntity<String> handleNewGameFile(NewGameFileException e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-    }
-
-    @ExceptionHandler(LoadGameException.class)
-    public ResponseEntity<String> handleLoadGameFile(LoadGameException e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-    }
-
-    @ExceptionHandler(SaveGameException.class)
-    public ResponseEntity<String> handleSaveGameFile(SaveGameException e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)

@@ -3,6 +3,8 @@ package sofia.sap.interview.project.game.items;
 import lombok.Getter;
 import sofia.sap.interview.project.game.exceptions.ItemNotAvailableException;
 
+import java.util.Arrays;
+
 @Getter
 public enum ItemType {
     MANA_POTION("mana potion", "mana"),
@@ -18,12 +20,10 @@ public enum ItemType {
     }
 
     public static ItemType getByName(String itemName) {
-        for (ItemType type : values()) {
-            if (type.name.equalsIgnoreCase(itemName)) {
-                return type;
-            }
-        }
-        throw new ItemNotAvailableException("The provided item is not available!");
+        return Arrays.stream(values())
+                .filter(type -> type.name.equalsIgnoreCase(itemName))
+                .findFirst()
+                .orElseThrow(() -> new ItemNotAvailableException("The provided item is not available!"));
     }
 
 }
