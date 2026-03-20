@@ -1,19 +1,17 @@
 package sofia.sap.interview.project.game.characters.enemy;
 
+import lombok.Getter;
 import sofia.sap.interview.project.game.characters.statistics.EnemyStatistics;
 import sofia.sap.interview.project.game.characters.enemy.type.EnemyType;
 
 public abstract class Enemy {
+    @Getter
     private final EnemyType type;
     private final EnemyStatistics enemyStats;
 
     public Enemy(EnemyType type) {
         this.enemyStats = new EnemyStatistics(type);
         this.type = type;
-    }
-
-    public EnemyType getType() {
-        return this.type;
     }
 
     public int attackDamage() {

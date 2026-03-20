@@ -4,7 +4,6 @@ import sofia.sap.interview.project.game.files.SaveGame;
 import sofia.sap.interview.project.game.user.User;
 
 import java.util.Collection;
-import java.util.Set;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 

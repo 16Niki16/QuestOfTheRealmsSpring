@@ -1,5 +1,6 @@
 package sofia.sap.interview.project.game.inventory;
 
+import lombok.Getter;
 import sofia.sap.interview.project.game.exceptions.ItemNotAvailableException;
 import sofia.sap.interview.project.game.items.Item;
 import sofia.sap.interview.project.game.items.ItemType;
@@ -10,6 +11,7 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
+@Getter
 public class Inventory {
     private final Map<ItemType, List<Item>> items;
 
@@ -19,10 +21,6 @@ public class Inventory {
 
     public Inventory(Map<ItemType, List<Item>> items) {
         this.items = items;
-    }
-
-    public Map<ItemType, List<Item>> getItems() {
-        return this.items;
     }
 
     public void addItem(Item item) {

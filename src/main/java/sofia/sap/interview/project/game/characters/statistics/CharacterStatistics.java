@@ -1,5 +1,6 @@
 package sofia.sap.interview.project.game.characters.statistics;
 
+import lombok.Getter;
 import sofia.sap.interview.project.game.characters.ally.type.AllyCharacterType;
 import sofia.sap.interview.project.game.characters.attack.AttackRange;
 
@@ -8,6 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class CharacterStatistics extends BaseStatistics {
     private final AtomicInteger mana;
+    @Getter
     private final int manaCost;
 
     public CharacterStatistics(AllyCharacterType type) {
@@ -24,10 +26,6 @@ public class CharacterStatistics extends BaseStatistics {
 
     public int getMana() {
         return this.mana.get();
-    }
-
-    public int getManaCost() {
-        return this.manaCost;
     }
 
     public boolean decreaseMana(int amount) {

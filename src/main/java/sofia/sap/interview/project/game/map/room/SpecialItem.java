@@ -1,5 +1,8 @@
 package sofia.sap.interview.project.game.map.room;
 
+import lombok.Getter;
+
+@Getter
 public enum SpecialItem {
     IRON_KEY("iron key"),
     TORCH("torch");
@@ -9,7 +12,4 @@ public enum SpecialItem {
         this.name = name;
     }
 
-    public String getName() {
-        return this.name;
-    }
 }

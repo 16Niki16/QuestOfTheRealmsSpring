@@ -10,7 +10,7 @@ public record NewGameEvent(EventType eventType, String characterName, AllyCharac
     implements GameEvent {
     public static NewGameEvent of(Character character) {
         CharacterStatistics stats = character.getCharacterStats();
-        return new NewGameEvent(EventType.NEW_GAME, character.getCharacterName(), character.getCharacterType(),
+        return new NewGameEvent(EventType.NEW_GAME, character.getCharacterName(), character.getType(),
             stats.getHealth(), stats.getMana(), stats.getAttackRange());
     }
 }

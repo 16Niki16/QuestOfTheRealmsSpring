@@ -1,5 +1,6 @@
 package sofia.sap.interview.project.game.gameplay;
 
+import lombok.Getter;
 import sofia.sap.interview.project.game.characters.enemy.Enemy;
 import sofia.sap.interview.project.game.characters.enemy.type.EnemyType;
 import sofia.sap.interview.project.game.command.result.CommandResult;
@@ -11,7 +12,6 @@ import sofia.sap.interview.project.game.information.RoomInformation;
 import sofia.sap.interview.project.game.map.Coordinates;
 import sofia.sap.interview.project.game.map.Direction;
 import sofia.sap.interview.project.game.map.Playground;
-import sofia.sap.interview.project.game.map.room.Chest;
 import sofia.sap.interview.project.game.map.room.Room;
 import sofia.sap.interview.project.game.map.room.SpecialItem;
 
@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+@Getter
 public class Gameplay {
     private final Playground playground;
     private Coordinates playerCoordinates;
@@ -33,20 +34,12 @@ public class Gameplay {
         this.playerCoordinates = coordinates;
     }
 
-    public Coordinates getPlayerCoordinates() {
-        return this.playerCoordinates;
-    }
-
-    public Playground getPlayground() {
-        return this.playground;
-    }
-
     public void movePlayer(Direction direction) {
         if (playground.canMove(this.playerCoordinates, direction)) {
             this.playerCoordinates = direction.move(this.playerCoordinates);
         } else {
             throw new DirectionNotAvailableException(
-                "The provided direction is not correct, choose another direction!");
+                    "The provided direction is not correct, choose another direction!");
         }
     }
 
@@ -57,7 +50,7 @@ public class Gameplay {
         EnemyType enemyType = enemy != null ? enemy.getType() : null;
         SpecialItem specialItem = room.getSpecialItem();
         resultList.add(new ViewResult(new RoomInformation(getRoom().hasChest(),
-            enemyType, specialItem)));
+                enemyType, specialItem)));
 
         if (specialItem != null) {
             room.collectSpecialItem();

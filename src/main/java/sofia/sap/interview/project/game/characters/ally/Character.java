@@ -1,5 +1,6 @@
 package sofia.sap.interview.project.game.characters.ally;
 
+import lombok.Getter;
 import sofia.sap.interview.project.game.characters.ally.type.AllyCharacterType;
 import sofia.sap.interview.project.game.characters.statistics.CharacterStatistics;
 import sofia.sap.interview.project.game.exceptions.EquipmentNotEquippedException;
@@ -15,6 +16,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+@Getter
 public class Character {
     private final String characterName;
     private final AllyCharacterType type;
@@ -37,26 +39,6 @@ public class Character {
         this.characterStats = stats;
         this.inventory = inventory;
         this.equippedItems = equipped;
-    }
-
-    public String getCharacterName() {
-        return this.characterName;
-    }
-
-    public AllyCharacterType getCharacterType() {
-        return this.type;
-    }
-
-    public CharacterStatistics getCharacterStats() {
-        return this.characterStats;
-    }
-
-    public Inventory getInventory() {
-        return this.inventory;
-    }
-
-    public Set<ItemType> getEquippedItems() {
-        return this.equippedItems;
     }
 
     public Item getEquippedItem(ItemType itemType) {
@@ -90,13 +72,12 @@ public class Character {
     }
 
     public void unequipGear(Gear gear) {
-        if (!this.equippedItems.contains(gear.getType())) {
-            throw new EquipmentNotEquippedException("The provided item is not equipped!");
+        if (this.equippedItems.contains(gear.getType())) {
+            this.equippedItems.remove(gear.getType());
+            this.inventory.addItem(gear);
+            gear.unequip(this);
         }
-
-        this.equippedItems.remove(gear.getType());
-        this.inventory.addItem(gear);
-        gear.unequip(this);
+        throw new EquipmentNotEquippedException("The provided item is not equipped!");
     }
 
     public void collectItems(Collection<Item> items) {

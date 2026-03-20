@@ -1,5 +1,8 @@
 package sofia.sap.interview.project.game.command;
 
+import lombok.Getter;
+
+@Getter
 public enum CommandOption {
     ATTACK("attack"),
     DEFEND("defend"),
@@ -18,7 +21,4 @@ public enum CommandOption {
         this.command = command;
     }
 
-    public String getCommand() {
-        return this.command;
-    }
 }

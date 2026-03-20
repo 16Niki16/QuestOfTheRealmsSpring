@@ -10,7 +10,6 @@ import sofia.sap.interview.project.game.user.User;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
@@ -30,9 +29,9 @@ public class EnemyAutoAttackSystem implements GameSystem {
                     if (state.canAttack()) {
                         List<CommandResult> results = new EnemyAttackCommand().execute(user);
                         List<GameEvent> events = results.stream()
-                            .filter(r -> r instanceof EventResult)
-                            .map(r -> ((EventResult) r).event())
-                            .toList();
+                                .filter(r -> r instanceof EventResult)
+                                .map(r -> ((EventResult) r).event())
+                                .toList();
                         state.attacked();
                     }
                 }

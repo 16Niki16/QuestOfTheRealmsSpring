@@ -1,7 +1,9 @@
 package sofia.sap.interview.project.game.items;
 
+import lombok.Getter;
 import sofia.sap.interview.project.game.exceptions.ItemNotAvailableException;
 
+@Getter
 public enum ItemType {
     MANA_POTION("mana potion", "mana"),
     HEALING_HERB("healing herb", "health"),
@@ -24,11 +26,4 @@ public enum ItemType {
         throw new ItemNotAvailableException("The provided item is not available!");
     }
 
-    public String getName() {
-        return this.name;
-    }
-
-    public String getSource() {
-        return this.source;
-    }
 }

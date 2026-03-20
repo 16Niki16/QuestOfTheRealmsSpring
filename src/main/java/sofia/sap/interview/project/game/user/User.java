@@ -1,5 +1,6 @@
 package sofia.sap.interview.project.game.user;
 
+import lombok.Getter;
 import sofia.sap.interview.project.game.characters.ally.type.AllyCharacterType;
 import sofia.sap.interview.project.game.dto.loadgame.LoadedInformation;
 import sofia.sap.interview.project.game.files.LoadGame;
@@ -7,6 +8,7 @@ import sofia.sap.interview.project.game.gameplay.GameFactory;
 import sofia.sap.interview.project.game.gameplay.GameSession;
 import sofia.sap.interview.project.game.quests.QuestLog;
 
+@Getter
 public class User {
     private final String username;
     private boolean activeSession;
@@ -18,22 +20,6 @@ public class User {
         this.session = session;
         this.log = log;
         this.activeSession = activeSession;
-    }
-
-    public boolean isActiveSession() {
-        return this.activeSession;
-    }
-
-    public String getUsername() {
-        return this.username;
-    }
-
-    public GameSession getSession() {
-        return this.session;
-    }
-
-    public QuestLog getLog() {
-        return this.log;
     }
 
     public static User createUser(String username) {

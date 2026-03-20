@@ -1,11 +1,13 @@
 package sofia.sap.interview.project.game.map.room;
 
+import lombok.Getter;
 import sofia.sap.interview.project.game.items.Item;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+@Getter
 public class Chest {
     private final Collection<Item> content;
 
@@ -15,10 +17,6 @@ public class Chest {
 
     public static Chest createChest(List<Item> content) {
         return new Chest(content);
-    }
-
-    public Collection<Item> getContent() {
-        return this.content;
     }
 
     public Collection<Item> collectItems() {

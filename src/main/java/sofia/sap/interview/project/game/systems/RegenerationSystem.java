@@ -3,7 +3,6 @@ package sofia.sap.interview.project.game.systems;
 import sofia.sap.interview.project.game.user.User;
 
 import java.util.Collection;
-import java.util.Set;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
@@ -14,13 +13,13 @@ public class RegenerationSystem implements GameSystem {
     @Override
     public void start(ScheduledExecutorService scheduler, Collection<User> users) {
         scheduler.scheduleAtFixedRate(
-            () -> {
-                for (User user : users) {
-                    if (user.isActiveSession()) {
-                        user.getSession().character().regen(AMOUNT);
+                () -> {
+                    for (User user : users) {
+                        if (user.isActiveSession()) {
+                            user.getSession().character().regen(AMOUNT);
+                        }
                     }
-                }
-            },
-            TIMER, TIMER, TimeUnit.SECONDS);
+                },
+                TIMER, TIMER, TimeUnit.SECONDS);
     }
 }
