@@ -1,11 +1,14 @@
 package sofia.sap.interview.project.game.characters.ally.type;
 
+import lombok.Getter;
 import sofia.sap.interview.project.game.characters.attack.AttackRange;
 
+@Getter
 public enum AllyCharacterType {
-    MAGE(80, 100, new AttackRange(10, 20), 15),
+    MAGE(80, 100, new AttackRange(1, 2), 15),
     WARRIOR(90, 100, new AttackRange(10, 30), 10),
     ROGUE(100, 90, new AttackRange(5, 20), 10);
+
     private final int health;
     private final int mana;
     private final AttackRange attackRange;
@@ -18,19 +21,4 @@ public enum AllyCharacterType {
         this.manaCost = manaCost;
     }
 
-    public int getHealth() {
-        return this.health;
-    }
-
-    public int getMana() {
-        return this.mana;
-    }
-
-    public AttackRange getAttackRange() {
-        return this.attackRange;
-    }
-
-    public int getManaCost() {
-        return this.manaCost;
-    }
 }

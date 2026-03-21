@@ -1,5 +1,6 @@
 package sofia.sap.interview.project.game.systems;
 
+import jakarta.annotation.PreDestroy;
 import sofia.sap.interview.project.game.user.User;
 
 import java.util.Collection;
@@ -16,8 +17,8 @@ public class SystemsStarter {
         this.scheduler = Executors.newScheduledThreadPool(2);
         this.activeUsers = activeUsers;
         this.systems = List.of(
-                new AutoSaveSystem(),
-                new RegenerationSystem());
+            new AutoSaveSystem(),
+            new RegenerationSystem());
         // new EnemyAutoAttackSystem());
     }
 
@@ -27,6 +28,7 @@ public class SystemsStarter {
         }
     }
 
+    @PreDestroy
     public void stop() {
         scheduler.shutdown();
     }
