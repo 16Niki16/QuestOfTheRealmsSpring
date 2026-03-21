@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public record CollectItemsEvent(EventType type, Map<ItemType, Integer> items) implements GameEvent {
+public record CollectItemsEvent(EventType eventType, Map<ItemType, Integer> items) implements GameEvent {
     public static CollectItemsEvent collectEvent(Collection<Item> items) {
 
         Map<ItemType, Integer> grouped = items.stream()

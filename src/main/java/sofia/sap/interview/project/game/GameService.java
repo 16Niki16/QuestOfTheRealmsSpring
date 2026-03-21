@@ -1,6 +1,7 @@
 package sofia.sap.interview.project.game;
 
 import org.springframework.stereotype.Service;
+import sofia.sap.interview.project.game.exceptions.UserNotFoundException;
 import sofia.sap.interview.project.game.systems.SystemsStarter;
 import sofia.sap.interview.project.game.user.User;
 
@@ -23,7 +24,7 @@ public class GameService {
     public User getUser(String username) {
         User user = users.get(username);
         if (user == null) {
-            throw new IllegalArgumentException("User not found: " + username);
+            throw new UserNotFoundException("User not found: " + username);
         }
         return user;
     }

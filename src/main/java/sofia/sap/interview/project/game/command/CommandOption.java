@@ -14,7 +14,8 @@ public enum CommandOption {
     HELP("help"),
     QUESTS("quests"),
     PATHS("paths"),
-    OPEN("open");
+    OPEN("open"),
+    INVENTORY("inventory");
     private final String command;
 
     CommandOption(String command) {

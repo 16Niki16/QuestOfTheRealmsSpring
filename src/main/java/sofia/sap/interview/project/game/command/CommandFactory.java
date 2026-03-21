@@ -5,6 +5,7 @@ import sofia.sap.interview.project.game.command.commands.CheckQuestsCommand;
 import sofia.sap.interview.project.game.command.commands.Command;
 import sofia.sap.interview.project.game.command.commands.EquipGearCommand;
 import sofia.sap.interview.project.game.command.commands.HelpCommand;
+import sofia.sap.interview.project.game.command.commands.InventoryCommand;
 import sofia.sap.interview.project.game.command.commands.LookCommand;
 import sofia.sap.interview.project.game.command.commands.MoveCommand;
 import sofia.sap.interview.project.game.command.commands.OpenChestCommand;
@@ -23,18 +24,20 @@ public class CommandFactory {
     private static final Map<String, CommandParser> COMMANDS = new HashMap<>();
     private static final Command HELP_COMMAND = new HelpCommand();
     private static final Command ATTACK_COMMAND = new AttackCommand();
-    private static final Command QUESTS = new CheckQuestsCommand();
-    private static final Command LOOK = new LookCommand();
-    private static final Command PATHS = new PathsCommand();
-    private static final Command OPEN = new OpenChestCommand();
+    private static final Command QUESTS_COMMAND = new CheckQuestsCommand();
+    private static final Command LOOK_COMMAND = new LookCommand();
+    private static final Command PATHS_COMMAND = new PathsCommand();
+    private static final Command CHEST_COMMAND = new OpenChestCommand();
+    private static final Command INVENTORY_COMMAND = new InventoryCommand();
 
     static {
         COMMANDS.put(CommandOption.HELP.getCommand(), args -> HELP_COMMAND);
         COMMANDS.put(CommandOption.ATTACK.getCommand(), args -> ATTACK_COMMAND);
-        COMMANDS.put(CommandOption.QUESTS.getCommand(), args -> QUESTS);
-        COMMANDS.put(CommandOption.LOOK.getCommand(), args -> LOOK);
-        COMMANDS.put(CommandOption.PATHS.getCommand(), args -> PATHS);
-        COMMANDS.put(CommandOption.OPEN.getCommand(), args -> OPEN);
+        COMMANDS.put(CommandOption.QUESTS.getCommand(), args -> QUESTS_COMMAND);
+        COMMANDS.put(CommandOption.LOOK.getCommand(), args -> LOOK_COMMAND);
+        COMMANDS.put(CommandOption.PATHS.getCommand(), args -> PATHS_COMMAND);
+        COMMANDS.put(CommandOption.OPEN.getCommand(), args -> CHEST_COMMAND);
+        COMMANDS.put(CommandOption.INVENTORY.getCommand(), args -> INVENTORY_COMMAND);
 
         COMMANDS.put(CommandOption.EQUIP.getCommand(), args -> new EquipGearCommand(itemType(args[0])));
         COMMANDS.put(CommandOption.UNEQUIP.getCommand(), args -> new UnequipGearCommand(itemType(args[0])));
