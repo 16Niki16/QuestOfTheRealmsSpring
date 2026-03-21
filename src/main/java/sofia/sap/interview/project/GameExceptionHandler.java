@@ -15,6 +15,7 @@ import sofia.sap.interview.project.game.exceptions.ItemNotAvailableException;
 import sofia.sap.interview.project.game.exceptions.ItemTypeAlreadyEquippedException;
 import sofia.sap.interview.project.game.exceptions.LoadGameException;
 import sofia.sap.interview.project.game.exceptions.NewGameFileException;
+import sofia.sap.interview.project.game.exceptions.NoActiveSessionException;
 import sofia.sap.interview.project.game.exceptions.NoEnemyInTheRoomException;
 import sofia.sap.interview.project.game.exceptions.SaveGameException;
 import sofia.sap.interview.project.game.exceptions.UserNotFoundException;
@@ -46,7 +47,8 @@ public class GameExceptionHandler {
 
     @ExceptionHandler({
         IllegalArgumentException.class,
-        CommandNotAvailableException.class})
+        CommandNotAvailableException.class,
+        NoActiveSessionException.class})
     public ResponseEntity<String> handleInvalidInput(RuntimeException e) {
         return ResponseEntity.badRequest().body(e.getMessage());
     }

@@ -10,26 +10,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventProcessor {
-    public static List<CommandResult> process(User user, List<CommandResult> results) {
-        List<CommandResult> allResults = new ArrayList<>(results);
-        QuestLog log = user.getLog();
-        for (CommandResult result : results) {
+    public static List<CommandResult> process(User user, List<CommandResult> commandResults) {
+        List<CommandResult> allResults = new ArrayList<>(commandResults);
+        QuestLog questLog = user.getLog();
+        for (CommandResult result : commandResults) {
             if (result instanceof EventResult eventResult) {
                 GameEvent event = eventResult.event();
-                boolean questCompleted = log.handleEvent(event);
+                boolean questCompleted = questLog.handleEvent(event);
 
                 if (questCompleted) {
-                    allResults.add(new EventResult(QuestCompletedEvent.of(log.getLastCompletedQuest())));
-                    if (log.getActiveQuests().isEmpty()) {
-                        allResults.add(new EventResult(GameWonEvent.of(user.getSession().character(), log)));
+                    allResults.add(new EventResult(QuestCompletedEvent.of(questLog.getLastCompletedQuest())));
+                    if (questLog.getActiveQuests().isEmpty()) {
+                        allResults.add(new EventResult(GameWonEvent.of(user.getSession().character(), questLog)));
+                        endGameHelper(user);
                     }
                 }
                 if (event instanceof CharacterDiedEvent) {
-                    user.endGame();
-                    EndGame.endGame(user.getUsername());
+                    endGameHelper(user);
                 }
             }
         }
         return allResults;
+    }
+
+    private static void endGameHelper(User user) {
+        user.endGame();
+        EndGame.endGame(user.getUsername());
     }
 }

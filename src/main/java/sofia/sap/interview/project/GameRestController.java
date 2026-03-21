@@ -42,11 +42,8 @@ public class GameRestController {
 
     @PostMapping("/user/{username}/command")
     public ResponseEntity<List<?>> executeCommand(@PathVariable String username, @RequestBody CommandRequest request) {
-        User user = gameService.getUser(username);
-        Command command = CommandFactory.createCommand(request.command());
-        List<CommandResult> results = command.execute(user);
-        List<CommandResult> processed = EventProcessor.process(user, results);
-        return ResponseEntity.ok(GameEventMapper.result(processed));
+        List<CommandResult> commandResults = GameRestControllerHelpers.commandResults(username, request, gameService);
+        return ResponseEntity.ok(GameEventMapper.result(commandResults));
     }
 
     @PostMapping("/user/{username}/load")
