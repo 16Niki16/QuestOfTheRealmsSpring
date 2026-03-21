@@ -41,7 +41,8 @@
         "name": "pleasant park",
         "chest": {
           "items": {
-            "IRON_DAGGER": 1
+            "IRON_DAGGER": 1,
+            "HEALING_HERB": 2
           }
         },
         "enemy": null,

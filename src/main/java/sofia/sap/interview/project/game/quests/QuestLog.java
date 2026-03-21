@@ -48,7 +48,6 @@ public class QuestLog {
 
             if (quest.isCompleted()) {
                 it.remove();
-                activeQuests.remove(quest);
                 completedQuests.add(quest);
                 collectedXP += quest.getReward().getRewardXP();
                 return true;

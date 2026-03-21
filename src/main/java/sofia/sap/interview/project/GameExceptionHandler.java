@@ -9,6 +9,7 @@ import sofia.sap.interview.project.game.exceptions.ChestNotAvailableException;
 import sofia.sap.interview.project.game.exceptions.CommandNotAvailableException;
 import sofia.sap.interview.project.game.exceptions.DirectionNotAvailableException;
 import sofia.sap.interview.project.game.exceptions.EndGameFileException;
+import sofia.sap.interview.project.game.exceptions.EnemyTypeNotAvailableException;
 import sofia.sap.interview.project.game.exceptions.EquipmentNotEquippedException;
 import sofia.sap.interview.project.game.exceptions.ItemNotAvailableException;
 import sofia.sap.interview.project.game.exceptions.ItemTypeAlreadyEquippedException;
@@ -26,7 +27,8 @@ public class GameExceptionHandler {
         ItemNotAvailableException.class,
         DirectionNotAvailableException.class,
         UserNotFoundException.class,
-        NoEnemyInTheRoomException.class
+        NoEnemyInTheRoomException.class,
+        EnemyTypeNotAvailableException.class
     })
     public ResponseEntity<String> handleNotFound(RuntimeException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

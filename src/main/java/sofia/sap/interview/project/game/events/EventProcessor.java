@@ -20,8 +20,10 @@ public class EventProcessor {
 
                 if (questCompleted) {
                     allResults.add(new EventResult(QuestCompletedEvent.of(log.getLastCompletedQuest())));
+                    if (log.getActiveQuests().isEmpty()) {
+                        allResults.add(new EventResult(GameWonEvent.of(user.getSession().character(), log)));
+                    }
                 }
-
                 if (event instanceof CharacterDiedEvent) {
                     user.endGame();
                     EndGame.endGame(user.getUsername());

@@ -14,4 +14,5 @@ public enum EventType {
     NEW_GAME,
     QUEST_COMPLETED,
     NOT_ENOUGH_MANA,
+    GAME_WON
 }
