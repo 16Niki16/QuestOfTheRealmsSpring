@@ -2,6 +2,7 @@ package sofia.sap.interview.project.game.events;
 
 import sofia.sap.interview.project.game.command.result.CommandResult;
 import sofia.sap.interview.project.game.command.result.EventResult;
+import sofia.sap.interview.project.game.files.EndGame;
 import sofia.sap.interview.project.game.quests.QuestLog;
 import sofia.sap.interview.project.game.user.User;
 
@@ -23,6 +24,7 @@ public class EventProcessor {
 
                 if (event instanceof CharacterDiedEvent) {
                     user.endGame();
+                    EndGame.endGame(user.getUsername());
                 }
             }
         }

@@ -17,7 +17,7 @@ public class NewGame {
             PlaygroundDTO dto = mapper.readValue(new File("files\\CommonMap.json"), PlaygroundDTO.class);
             return PlaygroundMapper.map(dto);
         } catch (IOException e) {
-            throw new NewGameFileException("Failed to load playground", e);
+            throw new NewGameFileException("Failed to load playground!", e);
         }
     }
 }

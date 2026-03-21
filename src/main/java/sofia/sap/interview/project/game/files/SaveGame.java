@@ -23,7 +23,7 @@ public class SaveGame {
             Files.createDirectories(path.getParent());
             MAPPER.writeValue(path.toFile(), GameDataFactory.save(user.getSession(), user.getLog()));
         } catch (IOException e) {
-            throw new SaveGameException("Server failed to save the game", e);
+            throw new SaveGameException("Server failed to save the game!", e);
         }
 
     }

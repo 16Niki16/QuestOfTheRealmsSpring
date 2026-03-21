@@ -21,7 +21,7 @@ public class LoadGame {
             return LoadedInformation.load(data);
 
         } catch (IOException e) {
-            throw new LoadGameException("Failed to load game", e);
+            throw new LoadGameException("Failed to load game!", e);
         }
     }
 }
