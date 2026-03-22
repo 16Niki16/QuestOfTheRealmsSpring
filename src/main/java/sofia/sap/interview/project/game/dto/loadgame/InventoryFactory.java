@@ -14,11 +14,6 @@ import java.util.stream.IntStream;
 
 public class InventoryFactory {
     public static Inventory create(InventoryData data) {
-        Map<ItemType, List<Item>> items = data.items().entrySet().stream()
-                .collect(Collectors.toMap(Map.Entry::getKey,
-                        entry -> IntStream.range(0, entry.getValue())
-                                .mapToObj(i -> ItemFactory.create(entry.getKey()))
-                                .collect(Collectors.toCollection(ArrayList::new))));
-        return new Inventory(items);
+        return new Inventory(data.items());
     }
 }

@@ -25,14 +25,4 @@ public class IronDagger implements Gear {
         character.decreaseAttackDamage(EFFECT);
     }
 
-    @Override
-    public String equipMessage() {
-        return String.format("Your attack damage has been increased by %d points!", EFFECT);
-    }
-
-    @Override
-    public String unequipMessage() {
-        return String.format("Your attack damage has been decreased by %d points!", EFFECT);
-    }
-
 }

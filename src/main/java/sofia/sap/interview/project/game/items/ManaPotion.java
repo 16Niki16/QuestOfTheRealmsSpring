@@ -19,9 +19,4 @@ public class ManaPotion implements Consumable {
     public void consume(Character character) {
         character.restoreMana(EFFECT);
     }
-
-    @Override
-    public String itemMessage() {
-        return String.format("Your potion provided you with %d mana!", EFFECT);
-    }
 }

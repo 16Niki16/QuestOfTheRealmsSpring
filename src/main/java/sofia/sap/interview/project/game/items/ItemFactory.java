@@ -7,21 +7,38 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public class ItemFactory {
-    private static final Map<ItemType, Supplier<Item>> REGISTRY = new EnumMap<>(ItemType.class);
+
+    private static final Map<ItemType, Supplier<Consumable>> CONSUMABLES = new EnumMap<>(ItemType.class);
+    private static final Map<ItemType, Supplier<Gear>> GEAR = new EnumMap<>(ItemType.class);
 
     static {
-        REGISTRY.put(ItemType.HEALING_HERB, HealingHerb::new);
-        REGISTRY.put(ItemType.MANA_POTION, ManaPotion::new);
-        REGISTRY.put(ItemType.IRON_DAGGER, IronDagger::new);
+        CONSUMABLES.put(ItemType.HEALING_HERB, HealingHerb::new);
+        CONSUMABLES.put(ItemType.MANA_POTION, ManaPotion::new);
+
+        GEAR.put(ItemType.IRON_DAGGER, IronDagger::new);
     }
 
-    public static Item create(ItemType type) {
-        Supplier<Item> item = REGISTRY.get(type);
-
-        if (item == null) {
-            throw new ItemNotAvailableException("The provided item type is not available!");
+    public static Item create(ItemType itemType) {
+        if (CONSUMABLES.containsKey(itemType)) {
+            return createConsumable(itemType);
         }
-        return item.get();
+        return createGear(itemType);
+    }
+
+    public static Consumable createConsumable(ItemType itemType) {
+        Supplier<Consumable> supplier = CONSUMABLES.get(itemType);
+        if (supplier == null) {
+            throw new ItemNotAvailableException("The provided item is not consumable!");
+        }
+        return supplier.get();
+    }
+
+    public static Gear createGear(ItemType itemType) {
+        Supplier<Gear> supplier = GEAR.get(itemType);
+        if (supplier == null) {
+            throw new ItemNotAvailableException("The provided item is not gear!");
+        }
+        return supplier.get();
     }
 
     private ItemFactory() {
