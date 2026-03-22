@@ -56,6 +56,7 @@ public class Campaign {
             room.collectSpecialItem();
             resultList.add(new EventResult(CollectSpecialItemEvent.of(specialItem)));
         }
+
         return resultList;
     }
 

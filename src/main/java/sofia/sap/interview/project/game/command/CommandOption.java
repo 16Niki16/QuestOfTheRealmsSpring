@@ -5,7 +5,6 @@ import lombok.Getter;
 @Getter
 public enum CommandOption {
     ATTACK("attack"),
-    DEFEND("defend"),
     USE_ITEM("use"),
     LOOK("look"),
     MOVE("move"),

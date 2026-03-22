@@ -16,16 +16,16 @@ public class AttackCommand implements Command {
     @Override
     public List<CommandResult> execute(User user) {
         GameSession session = user.getSession();
-        Enemy enemy = session.gameplay().getEnemyOnCharacterCoordinates();
+        Enemy enemy = session.getCampaign().getEnemyOnCharacterCoordinates();
         if (enemy == null) {
             throw new NoEnemyInTheRoomException("There is no enemy in the current room!");
         }
-        Character character = session.character();
-        Room room = session.gameplay().getRoom();
+        Character character = session.getCharacter();
+        Room room = session.getCampaign().getRoom();
 
         List<CommandResult> results = new ArrayList<>();
-        results.addAll(session.combat().attack(character, enemy, room));
-        results.addAll(session.combat().defend(character, enemy));
+        results.addAll(session.getCombatService().attack(character, enemy, room));
+        results.addAll(session.getCombatService().defend(character, enemy));
         return results;
     }
 

@@ -5,6 +5,7 @@ import sofia.sap.interview.project.game.command.result.EventResult;
 import sofia.sap.interview.project.game.events.CharacterMovedEvent;
 import sofia.sap.interview.project.game.gameplay.GameSession;
 import sofia.sap.interview.project.game.map.Direction;
+import sofia.sap.interview.project.game.map.room.Room;
 import sofia.sap.interview.project.game.user.User;
 
 import java.util.List;
@@ -19,7 +20,8 @@ public class MoveCommand implements Command {
     @Override
     public List<CommandResult> execute(User user) {
         GameSession session = user.getSession();
-        session.gameplay().movePlayer(this.direction);
-        return List.of(new EventResult(CharacterMovedEvent.of(session.character(), session.gameplay().getRoom())));
+        session.getCampaign().movePlayer(this.direction);
+        Room enteredRoom = session.getCampaign().getRoom();
+        return List.of(new EventResult(CharacterMovedEvent.of(session.getCharacter(), enteredRoom)));
     }
 }

@@ -1,32 +1,24 @@
 package sofia.sap.interview.project.game.gameplay;
 
+import lombok.Getter;
 import sofia.sap.interview.project.game.characters.ally.Character;
 
+@Getter
 public class GameSession {
 
     private final Character character;
     private final Campaign campaign;
-    private final CombatService combat;
+    private final CombatService combatService;
+    private final ItemsService itemsService;
 
-    public GameSession(Campaign campaign, Character character, CombatService combatService) {
+    public GameSession(Campaign campaign, Character character) {
         this.campaign = campaign;
         this.character = character;
-        this.combat = combatService;
+        this.combatService = new CombatService();
+        this.itemsService = new ItemsService();
     }
 
     public static GameSession load(Campaign campaign, Character character) {
-        return new GameSession(campaign, character, new CombatService());
-    }
-
-    public Campaign gameplay() {
-        return this.campaign;
-    }
-
-    public Character character() {
-        return this.character;
-    }
-
-    public CombatService combat() {
-        return this.combat;
+        return new GameSession(campaign, character);
     }
 }

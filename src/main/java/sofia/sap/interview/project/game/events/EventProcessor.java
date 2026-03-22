@@ -21,7 +21,7 @@ public class EventProcessor {
                 if (questCompleted) {
                     allResults.add(new EventResult(QuestCompletedEvent.of(questLog.getLastCompletedQuest())));
                     if (questLog.getActiveQuests().isEmpty()) {
-                        allResults.add(new EventResult(GameWonEvent.of(user.getSession().character(), questLog)));
+                        allResults.add(new EventResult(GameWonEvent.of(user.getSession().getCharacter(), questLog)));
                         endGame(user);
                     }
                 }

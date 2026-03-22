@@ -3,8 +3,6 @@ package sofia.sap.interview.project.game.user;
 import lombok.Getter;
 import sofia.sap.interview.project.game.characters.ally.type.AllyCharacterType;
 import sofia.sap.interview.project.game.dto.loadgame.LoadedInformation;
-import sofia.sap.interview.project.game.files.LoadGame;
-import sofia.sap.interview.project.game.gameplay.GameFactory;
 import sofia.sap.interview.project.game.gameplay.GameSession;
 import sofia.sap.interview.project.game.quests.QuestLog;
 

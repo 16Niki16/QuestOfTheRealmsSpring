@@ -17,7 +17,7 @@ public class RegenerationSystem implements GameSystem {
             () -> {
                 for (User user : activeUsers) {
                     if (user.isActiveSession()) {
-                        user.getSession().character().regen(AMOUNT);
+                        user.getSession().getCharacter().regen(AMOUNT);
                     }
                 }
             },

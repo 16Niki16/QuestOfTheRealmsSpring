@@ -10,6 +10,6 @@ import java.util.List;
 public class InventoryCommand implements Command {
     @Override
     public List<CommandResult> execute(User user) {
-        return List.of(new ViewResult(InventoryInformation.of(user.getSession().character().getInventory())));
+        return List.of(new ViewResult(InventoryInformation.of(user.getSession().getCharacter().getInventory())));
     }
 }

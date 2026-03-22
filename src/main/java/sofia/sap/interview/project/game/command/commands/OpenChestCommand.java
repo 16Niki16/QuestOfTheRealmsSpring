@@ -12,8 +12,8 @@ public class OpenChestCommand implements Command {
     @Override
     public List<CommandResult> execute(User user) {
         GameSession gameSession = user.getSession();
-        Character character = gameSession.character();
-        Room currentRoom = gameSession.gameplay().getRoom();
-        return gameSession.combat().collect(character, currentRoom);
+        Character character = gameSession.getCharacter();
+        Room currentRoom = gameSession.getCampaign().getRoom();
+        return gameSession.getItemsService().collect(character, currentRoom);
     }
 }
