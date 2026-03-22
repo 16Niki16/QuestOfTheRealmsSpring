@@ -58,11 +58,4 @@ public class GameRestController {
         user.loadGame();
         return ResponseEntity.ok().build();
     }
-
-    @PostMapping("/user/{username}/save")
-    public ResponseEntity<?> saveGame(@PathVariable String username) {
-        User user = gameService.getUser(username);
-        SaveGame.saveGame(user);
-        return ResponseEntity.ok().build();
-    }
 }

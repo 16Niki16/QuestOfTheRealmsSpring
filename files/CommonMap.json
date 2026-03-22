@@ -21,7 +21,7 @@
           }
         },
         "enemy": "GOBLIN_KING",
-        "specialItem": "IRON_KEY"
+        "specialItem": null
       },
       {
         "name": "salty springs",
@@ -46,7 +46,7 @@
           }
         },
         "enemy": null,
-        "specialItem": "IRON_KEY"
+        "specialItem": null
       },
       {
         "name": "flush factory",

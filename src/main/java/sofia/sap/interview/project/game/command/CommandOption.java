@@ -14,7 +14,8 @@ public enum CommandOption {
     QUESTS("quests"),
     PATHS("paths"),
     OPEN("open"),
-    INVENTORY("inventory");
+    INVENTORY("inventory"),
+    SAVE("save");
     private final String command;
 
     CommandOption(String command) {
