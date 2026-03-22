@@ -12,8 +12,6 @@ public class CheckQuestsCommand implements Command {
 
     @Override
     public List<CommandResult> execute(User user) {
-        QuestLog log = user.getLog();
-
-        return List.of(new ViewResult(new QuestInformation(log.getActiveQuests(), log.getCompletedQuests())));
+        return List.of(new ViewResult(QuestInformation.of(user.getLog())));
     }
 }

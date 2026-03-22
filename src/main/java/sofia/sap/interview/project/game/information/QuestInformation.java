@@ -1,8 +1,21 @@
 package sofia.sap.interview.project.game.information;
 
+import sofia.sap.interview.project.game.dto.events.QuestDTO;
 import sofia.sap.interview.project.game.quests.Quest;
+import sofia.sap.interview.project.game.quests.QuestLog;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-public record QuestInformation(List<Quest> active, List<Quest> completed) implements ViewInformation {
+public record QuestInformation(List<QuestDTO> active, List<QuestDTO> completed) implements ViewInformation {
+    public static QuestInformation of(QuestLog questLog) {
+        return new QuestInformation(transformToDTO(questLog.getActiveQuests()),
+            transformToDTO(questLog.getCompletedQuests()));
+    }
+
+    private static List<QuestDTO> transformToDTO(List<Quest> quests) {
+        return quests.stream()
+            .map(QuestDTO::of)
+            .toList();
+    }
 }

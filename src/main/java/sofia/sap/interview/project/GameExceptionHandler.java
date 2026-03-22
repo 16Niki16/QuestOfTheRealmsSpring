@@ -17,6 +17,7 @@ import sofia.sap.interview.project.game.exceptions.LoadGameException;
 import sofia.sap.interview.project.game.exceptions.NewGameFileException;
 import sofia.sap.interview.project.game.exceptions.NoActiveSessionException;
 import sofia.sap.interview.project.game.exceptions.NoEnemyInTheRoomException;
+import sofia.sap.interview.project.game.exceptions.QuestTypeNotFoundException;
 import sofia.sap.interview.project.game.exceptions.SaveGameException;
 import sofia.sap.interview.project.game.exceptions.UserNotFoundException;
 
@@ -29,7 +30,8 @@ public class GameExceptionHandler {
         DirectionNotAvailableException.class,
         UserNotFoundException.class,
         NoEnemyInTheRoomException.class,
-        EnemyTypeNotAvailableException.class
+        EnemyTypeNotAvailableException.class,
+        QuestTypeNotFoundException.class
     })
     public ResponseEntity<String> handleNotFound(RuntimeException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

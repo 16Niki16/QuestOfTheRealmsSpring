@@ -36,7 +36,7 @@ public class Inventory {
     public void removeItem(Item item) {
         Integer count = this.items.get(item.getType());
         if (count == null || count == 0) {
-            throw new ItemNotAvailableException("There is not an item to remove!");
+            throw new ItemNotAvailableException("There is not an item of this type in inventory!");
         }
         this.items.put(item.getType(), count - 1);
     }

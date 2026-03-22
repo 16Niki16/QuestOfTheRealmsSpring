@@ -1,5 +1,7 @@
 package sofia.sap.interview.project.game.quests;
 
+import sofia.sap.interview.project.game.exceptions.QuestTypeNotFoundException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
@@ -32,6 +34,15 @@ public class QuestList {
             .limit(numberOfQuests)
             .map(Supplier::get)
             .collect(Collectors.toList());
+    }
+
+    public static Quest create(QuestType type) {
+        Supplier<Quest> supplier = QUESTS.get(type);
+
+        if (supplier == null) {
+            throw new QuestTypeNotFoundException("Unknown quest type: " + type);
+        }
+        return supplier.get();
     }
 
     private QuestList() {
