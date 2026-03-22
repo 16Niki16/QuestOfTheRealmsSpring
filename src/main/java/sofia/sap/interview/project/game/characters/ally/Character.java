@@ -44,16 +44,6 @@ public class Character {
         this.equippedItems = equipped;
     }
 
-    public Item getEquippedItem(ItemType itemType) {
-        Item equippedItem = this.equippedItems.get(itemType);
-
-        if (equippedItem == null) {
-            throw new EquipmentNotEquippedException("The provided equipment is not equipped!");
-
-        }
-        return equippedItem;
-    }
-
     public int attackEnemy() {
         return this.characterStats.attack();
     }
@@ -69,22 +59,23 @@ public class Character {
 
     public void equipGear(Gear itemToEquip) {
         if (this.equippedItems.containsKey(itemToEquip.getType())) {
-            throw new ItemTypeAlreadyEquippedException("This kind of item is already equipped by the ally character!");
+            throw new ItemTypeAlreadyEquippedException("Item of this type is already equipped by the character!");
         }
 
-        this.equippedItems.put(itemToEquip.getType(), itemToEquip);
         this.inventory.removeItem(itemToEquip);
+        this.equippedItems.put(itemToEquip.getType(), itemToEquip);
         itemToEquip.equip(this);
     }
 
-    public void unequipGear(Gear gear) {
-        if (!this.equippedItems.containsKey(gear.getType())) {
+    public Gear unequipGear(ItemType gearType) {
+        if (!this.equippedItems.containsKey(gearType)) {
             throw new EquipmentNotEquippedException("The provided item is not equipped!");
         }
-
-        this.equippedItems.remove(gear.getType());
-        this.inventory.addItem(gear);
-        gear.unequip(this);
+        Gear gearToUnequip = this.equippedItems.get(gearType);
+        this.equippedItems.remove(gearType);
+        this.inventory.addItem(gearType);
+        gearToUnequip.unequip(this);
+        return gearToUnequip;
     }
 
     public void collectItems(Map<ItemType, Integer> items) {

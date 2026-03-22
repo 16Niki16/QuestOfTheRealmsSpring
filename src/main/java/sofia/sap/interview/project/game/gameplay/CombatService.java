@@ -17,6 +17,7 @@ import sofia.sap.interview.project.game.exceptions.ItemNotAvailableException;
 import sofia.sap.interview.project.game.items.Consumable;
 import sofia.sap.interview.project.game.items.Gear;
 import sofia.sap.interview.project.game.items.Item;
+import sofia.sap.interview.project.game.items.ItemFactory;
 import sofia.sap.interview.project.game.items.ItemType;
 import sofia.sap.interview.project.game.map.room.Room;
 
@@ -56,36 +57,21 @@ public class CombatService {
     }
 
     public List<CommandResult> useItem(Character character, ItemType itemType) {
-        Item itemToConsume = character.getInventory().getItem(itemType);
+        Consumable itemToConsume = ItemFactory.createConsumable(itemType);
+        character.applyPotion(itemToConsume);
 
-        if (itemToConsume instanceof Consumable consumable) {
-            character.applyPotion(consumable);
-            return List.of(new EventResult(ItemUsedEvent.of(consumable)));
-        }
-        throw new ItemNotAvailableException("The provided item is not correct!");
-
+        return List.of(new EventResult(ItemUsedEvent.of(itemToConsume)));
     }
 
     public List<CommandResult> equip(Character character, ItemType itemType) {
-        Item item = character.getInventory().getItem(itemType);
-
-        if (item instanceof Gear gear) {
-            character.equipGear(gear);
-            return List.of(new EventResult(ItemEquipEvent.equipEvent(item)));
-        }
-        throw new ItemNotAvailableException("The provided item is not gear!");
-
+        Gear gearToEquip = ItemFactory.createGear(itemType);
+        character.equipGear(gearToEquip);
+        return List.of(new EventResult(ItemEquipEvent.equipEvent(gearToEquip)));
     }
 
     public List<CommandResult> unequip(Character character, ItemType itemType) {
-        Item item = character.getEquippedItem(itemType);
-
-        if (item instanceof Gear gear) {
-            character.unequipGear(gear);
-            return List.of(new EventResult(ItemUnequipEvent.unequipEvent(item)));
-        }
-        throw new ItemNotAvailableException("The provided item is not gear!");
-
+        Gear unequippedGear = character.unequipGear(itemType);
+        return List.of(new EventResult(ItemUnequipEvent.unequipEvent(unequippedGear)));
     }
 
     public List<CommandResult> collect(Character character, Room room) {

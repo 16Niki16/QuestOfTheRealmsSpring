@@ -24,21 +24,13 @@ public class Inventory {
         this.items = items;
     }
 
-    public void addItem(Item item) {
-        this.items.merge(item.getType(), 1, Integer::sum);
+    public void addItem(ItemType itemType) {
+        this.items.merge(itemType, 1, Integer::sum);
     }
 
     public void addAllItems(Map<ItemType, Integer> items) {
         items.forEach((type, count) ->
             this.items.merge(type, count, Integer::sum));
-    }
-
-    public Item getItem(ItemType itemType) {
-        Integer count = this.items.get(itemType);
-        if (count == null || count == 0) {
-            throw new ItemNotAvailableException("The provided item is not in the inventory!");
-        }
-        return ItemFactory.create(itemType);
     }
 
     public void removeItem(Item item) {

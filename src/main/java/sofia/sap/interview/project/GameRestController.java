@@ -11,6 +11,7 @@ import sofia.sap.interview.project.game.command.CommandFactory;
 import sofia.sap.interview.project.game.command.commands.Command;
 import sofia.sap.interview.project.game.command.result.CommandResult;
 import sofia.sap.interview.project.game.events.EventProcessor;
+import sofia.sap.interview.project.game.exceptions.NoActiveSessionException;
 import sofia.sap.interview.project.game.files.SaveGame;
 import sofia.sap.interview.project.game.request.CommandRequest;
 import sofia.sap.interview.project.game.request.NewGameRequest;
@@ -42,7 +43,15 @@ public class GameRestController {
 
     @PostMapping("/user/{username}/command")
     public ResponseEntity<List<?>> executeCommand(@PathVariable String username, @RequestBody CommandRequest request) {
-        List<CommandResult> commandResults = GameRestControllerHelpers.commandResults(username, request, gameService);
+        User user = gameService.getUser(username);
+
+        if (!user.isActiveSession()) {
+            throw new NoActiveSessionException("Create a game before execute a command!");
+        }
+
+        Command command = CommandFactory.createCommand(request.command());
+        List<CommandResult> results = command.execute(user);
+        List<CommandResult> commandResults = EventProcessor.process(user, results);
         return ResponseEntity.ok(GameEventMapper.result(commandResults));
     }
 
