@@ -19,7 +19,6 @@ public class SystemsStarter {
         this.systems = List.of(
             new AutoSaveSystem(),
             new RegenerationSystem());
-        // new EnemyAutoAttackSystem());
     }
 
     public void start() {
