@@ -22,18 +22,18 @@ public class EventProcessor {
                     allResults.add(new EventResult(QuestCompletedEvent.of(questLog.getLastCompletedQuest())));
                     if (questLog.getActiveQuests().isEmpty()) {
                         allResults.add(new EventResult(GameWonEvent.of(user.getSession().character(), questLog)));
-                        endGameHelper(user);
+                        endGame(user);
                     }
                 }
                 if (event instanceof CharacterDiedEvent) {
-                    endGameHelper(user);
+                    endGame(user);
                 }
             }
         }
         return allResults;
     }
 
-    private static void endGameHelper(User user) {
+    private static void endGame(User user) {
         user.endGame();
         EndGame.endGame(user.getUsername());
     }

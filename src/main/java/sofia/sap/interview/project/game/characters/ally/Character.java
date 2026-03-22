@@ -3,6 +3,7 @@ package sofia.sap.interview.project.game.characters.ally;
 import lombok.Getter;
 import sofia.sap.interview.project.game.characters.ally.type.AllyCharacterType;
 import sofia.sap.interview.project.game.characters.statistics.CharacterStatistics;
+import sofia.sap.interview.project.game.dto.savegame.data.CharacterData;
 import sofia.sap.interview.project.game.exceptions.EquipmentNotEquippedException;
 import sofia.sap.interview.project.game.exceptions.ItemTypeAlreadyEquippedException;
 import sofia.sap.interview.project.game.inventory.Inventory;

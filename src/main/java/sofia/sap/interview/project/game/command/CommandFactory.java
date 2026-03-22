@@ -47,12 +47,13 @@ public class CommandFactory {
 
     public static Command createCommand(String input) {
         String[] commandSplit = input.split(" ", 2);
-
         String clientCommand = commandSplit[0].toLowerCase();
         CommandParser parser = COMMANDS.get(clientCommand);
+
         if (parser == null) {
             throw new CommandNotAvailableException("The provided command is not correct!");
         }
+
         String[] args = Arrays.copyOfRange(commandSplit, 1, commandSplit.length);
         return parser.parse(args);
     }

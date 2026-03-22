@@ -7,7 +7,7 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class EnemyRegistry {
+public class EnemyFactory {
     private static final Map<EnemyType, Supplier<Enemy>> ENEMIES = new EnumMap<>(EnemyType.class);
 
     static {
@@ -26,6 +26,6 @@ public class EnemyRegistry {
         return sup.get();
     }
 
-    private EnemyRegistry() {
+    private EnemyFactory() {
     }
 }

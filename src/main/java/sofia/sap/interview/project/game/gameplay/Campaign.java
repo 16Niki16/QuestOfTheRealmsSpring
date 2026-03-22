@@ -20,16 +20,16 @@ import java.util.List;
 import java.util.Set;
 
 @Getter
-public class Gameplay {
+public class Campaign {
     private final Playground playground;
     private Coordinates playerCoordinates;
 
-    public Gameplay(Playground playground) {
+    public Campaign(Playground playground) {
         this.playground = playground;
         this.playerCoordinates = Coordinates.startingCoordinates();
     }
 
-    public Gameplay(Playground playground, Coordinates coordinates) {
+    public Campaign(Playground playground, Coordinates coordinates) {
         this.playground = playground;
         this.playerCoordinates = coordinates;
     }

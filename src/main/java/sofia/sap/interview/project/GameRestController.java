@@ -48,10 +48,7 @@ public class GameRestController {
         if (!user.isActiveSession()) {
             throw new NoActiveSessionException("Create a game before execute a command!");
         }
-
-        Command command = CommandFactory.createCommand(request.command());
-        List<CommandResult> results = command.execute(user);
-        List<CommandResult> commandResults = EventProcessor.process(user, results);
+        List<CommandResult> commandResults = gameService.commandExecute(user, request);
         return ResponseEntity.ok(GameEventMapper.result(commandResults));
     }
 

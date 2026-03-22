@@ -6,9 +6,10 @@ import sofia.sap.interview.project.game.files.NewGame;
 
 public class GameFactory {
     public static GameSession createSession(String characterName, AllyCharacterType type) {
-        Gameplay gameplay = new Gameplay(NewGame.createPlayground());
+        Campaign campaign = new Campaign(NewGame.createPlayground());
         Character character = new Character(characterName, type);
         CombatService actions = new CombatService();
-        return new GameSession(gameplay, character, actions);
+
+        return new GameSession(campaign, character, actions);
     }
 }

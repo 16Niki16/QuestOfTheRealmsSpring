@@ -11,7 +11,7 @@ import java.nio.file.Path;
 public class LoadGame {
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
-    public static LoadedInformation loadGame(String username) {
+    public static LoadedInformation load(String username) {
         Path path = Path.of("files", username + ".json");
 
         try {

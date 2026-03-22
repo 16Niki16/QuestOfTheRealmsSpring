@@ -22,6 +22,7 @@ public class ItemFactory {
         if (CONSUMABLES.containsKey(itemType)) {
             return createConsumable(itemType);
         }
+
         return createGear(itemType);
     }
 
@@ -30,6 +31,7 @@ public class ItemFactory {
         if (supplier == null) {
             throw new ItemNotAvailableException("The provided item is not consumable!");
         }
+
         return supplier.get();
     }
 
@@ -38,6 +40,7 @@ public class ItemFactory {
         if (supplier == null) {
             throw new ItemNotAvailableException("The provided item is not gear!");
         }
+
         return supplier.get();
     }
 

@@ -1,5 +1,6 @@
 package sofia.sap.interview.project.game.quests;
 
+import lombok.Getter;
 import sofia.sap.interview.project.game.events.GameEvent;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 public class QuestLog {
     private final List<Quest> activeQuests;
     private final List<Quest> completedQuests;
+    @Getter
     private int collectedXP;
 
     public QuestLog() {
@@ -24,6 +26,7 @@ public class QuestLog {
         this.collectedXP = collectedXP;
     }
 
+    //TODO
     public static QuestLog load(List<Quest> active, List<Quest> completed, int collectedXP) {
         return new QuestLog(active, completed, collectedXP);
     }
@@ -56,7 +59,4 @@ public class QuestLog {
         return false;
     }
 
-    public int getCollectedXP() {
-        return this.collectedXP;
-    }
 }

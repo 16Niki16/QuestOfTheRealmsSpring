@@ -6,8 +6,7 @@ import sofia.sap.interview.project.game.characters.attack.AttackRange;
 import sofia.sap.interview.project.game.characters.statistics.CharacterStatistics;
 
 public record NewGameEvent(EventType eventType, String characterName, AllyCharacterType characterType, int characterHealth, int characterMana,
-                           AttackRange characterAttackRange)
-    implements GameEvent {
+                           AttackRange characterAttackRange) implements GameEvent {
     public static NewGameEvent of(Character character) {
         CharacterStatistics stats = character.getCharacterStats();
         return new NewGameEvent(EventType.NEW_GAME, character.getCharacterName(), character.getType(),

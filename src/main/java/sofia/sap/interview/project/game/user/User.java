@@ -8,6 +8,9 @@ import sofia.sap.interview.project.game.gameplay.GameFactory;
 import sofia.sap.interview.project.game.gameplay.GameSession;
 import sofia.sap.interview.project.game.quests.QuestLog;
 
+import static sofia.sap.interview.project.game.files.LoadGame.load;
+import static sofia.sap.interview.project.game.gameplay.GameFactory.createSession;
+
 @Getter
 public class User {
     private final String username;
@@ -30,7 +33,7 @@ public class User {
 
     public void createNewGame(String name, AllyCharacterType type) {
         this.log = new QuestLog();
-        this.session = GameFactory.createSession(name, type);
+        this.session = createSession(name, type);
     }
 
     public void endGame() {
@@ -39,7 +42,7 @@ public class User {
     }
 
     public void loadGame() {
-        LoadedInformation info = LoadGame.loadGame(this.username);
+        LoadedInformation info = load(this.username);
         this.session = info.session();
         this.log = info.log();
     }

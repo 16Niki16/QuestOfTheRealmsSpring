@@ -11,8 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class SaveGame {
-    private static final ObjectMapper MAPPER =
-        new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
+    private static final ObjectMapper MAPPER = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
     public static void saveGame(User user) {
         MAPPER.enable(SerializationFeature.INDENT_OUTPUT);

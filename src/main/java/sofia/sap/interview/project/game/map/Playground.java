@@ -8,13 +8,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public record Playground(Room[][] rooms) {
-
-    /**
-     * (0,0) x -->
-     * y
-     * |
-     * raste nadolu
-     */
     @Override
     public Room[][] rooms() {
         return this.rooms;
@@ -43,10 +36,6 @@ public record Playground(Room[][] rooms) {
 
     public Enemy getEnemyByPosition(Coordinates coordinates) {
         return rooms[coordinates.y()][coordinates.x()].getEnemy();
-    }
-
-    public SpecialItem getSpecialItemByPosition(Coordinates coordinates) {
-        return rooms[coordinates.y()][coordinates.x()].getSpecialItem();
     }
 
     public Room getRoomByCoordinates(Coordinates coordinates) {

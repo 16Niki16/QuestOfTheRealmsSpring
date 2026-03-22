@@ -1,5 +1,8 @@
 package sofia.sap.interview.project.game.quests;
 
+import lombok.Getter;
+
+@Getter
 public enum Reward {
     SMALL(10),
     MEDIUM(25),
@@ -11,7 +14,4 @@ public enum Reward {
         this.rewardXP = rewardXP;
     }
 
-    public int getRewardXP() {
-        return rewardXP;
-    }
 }

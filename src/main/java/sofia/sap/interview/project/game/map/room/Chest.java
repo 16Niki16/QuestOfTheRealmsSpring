@@ -25,6 +25,7 @@ public class Chest {
     public Map<ItemType, Integer> collectItems() {
         Map<ItemType, Integer> items = Map.copyOf(this.content);
         this.content.clear();
+
         return items;
     }
 }

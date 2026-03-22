@@ -46,7 +46,7 @@ public class Room {
     }
 
     public boolean hasEnemy() {
-        return !(this.enemy == null);
+        return this.enemy != null;
     }
 
     public void killEnemy() {

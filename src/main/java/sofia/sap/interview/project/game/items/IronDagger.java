@@ -16,7 +16,7 @@ public class IronDagger implements Gear {
     }
 
     @Override
-    public void equip(sofia.sap.interview.project.game.characters.ally.Character character) {
+    public void equip(Character character) {
         character.increaseAttackDamage(EFFECT);
     }
 
