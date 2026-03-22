@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+/*just an idea for the future*/
+
 public class EnemyAutoAttackSystem implements GameSystem {
     private static final EnemyAttackCommand ENEMY_ATTACK_COMMAND = new EnemyAttackCommand();
     private static final Duration TIME_INTERVAL = Duration.ofSeconds(1);
@@ -25,9 +27,9 @@ public class EnemyAutoAttackSystem implements GameSystem {
                 if (!user.isActiveSession()) {
                     continue;
                 }
-                Room room = user.getSession().gameplay().getRoom();
-                if (room.hasEnemy()) {
-                    EnemyState state = room.getState();
+                Room currentRoom = user.getSession().gameplay().getRoom();
+                if (currentRoom.hasEnemy()) {
+                    EnemyState state = currentRoom.getState();
                     if (state.canAttack()) {
                         List<CommandResult> results = ENEMY_ATTACK_COMMAND.execute(user);
                         List<GameEvent> events = results.stream()

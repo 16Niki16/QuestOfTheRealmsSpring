@@ -12,9 +12,9 @@ public class AutoSaveSystem implements GameSystem {
     private static final Duration TIME_INTERVAL = Duration.ofSeconds(60);
 
     @Override
-    public void start(ScheduledExecutorService scheduler, Collection<User> users) {
+    public void start(ScheduledExecutorService scheduler, Collection<User> activeUsers) {
         scheduler.scheduleAtFixedRate(() -> {
-            for (User user : users) {
+            for (User user : activeUsers) {
                 if (user.isActiveSession()) {
                     SaveGame.saveGame(user);
                 }

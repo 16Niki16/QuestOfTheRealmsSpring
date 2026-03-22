@@ -12,10 +12,10 @@ public class RegenerationSystem implements GameSystem {
     private static final Duration TIMER = Duration.ofSeconds(5);
 
     @Override
-    public void start(ScheduledExecutorService scheduler, Collection<User> users) {
+    public void start(ScheduledExecutorService scheduler, Collection<User> activeUsers) {
         scheduler.scheduleAtFixedRate(
             () -> {
-                for (User user : users) {
+                for (User user : activeUsers) {
                     if (user.isActiveSession()) {
                         user.getSession().character().regen(AMOUNT);
                     }
