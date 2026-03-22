@@ -23,6 +23,7 @@ import sofia.sap.interview.project.game.map.room.Room;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 public class CombatService {
     public List<CommandResult> attack(Character character, Enemy currentEnemy, Room currentRoom) {
@@ -88,7 +89,7 @@ public class CombatService {
     }
 
     public List<CommandResult> collect(Character character, Room room) {
-        Collection<Item> items = room.collectItems();
+        Map<ItemType, Integer> items = room.collectItems();
         character.collectItems(items);
         return List.of(new EventResult(CollectItemsEvent.collectEvent(items)));
     }

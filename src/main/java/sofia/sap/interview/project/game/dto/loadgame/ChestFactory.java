@@ -12,11 +12,6 @@ import java.util.stream.IntStream;
 
 public class ChestFactory {
     public static Chest create(ChestData data) {
-        List<Item> items = data.items().entrySet().stream()
-                .flatMap(entry -> IntStream.range(0, entry.getValue())
-                        .mapToObj(i -> ItemFactory.create(entry.getKey())))
-                .collect(Collectors.toCollection(ArrayList::new));
-
-        return Chest.createChest(items);
+        return Chest.createChest(data.items());
     }
 }

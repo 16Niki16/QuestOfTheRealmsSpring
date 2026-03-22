@@ -78,7 +78,7 @@ public class Character {
     }
 
     public void unequipGear(Gear gear) {
-        if (this.equippedItems.containsKey(gear.getType())) {
+        if (!this.equippedItems.containsKey(gear.getType())) {
             throw new EquipmentNotEquippedException("The provided item is not equipped!");
         }
 
@@ -87,7 +87,7 @@ public class Character {
         gear.unequip(this);
     }
 
-    public void collectItems(Collection<Item> items) {
+    public void collectItems(Map<ItemType, Integer> items) {
         this.inventory.addAllItems(items);
     }
 

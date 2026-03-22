@@ -28,10 +28,9 @@ public class Inventory {
         this.items.merge(item.getType(), 1, Integer::sum);
     }
 
-    public void addAllItems(Collection<Item> items) {
-        for (Item item : items) {
-            addItem(item);
-        }
+    public void addAllItems(Map<ItemType, Integer> items) {
+        items.forEach((type, count) ->
+            this.items.merge(type, count, Integer::sum));
     }
 
     public Item getItem(ItemType itemType) {

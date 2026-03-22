@@ -14,11 +14,6 @@ public class ChestMapper {
             return null;
         }
 
-        List<Item> items = dto.items.entrySet().stream()
-                .flatMap(entry -> IntStream.range(0, entry.getValue())
-                        .mapToObj(i -> ItemFactory.create(entry.getKey())))
-                .toList();
-
-        return Chest.createChest(items);
+        return Chest.createChest(dto.items);
     }
 }

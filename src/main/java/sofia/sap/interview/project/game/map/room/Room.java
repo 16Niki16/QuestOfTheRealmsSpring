@@ -5,8 +5,10 @@ import sofia.sap.interview.project.game.characters.enemy.Enemy;
 import sofia.sap.interview.project.game.characters.enemy.EnemyState;
 import sofia.sap.interview.project.game.exceptions.ChestNotAvailableException;
 import sofia.sap.interview.project.game.items.Item;
+import sofia.sap.interview.project.game.items.ItemType;
 
 import java.util.Collection;
+import java.util.Map;
 
 @Getter
 public class Room {
@@ -29,12 +31,12 @@ public class Room {
         return new Room(SAFE_PATH, null, null, null);
     }
 
-    public Collection<Item> collectItems() {
+    public Map<ItemType, Integer> collectItems() {
         if (this.chest == null) {
             throw new ChestNotAvailableException("There is not a chest in this room!");
         }
 
-        Collection<Item> items = this.chest.collectItems();
+        Map<ItemType, Integer> items = this.chest.collectItems();
         this.chest = null;
         return items;
     }

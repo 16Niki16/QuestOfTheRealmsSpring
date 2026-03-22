@@ -9,12 +9,6 @@ import java.util.stream.Collectors;
 
 public record InventoryInformation(Map<ItemType, Integer> inventoryContent) implements ViewInformation{
     public static InventoryInformation of(Inventory inventory) {
-        Map<ItemType, Integer> inventoryContent = inventory.getItems().entrySet().stream()
-            .collect(Collectors.toMap(
-                Map.Entry::getKey,
-                e -> e.getValue().size()
-            ));
-
-        return new InventoryInformation(inventoryContent);
+        return new InventoryInformation(inventory.getItems());
     }
 }
