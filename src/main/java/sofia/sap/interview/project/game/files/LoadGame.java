@@ -12,11 +12,9 @@ public class LoadGame {
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
     public static LoadedInformation loadGame(String username) {
-
         Path path = Path.of("files", username + ".json");
 
         try {
-
             GameData data = MAPPER.readValue(path.toFile(), GameData.class);
             return LoadedInformation.load(data);
 

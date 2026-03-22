@@ -15,10 +15,9 @@ public class SaveGame {
         new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
     public static void saveGame(User user) {
-
         MAPPER.enable(SerializationFeature.INDENT_OUTPUT);
-
         Path path = Path.of("files", user.getUsername() + ".json");
+
         try {
             Files.createDirectories(path.getParent());
             MAPPER.writeValue(path.toFile(), GameDataFactory.save(user.getSession(), user.getLog()));

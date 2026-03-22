@@ -11,8 +11,9 @@ public class EndGame {
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
     public static void endGame(String username) {
+        Path path = Path.of("files", username + ".json");
+
         try {
-            Path path = Path.of("files", username + ".json");
             Files.deleteIfExists(path);
         } catch (IOException e) {
             throw new EndGameFileException("Problem in end game file delete!", e);
