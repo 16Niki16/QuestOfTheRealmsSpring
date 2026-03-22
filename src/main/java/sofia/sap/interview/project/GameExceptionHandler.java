@@ -19,6 +19,7 @@ import sofia.sap.interview.project.game.exceptions.NoActiveSessionException;
 import sofia.sap.interview.project.game.exceptions.NoEnemyInTheRoomException;
 import sofia.sap.interview.project.game.exceptions.QuestTypeNotFoundException;
 import sofia.sap.interview.project.game.exceptions.SaveGameException;
+import sofia.sap.interview.project.game.exceptions.UnknownResultTypeException;
 import sofia.sap.interview.project.game.exceptions.UserNotFoundException;
 
 @RestControllerAdvice
@@ -31,7 +32,8 @@ public class GameExceptionHandler {
         UserNotFoundException.class,
         NoEnemyInTheRoomException.class,
         EnemyTypeNotAvailableException.class,
-        QuestTypeNotFoundException.class
+        QuestTypeNotFoundException.class,
+        UnknownResultTypeException.class
     })
     public ResponseEntity<String> handleNotFound(RuntimeException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
