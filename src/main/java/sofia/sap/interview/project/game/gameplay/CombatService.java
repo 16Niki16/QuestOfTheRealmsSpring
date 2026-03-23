@@ -5,26 +5,14 @@ import sofia.sap.interview.project.game.characters.enemy.Enemy;
 import sofia.sap.interview.project.game.command.result.CommandResult;
 import sofia.sap.interview.project.game.command.result.EventResult;
 import sofia.sap.interview.project.game.events.AttackEvent;
-import sofia.sap.interview.project.game.events.CharacterDiedEvent;
-import sofia.sap.interview.project.game.events.CollectItemsEvent;
+import sofia.sap.interview.project.game.events.GameOverEvent;
 import sofia.sap.interview.project.game.events.DefendEvent;
-import sofia.sap.interview.project.game.events.ItemEquipEvent;
-import sofia.sap.interview.project.game.events.ItemUnequipEvent;
-import sofia.sap.interview.project.game.events.ItemUsedEvent;
 import sofia.sap.interview.project.game.events.KillEnemyEvent;
 import sofia.sap.interview.project.game.events.NotEnoughManaEvent;
-import sofia.sap.interview.project.game.exceptions.ItemNotAvailableException;
-import sofia.sap.interview.project.game.items.Consumable;
-import sofia.sap.interview.project.game.items.Gear;
-import sofia.sap.interview.project.game.items.Item;
-import sofia.sap.interview.project.game.items.ItemFactory;
-import sofia.sap.interview.project.game.items.ItemType;
 import sofia.sap.interview.project.game.map.room.Room;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 public class CombatService {
     public List<CommandResult> attack(Character character, Enemy currentEnemy, Room currentRoom) {
@@ -52,7 +40,7 @@ public class CombatService {
         enemyAttackResults.add(new EventResult(DefendEvent.of(character, damageDealt, currentEnemy)));
 
         if (character.getCharacterStats().isDead()) {
-            enemyAttackResults.add(new EventResult(CharacterDiedEvent.of(character, currentEnemy)));
+            enemyAttackResults.add(new EventResult(GameOverEvent.of(character, currentEnemy)));
         }
 
         return enemyAttackResults;

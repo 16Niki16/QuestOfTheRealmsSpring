@@ -2,7 +2,7 @@ package sofia.sap.interview.project.game.events;
 
 public enum EventType {
     ATTACK,
-    CHARACTER_DIED,
+    GAME_OVER,
     MOVE,
     COLLECT_ITEMS,
     COLLECT_SPECIAL_ITEM,

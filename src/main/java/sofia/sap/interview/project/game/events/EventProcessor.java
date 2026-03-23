@@ -25,7 +25,7 @@ public class EventProcessor {
                         endGame(user);
                     }
                 }
-                if (event instanceof CharacterDiedEvent) {
+                if (event instanceof GameOverEvent) {
                     endGame(user);
                 }
             }

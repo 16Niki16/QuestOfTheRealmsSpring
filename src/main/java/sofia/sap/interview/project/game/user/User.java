@@ -8,7 +8,7 @@ import sofia.sap.interview.project.game.gameplay.GameSession;
 import sofia.sap.interview.project.game.quests.QuestLog;
 
 import static sofia.sap.interview.project.game.files.LoadGame.load;
-import static sofia.sap.interview.project.game.files.SaveGame.*;
+import static sofia.sap.interview.project.game.files.NewGameSave.*;
 import static sofia.sap.interview.project.game.gameplay.GameFactory.createSession;
 import static sofia.sap.interview.project.game.quests.QuestLog.*;
 
@@ -18,6 +18,7 @@ public class User {
     private String currentGameSessionName;
     private GameSession session;
     private QuestLog log;
+    private final Object saveLock = new Object();
 
     private User(String username, String currentGameSessionName, GameSession session, QuestLog log) {
         this.username = username;
@@ -35,21 +36,33 @@ public class User {
     }
 
     public void createNewGame(String name, AllyCharacterType type) {
-        this.log = createNewQuestLog();
-        this.session = createSession(name, type);
-        this.currentGameSessionName = saveGame(this);
+        synchronized (saveLock) {
+            this.log = createNewQuestLog();
+            this.session = createSession(name, type);
+            this.currentGameSessionName = saveGame(this);
+        }
     }
 
     public void endGame() {
-        this.currentGameSessionName = null;
-        this.session = null;
-        this.log = null;
+        synchronized (saveLock) {
+            this.currentGameSessionName = null;
+            this.session = null;
+            this.log = null;
+        }
     }
 
-    public void loadGame(String filename) {
-        LoadedInformation info = load(this, filename);
-        this.currentGameSessionName = filename;
-        this.session = info.session();
-        this.log = info.log();
+    public void resumeGame(String filename) {
+        synchronized (saveLock) {
+            LoadedInformation info = load(this, filename);
+            this.currentGameSessionName = filename;
+            this.session = info.session();
+            this.log = info.log();
+        }
+    }
+
+    public void save() {
+        synchronized (saveLock) {
+            SaveGame.saveGame(this);
+        }
     }
 }

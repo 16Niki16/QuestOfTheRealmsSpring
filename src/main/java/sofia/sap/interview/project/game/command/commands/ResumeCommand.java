@@ -19,7 +19,7 @@ public class ResumeCommand implements Command {
 
     @Override
     public List<CommandResult> execute(User user) {
-        user.loadGame(filename);
+        user.resumeGame(filename);
         GameSession gameSession = user.getSession();
         Character character = gameSession.getCharacter();
         Room currentRoom = gameSession.getCampaign().getRoom();

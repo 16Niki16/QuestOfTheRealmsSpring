@@ -1,16 +1,11 @@
 package sofia.sap.interview.project.game.systems;
 
-import sofia.sap.interview.project.game.files.AutoSaveGame;
-import sofia.sap.interview.project.game.files.SaveGame;
 import sofia.sap.interview.project.game.user.User;
 
 import java.time.Duration;
 import java.util.Collection;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
-import static sofia.sap.interview.project.game.files.AutoSaveGame.*;
-import static sofia.sap.interview.project.game.files.SaveGame.*;
 
 public class AutoSaveSystem implements GameSystem {
     private static final Duration TIME_INTERVAL = Duration.ofSeconds(60);
@@ -20,7 +15,7 @@ public class AutoSaveSystem implements GameSystem {
         scheduler.scheduleAtFixedRate(() -> {
             for (User user : activeUsers) {
                 if (user.isActiveSession()) {
-                    autoSaveGame(user);
+                    user.save();
                 }
             }
         }, TIME_INTERVAL.getSeconds(), TIME_INTERVAL.getSeconds(), TimeUnit.SECONDS);
