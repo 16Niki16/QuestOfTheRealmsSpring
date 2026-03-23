@@ -8,8 +8,11 @@ import sofia.sap.interview.project.game.files.SaveGame;
 import sofia.sap.interview.project.game.gameplay.GameSession;
 import sofia.sap.interview.project.game.quests.QuestLog;
 
+import java.util.List;
+
 import static sofia.sap.interview.project.game.files.LoadGame.load;
 import static sofia.sap.interview.project.game.files.NewGameSave.*;
+import static sofia.sap.interview.project.game.files.SavedGamesList.getSaveFiles;
 import static sofia.sap.interview.project.game.gameplay.GameFactory.createSession;
 import static sofia.sap.interview.project.game.quests.QuestLog.*;
 
@@ -41,6 +44,17 @@ public class User {
         this.currentGameSessionName = saveNewGame(this);
     }
 
+    public synchronized void resumeGame(String filename) {
+        LoadedInformation info = load(this, filename);
+        this.currentGameSessionName = filename;
+        this.session = info.session();
+        this.log = info.log();
+    }
+
+    public synchronized List<String> savedGames() {
+        return getSaveFiles(this);
+    }
+
     public synchronized void exitGame() {
         this.currentGameSessionName = null;
         this.session = null;
@@ -52,13 +66,6 @@ public class User {
         this.currentGameSessionName = null;
         this.session = null;
         this.log = null;
-    }
-
-    public synchronized void resumeGame(String filename) {
-        LoadedInformation info = load(this, filename);
-        this.currentGameSessionName = filename;
-        this.session = info.session();
-        this.log = info.log();
     }
 
     public synchronized void save() {

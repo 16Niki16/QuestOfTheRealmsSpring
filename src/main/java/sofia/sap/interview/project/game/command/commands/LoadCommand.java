@@ -12,7 +12,7 @@ import static sofia.sap.interview.project.game.files.SavedGamesList.*;
 public class LoadCommand implements Command {
     @Override
     public List<CommandResult> execute(User user) {
-        List<String> savedGames = getSaveFiles(user);
+        List<String> savedGames = user.savedGames();
         return List.of(new ViewResult(new LoadInformation(savedGames)));
     }
 }
