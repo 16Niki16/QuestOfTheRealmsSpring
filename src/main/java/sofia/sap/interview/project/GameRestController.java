@@ -27,7 +27,7 @@ public class GameRestController {
 
     @PostMapping("/user/{username}")
     public ResponseEntity<?> userRegistration(@PathVariable String username) {
-        gameService.getOrCreateUser(username);
+        gameService.registerUser(username);
 
         return ResponseEntity.ok().build();
     }

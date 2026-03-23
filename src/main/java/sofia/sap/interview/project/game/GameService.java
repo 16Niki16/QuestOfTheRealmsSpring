@@ -9,6 +9,7 @@ import sofia.sap.interview.project.game.command.result.CommandResult;
 import sofia.sap.interview.project.game.events.EventProcessor;
 import sofia.sap.interview.project.game.events.NewGameEvent;
 import sofia.sap.interview.project.game.exceptions.UserNotFoundException;
+import sofia.sap.interview.project.game.exceptions.UsernameAlreadyExistException;
 import sofia.sap.interview.project.game.information.LoadInformation;
 import sofia.sap.interview.project.game.information.ResumeInformation;
 import sofia.sap.interview.project.game.request.CommandRequest;
@@ -30,8 +31,11 @@ public class GameService {
         starter.start();
     }
 
-    public void getOrCreateUser(String username) {
-        users.computeIfAbsent(username, User::createUser);
+    public void registerUser(String username) {
+        User existing = users.putIfAbsent(username, User.createUser(username));
+        if (existing != null) {
+            throw new UsernameAlreadyExistException("Username already taken: " + username);
+        }
     }
 
     public User getUser(String username) {

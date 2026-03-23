@@ -22,11 +22,18 @@ import sofia.sap.interview.project.game.exceptions.QuestTypeNotFoundException;
 import sofia.sap.interview.project.game.exceptions.SaveGameException;
 import sofia.sap.interview.project.game.exceptions.UnknownResultTypeException;
 import sofia.sap.interview.project.game.exceptions.UserNotFoundException;
+import sofia.sap.interview.project.game.exceptions.UsernameAlreadyExistException;
 
 @RestControllerAdvice
 public class GameExceptionHandler {
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<String> handleInvalidJson(HttpMessageNotReadableException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid request format!");
+    }
+
 
     @ExceptionHandler({
+        UsernameAlreadyExistException.class,
         IllegalArgumentException.class,
         CommandNotAvailableException.class,
         NoActiveSessionException.class,
@@ -35,12 +42,16 @@ public class GameExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
 
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<String> userNotFound(UserNotFoundException e) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+    }
+
     @ExceptionHandler({
         ChestNotAvailableException.class,
         EquipmentNotEquippedException.class,
         ItemNotAvailableException.class,
         DirectionNotAvailableException.class,
-        UserNotFoundException.class,
         NoEnemyInTheRoomException.class,
         EnemyTypeNotAvailableException.class,
         QuestTypeNotFoundException.class,
@@ -63,11 +74,6 @@ public class GameExceptionHandler {
     })
     public ResponseEntity<String> handleFileErrors(RuntimeException e) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-    }
-
-    @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<String> handleInvalidJson(HttpMessageNotReadableException e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid request format!");
     }
 
     @ExceptionHandler(Exception.class)
