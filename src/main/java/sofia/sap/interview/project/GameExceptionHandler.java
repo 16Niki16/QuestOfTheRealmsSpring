@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import sofia.sap.interview.project.game.exceptions.BadRequestException;
 import sofia.sap.interview.project.game.exceptions.ChestNotAvailableException;
 import sofia.sap.interview.project.game.exceptions.CommandNotAvailableException;
 import sofia.sap.interview.project.game.exceptions.DirectionNotAvailableException;
@@ -24,15 +25,12 @@ import sofia.sap.interview.project.game.exceptions.UserNotFoundException;
 
 @RestControllerAdvice
 public class GameExceptionHandler {
-    @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<String> handleInvalidJson(HttpMessageNotReadableException e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid request format!");
-    }
 
     @ExceptionHandler({
         IllegalArgumentException.class,
         CommandNotAvailableException.class,
-        NoActiveSessionException.class})
+        NoActiveSessionException.class,
+        BadRequestException.class})
     public ResponseEntity<String> handleInvalidInput(RuntimeException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
@@ -65,6 +63,11 @@ public class GameExceptionHandler {
     })
     public ResponseEntity<String> handleFileErrors(RuntimeException e) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<String> handleInvalidJson(HttpMessageNotReadableException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid request format!");
     }
 
     @ExceptionHandler(Exception.class)
