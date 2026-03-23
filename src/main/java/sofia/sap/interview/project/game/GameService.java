@@ -3,10 +3,17 @@ package sofia.sap.interview.project.game;
 import org.springframework.stereotype.Service;
 import sofia.sap.interview.project.game.command.CommandFactory;
 import sofia.sap.interview.project.game.command.commands.Command;
+import sofia.sap.interview.project.game.command.commands.LoadCommand;
+import sofia.sap.interview.project.game.command.commands.ResumeCommand;
 import sofia.sap.interview.project.game.command.result.CommandResult;
 import sofia.sap.interview.project.game.events.EventProcessor;
+import sofia.sap.interview.project.game.events.NewGameEvent;
 import sofia.sap.interview.project.game.exceptions.UserNotFoundException;
+import sofia.sap.interview.project.game.information.LoadInformation;
+import sofia.sap.interview.project.game.information.ResumeInformation;
 import sofia.sap.interview.project.game.request.CommandRequest;
+import sofia.sap.interview.project.game.request.NewGameRequest;
+import sofia.sap.interview.project.game.request.ResumeGameRequest;
 import sofia.sap.interview.project.game.systems.SystemsStarter;
 import sofia.sap.interview.project.game.user.User;
 
@@ -32,12 +39,32 @@ public class GameService {
         if (user == null) {
             throw new UserNotFoundException("User not found: " + username);
         }
+
         return user;
     }
 
     public List<CommandResult> commandExecute(User user, CommandRequest request) {
         Command command = CommandFactory.createCommand(request.command());
         List<CommandResult> results = command.execute(user);
+
         return EventProcessor.process(user, results);
+    }
+
+    public NewGameEvent createNewGame(User user, NewGameRequest request) {
+        user.createNewGame(request.characterName(), request.type());
+
+        return NewGameEvent.of(user.getSession().getCharacter());
+    }
+
+    public List<CommandResult> resumeSavedGame(User user, ResumeGameRequest request) {
+        Command resumeCommand = new ResumeCommand(request.filename());
+
+        return resumeCommand.execute(user);
+    }
+
+    public List<CommandResult> loadSavedGames(User user) {
+        Command loadOptions = new LoadCommand();
+
+        return loadOptions.execute(user);
     }
 }

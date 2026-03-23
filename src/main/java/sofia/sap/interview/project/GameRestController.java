@@ -13,6 +13,7 @@ import sofia.sap.interview.project.game.command.commands.LoadCommand;
 import sofia.sap.interview.project.game.command.commands.ResumeCommand;
 import sofia.sap.interview.project.game.command.result.CommandResult;
 import sofia.sap.interview.project.game.events.EventProcessor;
+import sofia.sap.interview.project.game.events.NewGameEvent;
 import sofia.sap.interview.project.game.exceptions.NoActiveSessionException;
 import sofia.sap.interview.project.game.files.SaveGame;
 import sofia.sap.interview.project.game.request.CommandRequest;
@@ -34,14 +35,15 @@ public class GameRestController {
     @PostMapping("/user/{username}")
     public ResponseEntity<?> userRegistration(@PathVariable String username) {
         gameService.getOrCreateUser(username);
+
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/user/{username}/new")
     public ResponseEntity<?> newGame(@PathVariable String username, @RequestBody NewGameRequest request) {
         User user = gameService.getUser(username);
-        user.createNewGame(request.characterName(), request.type());
-        return ResponseEntity.ok().build();
+
+        return ResponseEntity.ok(gameService.createNewGame(user, request));
     }
 
     @PostMapping("/user/{username}/command")
@@ -51,23 +53,23 @@ public class GameRestController {
         if (!user.isActiveSession()) {
             throw new NoActiveSessionException("Create a game before execute a command!");
         }
+
         List<CommandResult> commandResults = gameService.commandExecute(user, request);
+
         return ResponseEntity.ok(GameEventMapper.result(commandResults));
     }
 
     @PostMapping("/user/{username}/load")
     public ResponseEntity<?> loadGame(@PathVariable String username) {
         User user = gameService.getUser(username);
-        Command loadOptions = new LoadCommand();
-        List<CommandResult> commandResult = loadOptions.execute(user);
-        return ResponseEntity.ok(GameEventMapper.result(commandResult));
+
+        return ResponseEntity.ok(GameEventMapper.result(gameService.loadSavedGames(user)));
     }
 
     @PostMapping("/user/{username}/resume")
     public ResponseEntity<?> resumeGame(@PathVariable String username, @RequestBody ResumeGameRequest request) {
         User user = gameService.getUser(username);
-        Command resumeCommand = new ResumeCommand(request.filename());
-        List<CommandResult> commandResult = resumeCommand.execute(user);
-        return ResponseEntity.ok(GameEventMapper.result(commandResult));
+
+        return ResponseEntity.ok(GameEventMapper.result(gameService.resumeSavedGame(user, request)));
     }
 }
