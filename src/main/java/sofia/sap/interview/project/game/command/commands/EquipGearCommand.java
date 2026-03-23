@@ -16,7 +16,10 @@ public class EquipGearCommand implements Command {
 
     @Override
     public List<CommandResult> execute(User user) {
-        GameSession session = user.getSession();
-        return session.getItemsService().equip(session.getCharacter(), this.gear);
+        synchronized (user) {
+            GameSession session = user.getSession();
+
+            return session.getItemsService().equip(session.getCharacter(), this.gear);
+        }
     }
 }

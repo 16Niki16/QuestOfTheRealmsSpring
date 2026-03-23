@@ -11,9 +11,12 @@ import java.util.List;
 public class OpenChestCommand implements Command {
     @Override
     public List<CommandResult> execute(User user) {
-        GameSession gameSession = user.getSession();
-        Character character = gameSession.getCharacter();
-        Room currentRoom = gameSession.getCampaign().getRoom();
-        return gameSession.getItemsService().collect(character, currentRoom);
+        synchronized (user) {
+            GameSession gameSession = user.getSession();
+            Character character = gameSession.getCharacter();
+            Room currentRoom = gameSession.getCampaign().getRoom();
+
+            return gameSession.getItemsService().collect(character, currentRoom);
+        }
     }
 }

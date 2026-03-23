@@ -19,7 +19,6 @@ public class User {
     private String currentGameSessionName;
     private GameSession session;
     private QuestLog log;
-    private final Object saveLock = new Object();
 
     private User(String username, String currentGameSessionName, GameSession session, QuestLog log) {
         this.username = username;
@@ -36,34 +35,34 @@ public class User {
         return this.session != null && this.log != null;
     }
 
-    public void createNewGame(String name, AllyCharacterType type) {
-        synchronized (saveLock) {
-            this.log = createNewQuestLog();
-            this.session = createSession(name, type);
-            this.currentGameSessionName = saveNewGame(this);
-        }
+    public synchronized void createNewGame(String name, AllyCharacterType type) {
+        this.log = createNewQuestLog();
+        this.session = createSession(name, type);
+        this.currentGameSessionName = saveNewGame(this);
     }
 
-    public void endGame() {
-        synchronized (saveLock) {
-            EndGame.endGame(this, currentGameSessionName);
-            this.currentGameSessionName = null;
-            this.session = null;
-            this.log = null;
-        }
+    public synchronized void exitGame() {
+        this.currentGameSessionName = null;
+        this.session = null;
+        this.log = null;
     }
 
-    public void resumeGame(String filename) {
-        synchronized (saveLock) {
-            LoadedInformation info = load(this, filename);
-            this.currentGameSessionName = filename;
-            this.session = info.session();
-            this.log = info.log();
-        }
+    public synchronized void endGame() {
+        EndGame.endGame(this, currentGameSessionName);
+        this.currentGameSessionName = null;
+        this.session = null;
+        this.log = null;
     }
 
-    public void save() {
-        synchronized (saveLock) {
+    public synchronized void resumeGame(String filename) {
+        LoadedInformation info = load(this, filename);
+        this.currentGameSessionName = filename;
+        this.session = info.session();
+        this.log = info.log();
+    }
+
+    public synchronized void save() {
+        if (isActiveSession()) {
             SaveGame.saveGame(this);
         }
     }

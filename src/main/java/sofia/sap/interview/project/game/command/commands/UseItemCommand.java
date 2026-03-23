@@ -16,7 +16,10 @@ public class UseItemCommand implements Command {
 
     @Override
     public List<CommandResult> execute(User user) {
-        GameSession session = user.getSession();
-        return session.getItemsService().useItem(session.getCharacter(), this.item);
+        synchronized (user) {
+            GameSession session = user.getSession();
+
+            return session.getItemsService().useItem(session.getCharacter(), this.item);
+        }
     }
 }

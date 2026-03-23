@@ -14,9 +14,7 @@ public class AutoSaveSystem implements GameSystem {
     public void start(ScheduledExecutorService scheduler, Collection<User> activeUsers) {
         scheduler.scheduleAtFixedRate(() -> {
             for (User user : activeUsers) {
-                if (user.isActiveSession()) {
-                    user.save();
-                }
+                user.save();
             }
         }, TIME_INTERVAL.getSeconds(), TIME_INTERVAL.getSeconds(), TimeUnit.SECONDS);
     }

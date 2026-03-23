@@ -22,6 +22,7 @@ public class CombatService {
             attackResults.add(new EventResult(NotEnoughManaEvent.of(character, currentEnemy)));
             return attackResults;
         }
+
         currentEnemy.defendAgainstAllyCharacter(damageDealt);
         attackResults.add(new EventResult(AttackEvent.of(character, damageDealt, currentEnemy)));
 

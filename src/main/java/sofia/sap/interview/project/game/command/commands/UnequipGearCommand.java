@@ -16,7 +16,10 @@ public class UnequipGearCommand implements Command {
 
     @Override
     public List<CommandResult> execute(User user) {
-        GameSession session = user.getSession();
-        return session.getItemsService().unequip(session.getCharacter(), gear);
+        synchronized (user) {
+            GameSession session = user.getSession();
+
+            return session.getItemsService().unequip(session.getCharacter(), gear);
+        }
     }
 }

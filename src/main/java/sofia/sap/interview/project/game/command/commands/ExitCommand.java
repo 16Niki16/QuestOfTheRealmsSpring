@@ -4,6 +4,8 @@ import sofia.sap.interview.project.game.command.result.CommandResult;
 import sofia.sap.interview.project.game.command.result.ViewResult;
 import sofia.sap.interview.project.game.information.ExitInformation;
 import sofia.sap.interview.project.game.files.SaveGame;
+import sofia.sap.interview.project.game.information.QuestInformation;
+import sofia.sap.interview.project.game.quests.QuestLog;
 import sofia.sap.interview.project.game.user.User;
 
 import java.util.List;
@@ -13,7 +15,10 @@ public class ExitCommand implements Command {
     public List<CommandResult> execute(User user) {
         user.save();
         String filename = user.getCurrentGameSessionName();
-        user.endGame();
-        return List.of(new ViewResult(ExitInformation.of(filename)));
+        QuestLog log = user.getLog();
+        user.exitGame();
+        return List.of(
+            new ViewResult(QuestInformation.of(log)),
+            new ViewResult(new ExitInformation(filename)));
     }
 }

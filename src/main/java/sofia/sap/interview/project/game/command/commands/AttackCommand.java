@@ -26,8 +26,12 @@ public class AttackCommand implements Command {
         Room room = session.getCampaign().getRoom();
 
         List<CommandResult> results = new ArrayList<>();
-        results.addAll(session.getCombatService().attack(character, enemy, room));
-        results.addAll(session.getCombatService().defend(character, enemy));
+
+        synchronized (user) {
+            results.addAll(session.getCombatService().attack(character, enemy, room));
+            results.addAll(session.getCombatService().defend(character, enemy));
+        }
+
         return results;
     }
 
