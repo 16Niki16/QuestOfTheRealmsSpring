@@ -34,10 +34,10 @@ public class CombatService {
             attackResults.add(new EventResult(NotEnoughManaEvent.of(character, currentEnemy)));
             return attackResults;
         }
-        boolean isEnemyDead = currentEnemy.defendAgainstAllyCharacter(damageDealt);
+        currentEnemy.defendAgainstAllyCharacter(damageDealt);
         attackResults.add(new EventResult(AttackEvent.of(character, damageDealt, currentEnemy)));
 
-        if (isEnemyDead) {
+        if (currentEnemy.getEnemyStats().isDead()) {
             currentRoom.killEnemy();
             attackResults.add(new EventResult(KillEnemyEvent.of(character, currentEnemy)));
         }
@@ -48,10 +48,10 @@ public class CombatService {
     public List<CommandResult> defend(Character character, Enemy currentEnemy) {
         List<CommandResult> enemyAttackResults = new ArrayList<>();
         int damageDealt = currentEnemy.attackDamage();
-        boolean isCharacterDead = character.defendAgainstEnemy(damageDealt);
+        character.defendAgainstEnemy(damageDealt);
         enemyAttackResults.add(new EventResult(DefendEvent.of(character, damageDealt, currentEnemy)));
 
-        if (isCharacterDead) {
+        if (character.getCharacterStats().isDead()) {
             enemyAttackResults.add(new EventResult(CharacterDiedEvent.of(character, currentEnemy)));
         }
 

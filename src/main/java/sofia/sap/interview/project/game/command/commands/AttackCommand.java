@@ -17,9 +17,11 @@ public class AttackCommand implements Command {
     public List<CommandResult> execute(User user) {
         GameSession session = user.getSession();
         Enemy enemy = session.getCampaign().getEnemyOnCharacterCoordinates();
+
         if (enemy == null) {
             throw new NoEnemyInTheRoomException("There is no enemy in the current room!");
         }
+
         Character character = session.getCharacter();
         Room room = session.getCampaign().getRoom();
 

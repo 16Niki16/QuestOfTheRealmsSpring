@@ -34,8 +34,8 @@ public abstract class BaseStatistics implements Statistics {
     }
 
     @Override
-    public boolean decreaseHealth(int amount) {
-        return health.updateAndGet(currentHealth -> Math.max(currentHealth - amount, 0)) == 0;
+    public void decreaseHealth(int amount) {
+        health.updateAndGet(currentHealth -> Math.max(currentHealth - amount, 0));
     }
 
     @Override

@@ -4,8 +4,9 @@ import lombok.Getter;
 import sofia.sap.interview.project.game.characters.statistics.EnemyStatistics;
 import sofia.sap.interview.project.game.characters.enemy.type.EnemyType;
 
+@Getter
 public abstract class Enemy {
-    @Getter
+
     private final EnemyType type;
     private final EnemyStatistics enemyStats;
 
@@ -22,8 +23,8 @@ public abstract class Enemy {
         return enemyStats.getHealth();
     }
 
-    public boolean defendAgainstAllyCharacter(int damage) {
-        return this.enemyStats.decreaseHealth(damage);
+    public void defendAgainstAllyCharacter(int damage) {
+        this.enemyStats.decreaseHealth(damage);
     }
 
     public abstract String getDamageMessage(int damage);

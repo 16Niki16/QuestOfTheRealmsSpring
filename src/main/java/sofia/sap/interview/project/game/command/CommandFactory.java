@@ -23,9 +23,10 @@ import sofia.sap.interview.project.game.map.Direction;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 public class CommandFactory {
-    private static final Map<String, CommandParser> COMMANDS = new HashMap<>();
+    private static final Map<String, Function<String[], Command>> COMMANDS = new HashMap<>();
     private static final Command HELP_COMMAND = new HelpCommand();
     private static final Command ATTACK_COMMAND = new AttackCommand();
     private static final Command QUESTS_COMMAND = new CheckQuestsCommand();
@@ -59,14 +60,14 @@ public class CommandFactory {
     public static Command createCommand(String input) {
         String[] commandSplit = input.split(" ", 2);
         String clientCommand = commandSplit[0].toLowerCase();
-        CommandParser parser = COMMANDS.get(clientCommand);
+        Function<String[], Command> parser = COMMANDS.get(clientCommand);
 
         if (parser == null) {
             throw new CommandNotAvailableException("The provided command is not correct!");
         }
 
         String[] args = Arrays.copyOfRange(commandSplit, 1, commandSplit.length);
-        return parser.parse(args);
+        return parser.apply(args);
     }
 
     private static ItemType itemType(String itemName) {

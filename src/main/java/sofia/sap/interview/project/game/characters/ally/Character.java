@@ -49,8 +49,8 @@ public class Character {
         return this.characterStats.attack();
     }
 
-    public boolean defendAgainstEnemy(int enemyDamage) {
-        return this.characterStats.decreaseHealth(enemyDamage);
+    public void defendAgainstEnemy(int enemyDamage) {
+        this.characterStats.decreaseHealth(enemyDamage);
     }
 
     public void applyPotion(Consumable potionToConsume) {
