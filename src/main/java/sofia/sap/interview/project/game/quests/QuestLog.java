@@ -14,21 +14,15 @@ public class QuestLog {
     @Getter
     private int collectedXP;
 
-    public QuestLog() {
-        this.activeQuests = QuestList.createQuests();
-        this.completedQuests = new ArrayList<>();
-        this.collectedXP = 0;
-    }
-
-    private QuestLog(List<Quest> active, List<Quest> completed, int collectedXP) {
+    public QuestLog(List<Quest> active, List<Quest> completed, int collectedXP) {
         this.activeQuests = active;
         this.completedQuests = completed;
         this.collectedXP = collectedXP;
     }
 
-    //TODO
-    public static QuestLog load(List<Quest> active, List<Quest> completed, int collectedXP) {
-        return new QuestLog(active, completed, collectedXP);
+    public static QuestLog createNewQuestLog() {
+        List<Quest> activeQuests = QuestList.createQuests();
+        return new QuestLog(activeQuests, new ArrayList<>(), 0);
     }
 
     public List<Quest> getActiveQuests() {

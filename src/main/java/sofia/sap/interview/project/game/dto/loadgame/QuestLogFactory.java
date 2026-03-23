@@ -17,12 +17,12 @@ public class QuestLogFactory {
         List<Quest> activeQuests = transform(active);
         List<Quest> completedQuests = transform(completed);
 
-        return QuestLog.load(activeQuests, completedQuests, data.collectedXP());
+        return new QuestLog(activeQuests, completedQuests, data.collectedXP());
     }
 
     private static List<Quest> transform(List<QuestData> quests) {
         return quests.stream()
-                .map(QuestFactory::create)
-                .collect(Collectors.toCollection(ArrayList::new));
+            .map(QuestFactory::create)
+            .collect(Collectors.toCollection(ArrayList::new));
     }
 }

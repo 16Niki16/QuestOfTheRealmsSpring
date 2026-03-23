@@ -28,14 +28,6 @@ public class Character {
     private final Inventory inventory;
     private final Map<ItemType, Gear> equippedItems;
 
-    public Character(String characterName, AllyCharacterType type) {
-        this.characterName = characterName;
-        this.type = type;
-        this.characterStats = new CharacterStatistics(type);
-        this.inventory = new Inventory();
-        this.equippedItems = new EnumMap<>(ItemType.class);
-    }
-
     public Character(String characterName, AllyCharacterType type, CharacterStatistics stats,
                      Inventory inventory, Map<ItemType, Gear> equipped) {
         this.characterName = characterName;
@@ -43,6 +35,11 @@ public class Character {
         this.characterStats = stats;
         this.inventory = inventory;
         this.equippedItems = equipped;
+    }
+
+    public static Character createNewCharacter(String characterName, AllyCharacterType type) {
+        return new Character(characterName, type, new CharacterStatistics(type), new Inventory(),
+            new EnumMap<>(ItemType.class));
     }
 
     public int attackEnemy() {
@@ -72,6 +69,7 @@ public class Character {
         if (!this.equippedItems.containsKey(gearType)) {
             throw new EquipmentNotEquippedException("The provided item is not equipped!");
         }
+
         Gear gearToUnequip = this.equippedItems.get(gearType);
         this.equippedItems.remove(gearType);
         this.inventory.addItem(gearType);

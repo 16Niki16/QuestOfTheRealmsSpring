@@ -10,6 +10,7 @@ import sofia.sap.interview.project.game.quests.QuestLog;
 import static sofia.sap.interview.project.game.files.LoadGame.load;
 import static sofia.sap.interview.project.game.files.SaveGame.*;
 import static sofia.sap.interview.project.game.gameplay.GameFactory.createSession;
+import static sofia.sap.interview.project.game.quests.QuestLog.*;
 
 @Getter
 public class User {
@@ -34,7 +35,7 @@ public class User {
     }
 
     public void createNewGame(String name, AllyCharacterType type) {
-        this.log = new QuestLog();
+        this.log = createNewQuestLog();
         this.session = createSession(name, type);
         this.currentGameSessionName = saveGame(this);
     }
