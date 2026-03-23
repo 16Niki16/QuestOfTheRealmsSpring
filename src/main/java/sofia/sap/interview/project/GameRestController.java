@@ -9,12 +9,15 @@ import org.springframework.web.bind.annotation.RestController;
 import sofia.sap.interview.project.game.GameService;
 import sofia.sap.interview.project.game.command.CommandFactory;
 import sofia.sap.interview.project.game.command.commands.Command;
+import sofia.sap.interview.project.game.command.commands.LoadCommand;
+import sofia.sap.interview.project.game.command.commands.ResumeCommand;
 import sofia.sap.interview.project.game.command.result.CommandResult;
 import sofia.sap.interview.project.game.events.EventProcessor;
 import sofia.sap.interview.project.game.exceptions.NoActiveSessionException;
 import sofia.sap.interview.project.game.files.SaveGame;
 import sofia.sap.interview.project.game.request.CommandRequest;
 import sofia.sap.interview.project.game.request.NewGameRequest;
+import sofia.sap.interview.project.game.request.ResumeGameRequest;
 import sofia.sap.interview.project.game.user.User;
 
 import java.util.List;
@@ -55,7 +58,16 @@ public class GameRestController {
     @PostMapping("/user/{username}/load")
     public ResponseEntity<?> loadGame(@PathVariable String username) {
         User user = gameService.getUser(username);
-        user.loadGame();
-        return ResponseEntity.ok().build();
+        Command loadOptions = new LoadCommand();
+        List<CommandResult> commandResult = loadOptions.execute(user);
+        return ResponseEntity.ok(GameEventMapper.result(commandResult));
+    }
+
+    @PostMapping("/user/{username}/resume")
+    public ResponseEntity<?> resumeGame(@PathVariable String username, @RequestBody ResumeGameRequest request) {
+        User user = gameService.getUser(username);
+        Command resumeCommand = new ResumeCommand(request.filename());
+        List<CommandResult> commandResult = resumeCommand.execute(user);
+        return ResponseEntity.ok(GameEventMapper.result(commandResult));
     }
 }

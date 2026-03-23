@@ -4,8 +4,10 @@ import sofia.sap.interview.project.game.command.commands.AttackCommand;
 import sofia.sap.interview.project.game.command.commands.CheckQuestsCommand;
 import sofia.sap.interview.project.game.command.commands.Command;
 import sofia.sap.interview.project.game.command.commands.EquipGearCommand;
+import sofia.sap.interview.project.game.command.commands.ExitCommand;
 import sofia.sap.interview.project.game.command.commands.HelpCommand;
 import sofia.sap.interview.project.game.command.commands.InventoryCommand;
+import sofia.sap.interview.project.game.command.commands.LoadCommand;
 import sofia.sap.interview.project.game.command.commands.LookCommand;
 import sofia.sap.interview.project.game.command.commands.MoveCommand;
 import sofia.sap.interview.project.game.command.commands.OpenChestCommand;
@@ -31,6 +33,8 @@ public class CommandFactory {
     private static final Command CHEST_COMMAND = new OpenChestCommand();
     private static final Command INVENTORY_COMMAND = new InventoryCommand();
     private static final Command SAVE_COMMAND = new SaveCommand();
+    private static final Command EXIT_COMMAND = new ExitCommand();
+    private static final Command LOAD_COMMAND = new LoadCommand();
 
     static {
         COMMANDS.put(CommandOption.HELP.getCommand(), args -> HELP_COMMAND);
@@ -41,6 +45,8 @@ public class CommandFactory {
         COMMANDS.put(CommandOption.OPEN.getCommand(), args -> CHEST_COMMAND);
         COMMANDS.put(CommandOption.INVENTORY.getCommand(), args -> INVENTORY_COMMAND);
         COMMANDS.put(CommandOption.SAVE.getCommand(), args -> SAVE_COMMAND);
+        COMMANDS.put(CommandOption.EXIT.getCommand(), args -> EXIT_COMMAND);
+        COMMANDS.put(CommandOption.LOAD.getCommand(), args -> LOAD_COMMAND);
 
         COMMANDS.put(CommandOption.EQUIP.getCommand(), args -> new EquipGearCommand(itemType(args[0])));
         COMMANDS.put(CommandOption.UNEQUIP.getCommand(), args -> new UnequipGearCommand(itemType(args[0])));

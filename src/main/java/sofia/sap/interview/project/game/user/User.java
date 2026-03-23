@@ -45,8 +45,9 @@ public class User {
         this.log = null;
     }
 
-    public void loadGame() {
-        LoadedInformation info = load(this.username);
+    public void loadGame(String filename) {
+        LoadedInformation info = load(this, filename);
+        this.currentGameSessionName = filename;
         this.session = info.session();
         this.log = info.log();
     }

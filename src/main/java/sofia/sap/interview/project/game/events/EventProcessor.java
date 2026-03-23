@@ -35,6 +35,6 @@ public class EventProcessor {
 
     private static void endGame(User user) {
         user.endGame();
-        EndGame.endGame(user.getUsername());
+        EndGame.endGame(user);
     }
 }

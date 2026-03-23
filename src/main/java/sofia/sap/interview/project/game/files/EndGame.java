@@ -1,6 +1,7 @@
 package sofia.sap.interview.project.game.files;
 
 import sofia.sap.interview.project.game.exceptions.EndGameFileException;
+import sofia.sap.interview.project.game.user.User;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,8 +9,8 @@ import java.nio.file.Path;
 
 public class EndGame {
 
-    public static void endGame(String username) {
-        Path path = Path.of("files", username + ".json");
+    public static void endGame(User user) {
+        Path path = Path.of("files", user.getUsername() + ".json");
 
         try {
             Files.deleteIfExists(path);
