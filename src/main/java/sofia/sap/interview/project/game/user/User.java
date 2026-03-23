@@ -3,6 +3,7 @@ package sofia.sap.interview.project.game.user;
 import lombok.Getter;
 import sofia.sap.interview.project.game.characters.ally.type.AllyCharacterType;
 import sofia.sap.interview.project.game.dto.loadgame.LoadedInformation;
+import sofia.sap.interview.project.game.files.EndGame;
 import sofia.sap.interview.project.game.files.SaveGame;
 import sofia.sap.interview.project.game.gameplay.GameSession;
 import sofia.sap.interview.project.game.quests.QuestLog;
@@ -39,12 +40,13 @@ public class User {
         synchronized (saveLock) {
             this.log = createNewQuestLog();
             this.session = createSession(name, type);
-            this.currentGameSessionName = saveGame(this);
+            this.currentGameSessionName = saveNewGame(this);
         }
     }
 
     public void endGame() {
         synchronized (saveLock) {
+            EndGame.endGame(this, currentGameSessionName);
             this.currentGameSessionName = null;
             this.session = null;
             this.log = null;

@@ -9,8 +9,8 @@ import java.nio.file.Path;
 
 public class EndGame {
 
-    public static void endGame(User user) {
-        Path path = Path.of("files", user.getUsername() + ".json");
+    public static void endGame(User user, String filename) {
+        Path path = Path.of("files", user.getUsername(), filename);
 
         try {
             Files.deleteIfExists(path);

@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 public class NewGameSave {
     private static final ObjectMapper MAPPER = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
-    public static String saveGame(User user) {
+    public static String saveNewGame(User user) {
         int saveNumber = getNextSaveNumber(user.getUsername());
         String filename = user.getUsername() + "_" + saveNumber + ".json";
         Path path = Path.of("files", user.getUsername(), filename);

@@ -22,19 +22,14 @@ public class EventProcessor {
                     allResults.add(new EventResult(QuestCompletedEvent.of(questLog.getLastCompletedQuest())));
                     if (questLog.getActiveQuests().isEmpty()) {
                         allResults.add(new EventResult(GameWonEvent.of(user.getSession().getCharacter(), questLog)));
-                        endGame(user);
+                        user.endGame();
                     }
                 }
                 if (event instanceof GameOverEvent) {
-                    endGame(user);
+                    user.endGame();
                 }
             }
         }
         return allResults;
-    }
-
-    private static void endGame(User user) {
-        user.endGame();
-        EndGame.endGame(user);
     }
 }
