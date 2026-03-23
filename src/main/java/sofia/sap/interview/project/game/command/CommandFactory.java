@@ -12,6 +12,7 @@ import sofia.sap.interview.project.game.command.commands.LookCommand;
 import sofia.sap.interview.project.game.command.commands.MoveCommand;
 import sofia.sap.interview.project.game.command.commands.OpenChestCommand;
 import sofia.sap.interview.project.game.command.commands.PathsCommand;
+import sofia.sap.interview.project.game.command.commands.ResumeCommand;
 import sofia.sap.interview.project.game.command.commands.SaveCommand;
 import sofia.sap.interview.project.game.command.commands.UnequipGearCommand;
 import sofia.sap.interview.project.game.command.commands.UseItemCommand;
@@ -52,6 +53,7 @@ public class CommandFactory {
         COMMANDS.put(CommandOption.UNEQUIP.getCommand(), args -> new UnequipGearCommand(itemType(args[0])));
         COMMANDS.put(CommandOption.USE_ITEM.getCommand(), args -> new UseItemCommand(itemType(args[0])));
         COMMANDS.put(CommandOption.MOVE.getCommand(), args -> new MoveCommand(Direction.getDirection(args[0])));
+        COMMANDS.put(CommandOption.RESUME.getCommand(), args -> new ResumeCommand(args[0]));
     }
 
     public static Command createCommand(String input) {
