@@ -21,12 +21,13 @@ import sofia.sap.interview.project.game.items.ItemType;
 import sofia.sap.interview.project.game.map.Direction;
 
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
 public class CommandFactory {
-    private static final Map<String, Function<String[], Command>> COMMANDS = new HashMap<>();
+    private static final Map<CommandOption, Function<String, Command>> COMMANDS = new EnumMap<>(CommandOption.class);
     private static final Command HELP_COMMAND = new HelpCommand();
     private static final Command ATTACK_COMMAND = new AttackCommand();
     private static final Command QUESTS_COMMAND = new CheckQuestsCommand();
@@ -39,34 +40,30 @@ public class CommandFactory {
     private static final Command LOAD_COMMAND = new LoadCommand();
 
     static {
-        COMMANDS.put(CommandOption.HELP.getCommand(), args -> HELP_COMMAND);
-        COMMANDS.put(CommandOption.ATTACK.getCommand(), args -> ATTACK_COMMAND);
-        COMMANDS.put(CommandOption.QUESTS.getCommand(), args -> QUESTS_COMMAND);
-        COMMANDS.put(CommandOption.LOOK.getCommand(), args -> LOOK_COMMAND);
-        COMMANDS.put(CommandOption.PATHS.getCommand(), args -> PATHS_COMMAND);
-        COMMANDS.put(CommandOption.OPEN.getCommand(), args -> CHEST_COMMAND);
-        COMMANDS.put(CommandOption.INVENTORY.getCommand(), args -> INVENTORY_COMMAND);
-        COMMANDS.put(CommandOption.SAVE.getCommand(), args -> SAVE_COMMAND);
-        COMMANDS.put(CommandOption.EXIT.getCommand(), args -> EXIT_COMMAND);
-        COMMANDS.put(CommandOption.LOAD.getCommand(), args -> LOAD_COMMAND);
+        COMMANDS.put(CommandOption.HELP, args -> HELP_COMMAND);
+        COMMANDS.put(CommandOption.ATTACK, args -> ATTACK_COMMAND);
+        COMMANDS.put(CommandOption.QUESTS, args -> QUESTS_COMMAND);
+        COMMANDS.put(CommandOption.LOOK, args -> LOOK_COMMAND);
+        COMMANDS.put(CommandOption.PATHS, args -> PATHS_COMMAND);
+        COMMANDS.put(CommandOption.OPEN, args -> CHEST_COMMAND);
+        COMMANDS.put(CommandOption.INVENTORY, args -> INVENTORY_COMMAND);
+        COMMANDS.put(CommandOption.SAVE, args -> SAVE_COMMAND);
+        COMMANDS.put(CommandOption.EXIT, args -> EXIT_COMMAND);
+        COMMANDS.put(CommandOption.LOAD, args -> LOAD_COMMAND);
 
-        COMMANDS.put(CommandOption.EQUIP.getCommand(), args -> new EquipGearCommand(itemType(args[0])));
-        COMMANDS.put(CommandOption.UNEQUIP.getCommand(), args -> new UnequipGearCommand(itemType(args[0])));
-        COMMANDS.put(CommandOption.USE_ITEM.getCommand(), args -> new UseItemCommand(itemType(args[0])));
-        COMMANDS.put(CommandOption.MOVE.getCommand(), args -> new MoveCommand(Direction.getDirection(args[0])));
-        COMMANDS.put(CommandOption.RESUME.getCommand(), args -> new ResumeCommand(args[0]));
+        COMMANDS.put(CommandOption.EQUIP, args -> new EquipGearCommand(itemType(args)));
+        COMMANDS.put(CommandOption.UNEQUIP, args -> new UnequipGearCommand(itemType(args)));
+        COMMANDS.put(CommandOption.USE_ITEM, args -> new UseItemCommand(itemType(args)));
+        COMMANDS.put(CommandOption.MOVE, args -> new MoveCommand(Direction.getDirection(args)));
+        COMMANDS.put(CommandOption.RESUME, ResumeCommand::new);
     }
 
     public static Command createCommand(String input) {
         String[] commandSplit = input.split(" ", 2);
-        String clientCommand = commandSplit[0].toLowerCase();
-        Function<String[], Command> parser = COMMANDS.get(clientCommand);
+        CommandOption command = CommandOption.fromString(commandSplit[0]);
+        Function<String, Command> parser = COMMANDS.get(command);
 
-        if (parser == null) {
-            throw new CommandNotAvailableException("The provided command is not correct!");
-        }
-
-        String[] args = Arrays.copyOfRange(commandSplit, 1, commandSplit.length);
+        String args = commandSplit.length > 1 ? commandSplit[1] : "";
         return parser.apply(args);
     }
 

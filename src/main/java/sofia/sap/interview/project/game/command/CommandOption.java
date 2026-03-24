@@ -1,6 +1,9 @@
 package sofia.sap.interview.project.game.command;
 
 import lombok.Getter;
+import sofia.sap.interview.project.game.exceptions.CommandNotAvailableException;
+
+import java.util.Arrays;
 
 @Getter
 public enum CommandOption {
@@ -25,4 +28,10 @@ public enum CommandOption {
         this.command = command;
     }
 
+    public static CommandOption fromString(String input) {
+        return Arrays.stream(values())
+            .filter(c -> c.command.equalsIgnoreCase(input))
+            .findFirst()
+            .orElseThrow(() -> new CommandNotAvailableException("The provided command is not correct!"));
+    }
 }
