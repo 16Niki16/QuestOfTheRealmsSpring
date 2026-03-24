@@ -42,13 +42,13 @@ public class Campaign {
     }
 
     public List<CommandResult> lookAround() {
-        Room currentRoom = getRoom();
         List<CommandResult> resultList = new ArrayList<>();
+        Room currentRoom = getRoom();
         Enemy enemy = currentRoom.getEnemy();
         EnemyType enemyType = enemy != null ? enemy.getType() : null;
         SpecialItem specialItem = currentRoom.getSpecialItem();
 
-        resultList.add(new RoomInformation(getRoom().hasChest(), enemyType, specialItem));
+        resultList.add(RoomInformation.of(getRoom().hasChest(), enemyType, specialItem));
 
         if (specialItem != null) {
             currentRoom.collectSpecialItem();

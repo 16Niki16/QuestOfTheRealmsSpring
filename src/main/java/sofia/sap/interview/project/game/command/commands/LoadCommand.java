@@ -10,6 +10,6 @@ public class LoadCommand implements Command {
     @Override
     public List<CommandResult> execute(User user) {
         List<String> savedGames = user.savedGames();
-        return List.of(new LoadInformation(savedGames));
+        return List.of(LoadInformation.of(savedGames));
     }
 }

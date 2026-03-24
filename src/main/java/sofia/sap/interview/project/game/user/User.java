@@ -12,6 +12,7 @@ import java.util.List;
 
 import static sofia.sap.interview.project.game.files.LoadGame.load;
 import static sofia.sap.interview.project.game.files.NewGameSave.*;
+import static sofia.sap.interview.project.game.files.SaveGame.*;
 import static sofia.sap.interview.project.game.files.SavedGamesList.getSaveFiles;
 import static sofia.sap.interview.project.game.gameplay.GameFactory.createSession;
 import static sofia.sap.interview.project.game.quests.QuestLog.*;
@@ -70,7 +71,7 @@ public class User {
 
     public synchronized void save() {
         if (isActiveSession()) {
-            SaveGame.saveGame(this);
+            saveGame(this);
         }
     }
 }

@@ -1,7 +1,7 @@
 package sofia.sap.interview.project.game.characters.enemy.type;
 
 import lombok.Getter;
-import sofia.sap.interview.project.game.characters.attack.AttackRange;
+import sofia.sap.interview.project.game.characters.statistics.attack.AttackRange;
 
 @Getter
 public enum EnemyType {

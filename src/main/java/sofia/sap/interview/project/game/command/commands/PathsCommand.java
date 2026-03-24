@@ -13,6 +13,6 @@ public class PathsCommand implements Command {
     public List<CommandResult> execute(User user) {
         Set<Direction> possibleDirections = user.getSession().getCampaign().getPossibleDirections();
 
-        return List.of(new PathsInformation(possibleDirections));
+        return List.of(PathsInformation.of(possibleDirections));
     }
 }

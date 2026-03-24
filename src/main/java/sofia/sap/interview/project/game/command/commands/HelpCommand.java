@@ -27,6 +27,6 @@ public class HelpCommand implements Command {
             new CommandDTO("exit", "Exit the game!")
         );
 
-        return List.of(new HelpInformation(commands));
+        return List.of(HelpInformation.of(commands));
     }
 }

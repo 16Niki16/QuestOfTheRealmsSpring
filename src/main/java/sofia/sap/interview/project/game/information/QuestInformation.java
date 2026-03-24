@@ -7,9 +7,12 @@ import sofia.sap.interview.project.game.quests.QuestLog;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public record QuestInformation(List<QuestDTO> active, List<QuestDTO> completed) implements ViewInformation {
+public record QuestInformation(ViewType viewType, List<QuestDTO> active, List<QuestDTO> completed)
+    implements ViewInformation {
     public static QuestInformation of(QuestLog questLog) {
-        return new QuestInformation(transformToDTO(questLog.getActiveQuests()),
+
+        return new QuestInformation(ViewType.QUESTS,
+            transformToDTO(questLog.getActiveQuests()),
             transformToDTO(questLog.getCompletedQuests()));
     }
 

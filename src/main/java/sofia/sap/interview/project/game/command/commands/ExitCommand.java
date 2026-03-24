@@ -17,6 +17,6 @@ public class ExitCommand implements Command {
         user.exitGame();
         return List.of(
             QuestInformation.of(log),
-            new ExitInformation(filename));
+            ExitInformation.of(filename));
     }
 }

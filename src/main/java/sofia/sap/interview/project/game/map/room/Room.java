@@ -22,10 +22,6 @@ public class Room {
         this.name = name;
     }
 
-    public static Room emptyRoom() {
-        return new Room(SAFE_PATH, null, null, null);
-    }
-
     public Map<ItemType, Integer> collectItems() {
         if (this.chest == null) {
             throw new ChestNotAvailableException("There is not a chest in this room!");
@@ -39,10 +35,6 @@ public class Room {
 
     public void collectSpecialItem() {
         this.specialItem = null;
-    }
-
-    public boolean hasEnemy() {
-        return this.enemy != null;
     }
 
     public void killEnemy() {

@@ -2,7 +2,7 @@ package sofia.sap.interview.project.game.characters.statistics;
 
 import lombok.Getter;
 import sofia.sap.interview.project.game.characters.ally.type.AllyCharacterType;
-import sofia.sap.interview.project.game.characters.attack.AttackRange;
+import sofia.sap.interview.project.game.characters.statistics.attack.AttackRange;
 
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicInteger;
