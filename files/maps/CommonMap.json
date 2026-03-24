@@ -17,7 +17,7 @@
         "chest": {
           "items": {
             "HEALING_HERB": 1,
-            "IRON_DAGGER": 1
+            "IRON_SWORD": 1
           }
         },
         "enemy": "GOBLIN_KING",
@@ -41,7 +41,7 @@
         "name": "pleasant park",
         "chest": {
           "items": {
-            "IRON_DAGGER": 1,
+            "GOLDEN_DAGGER": 1,
             "HEALING_HERB": 2
           }
         },
@@ -53,7 +53,8 @@
         "chest": {
           "items": {
             "MANA_POTION": 1,
-            "HEALING_HERB": 1
+            "HEALING_HERB": 1,
+            "GOLDEN_SWORD": 1
           }
         },
         "enemy": "BANDIT",

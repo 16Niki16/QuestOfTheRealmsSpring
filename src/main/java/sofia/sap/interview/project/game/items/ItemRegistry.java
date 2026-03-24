@@ -1,6 +1,14 @@
 package sofia.sap.interview.project.game.items;
 
 import sofia.sap.interview.project.game.exceptions.ItemNotAvailableException;
+import sofia.sap.interview.project.game.items.consumable.Consumable;
+import sofia.sap.interview.project.game.items.consumable.HealingHerb;
+import sofia.sap.interview.project.game.items.consumable.ManaPotion;
+import sofia.sap.interview.project.game.items.gear.Gear;
+import sofia.sap.interview.project.game.items.gear.GoldenDagger;
+import sofia.sap.interview.project.game.items.gear.GoldenSword;
+import sofia.sap.interview.project.game.items.gear.IronDagger;
+import sofia.sap.interview.project.game.items.gear.IronSword;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -16,6 +24,9 @@ public class ItemRegistry {
         CONSUMABLES.put(ItemType.MANA_POTION, ManaPotion::new);
 
         GEAR.put(ItemType.IRON_DAGGER, IronDagger::new);
+        GEAR.put(ItemType.IRON_SWORD, IronSword::new);
+        GEAR.put(ItemType.GOLDEN_DAGGER, GoldenDagger::new);
+        GEAR.put(ItemType.GOLDEN_SWORD, GoldenSword::new);
     }
 
     public static Item create(ItemType itemType) {

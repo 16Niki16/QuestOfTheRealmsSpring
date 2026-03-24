@@ -4,9 +4,10 @@ import sofia.sap.interview.project.game.characters.ally.Character;
 import sofia.sap.interview.project.game.characters.statistics.CharacterStatistics;
 import sofia.sap.interview.project.game.dto.savegame.data.CharacterData;
 import sofia.sap.interview.project.game.inventory.Inventory;
-import sofia.sap.interview.project.game.items.Gear;
+import sofia.sap.interview.project.game.items.gear.Gear;
 import sofia.sap.interview.project.game.items.ItemRegistry;
 import sofia.sap.interview.project.game.items.ItemType;
+import sofia.sap.interview.project.game.items.gear.GearType;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -20,11 +21,17 @@ public class CharacterFactory {
 
         return new Character(data.name(), data.type(), stats, inventory, equippedItems(data.equipped()));
     }
-    private static Map<ItemType, Gear> equippedItems(Set<ItemType> equippedItemsData){
-        return equippedItemsData.stream()
-            .collect(Collectors.toMap(itemType -> itemType,
-               ItemRegistry::createGear,
-                (a,b) -> b,
-                () -> new EnumMap<>(ItemType.class)));
+
+    private static Map<GearType, Gear> equippedItems(Set<ItemType> equippedItemsData) {
+        Set<Gear> equippedGears = equippedItemsData.stream()
+            .map(ItemRegistry::createGear)
+            .collect(Collectors.toSet());
+
+        return equippedGears.stream()
+            .collect(Collectors.toMap(
+                Gear::getGearType,
+                gear -> gear,
+                (a, b) -> b,
+                () -> new EnumMap<>(GearType.class)));
     }
 }

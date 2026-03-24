@@ -9,7 +9,10 @@ import java.util.Arrays;
 public enum ItemType {
     MANA_POTION("mana potion", "mana"),
     HEALING_HERB("healing herb", "health"),
-    IRON_DAGGER("iron dagger", "attack damage");
+    IRON_DAGGER("iron dagger", "attack damage"),
+    IRON_SWORD("iron sword", "attack damage"),
+    GOLDEN_DAGGER("golden dagger", "attack damage"),
+    GOLDEN_SWORD("golden sword", "attack damage");
 
     private final String name;
     private final String source;
@@ -21,9 +24,9 @@ public enum ItemType {
 
     public static ItemType getByName(String itemName) {
         return Arrays.stream(values())
-                .filter(type -> type.name.equalsIgnoreCase(itemName))
-                .findFirst()
-                .orElseThrow(() -> new ItemNotAvailableException("The provided item is not available!"));
+            .filter(type -> type.name.equalsIgnoreCase(itemName))
+            .findFirst()
+            .orElseThrow(() -> new ItemNotAvailableException("The provided item is not available!"));
     }
 
 }

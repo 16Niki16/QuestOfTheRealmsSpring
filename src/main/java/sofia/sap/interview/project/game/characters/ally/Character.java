@@ -6,9 +6,10 @@ import sofia.sap.interview.project.game.characters.statistics.CharacterStatistic
 import sofia.sap.interview.project.game.exceptions.EquipmentNotEquippedException;
 import sofia.sap.interview.project.game.exceptions.ItemTypeAlreadyEquippedException;
 import sofia.sap.interview.project.game.inventory.Inventory;
-import sofia.sap.interview.project.game.items.Consumable;
-import sofia.sap.interview.project.game.items.Gear;
+import sofia.sap.interview.project.game.items.consumable.Consumable;
+import sofia.sap.interview.project.game.items.gear.Gear;
 import sofia.sap.interview.project.game.items.ItemType;
+import sofia.sap.interview.project.game.items.gear.GearType;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -19,10 +20,10 @@ public class Character {
     private final AllyCharacterType type;
     private final CharacterStatistics characterStats;
     private final Inventory inventory;
-    private final Map<ItemType, Gear> equippedItems;
+    private final Map<GearType, Gear> equippedItems;
 
     public Character(String characterName, AllyCharacterType type, CharacterStatistics stats,
-                     Inventory inventory, Map<ItemType, Gear> equipped) {
+                     Inventory inventory, Map<GearType, Gear> equipped) {
         this.characterName = characterName;
         this.type = type;
         this.characterStats = stats;
@@ -31,8 +32,8 @@ public class Character {
     }
 
     public static Character createNewCharacter(String characterName, AllyCharacterType type) {
-        return new Character(characterName, type, new CharacterStatistics(type), new Inventory(),
-            new EnumMap<>(ItemType.class));
+        return new Character(characterName, type, CharacterStatistics.createNewCharacter(type), new Inventory(),
+            new EnumMap<>(GearType.class));
     }
 
     public int attackEnemy() {
@@ -49,25 +50,28 @@ public class Character {
     }
 
     public void equipGear(Gear itemToEquip) {
-        if (this.equippedItems.containsKey(itemToEquip.getType())) {
+        GearType gearType = itemToEquip.getGearType();
+
+        if (this.equippedItems.containsKey(gearType)) {
             throw new ItemTypeAlreadyEquippedException("Item of this type is already equipped by the character!");
         }
 
         this.inventory.removeItem(itemToEquip);
-        this.equippedItems.put(itemToEquip.getType(), itemToEquip);
+        this.equippedItems.put(itemToEquip.getGearType(), itemToEquip);
         itemToEquip.equip(this);
     }
 
-    public Gear unequipGear(ItemType gearType) {
-        if (!this.equippedItems.containsKey(gearType)) {
+    public void unequipGear(Gear itemToUnequip) {
+        GearType gearType = itemToUnequip.getGearType();
+
+        if (!this.equippedItems.containsKey(gearType) ||
+            !this.equippedItems.get(gearType).getType().equals(itemToUnequip.getType())) {
             throw new EquipmentNotEquippedException("The provided item is not equipped!");
         }
 
-        Gear gearToUnequip = this.equippedItems.get(gearType);
         this.equippedItems.remove(gearType);
-        this.inventory.addItem(gearType);
-        gearToUnequip.unequip(this);
-        return gearToUnequip;
+        this.inventory.addItem(itemToUnequip.getType());
+        itemToUnequip.unequip(this);
     }
 
     public void collectItems(Map<ItemType, Integer> items) {

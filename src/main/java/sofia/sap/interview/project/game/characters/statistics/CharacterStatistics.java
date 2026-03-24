@@ -12,16 +12,15 @@ public class CharacterStatistics extends BaseStatistics {
     @Getter
     private final int manaCost;
 
-    public CharacterStatistics(AllyCharacterType type) {
-        super(type.getHealth(), type.getAttackRange());
-        this.mana = new AtomicInteger(type.getMana());
-        this.manaCost = type.getManaCost();
-    }
-
     public CharacterStatistics(int health, AttackRange attackRange, int mana, int manaCost) {
         super(health, attackRange);
         this.mana = new AtomicInteger(mana);
         this.manaCost = manaCost;
+    }
+
+    public static CharacterStatistics createNewCharacter(AllyCharacterType type) {
+        return new CharacterStatistics(type.getHealth(), type.getAttackRange(),
+            type.getMana(), type.getManaCost());
     }
 
     public int getMana() {
@@ -30,7 +29,7 @@ public class CharacterStatistics extends BaseStatistics {
 
     public boolean decreaseMana(int amount) {
         int prev = mana.getAndUpdate(current ->
-                current >= amount ? current - amount : current
+            current >= amount ? current - amount : current
         );
 
         return prev >= amount;

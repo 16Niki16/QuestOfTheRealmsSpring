@@ -6,8 +6,8 @@ import sofia.sap.interview.project.game.events.CollectItemsEvent;
 import sofia.sap.interview.project.game.events.ItemEquipEvent;
 import sofia.sap.interview.project.game.events.ItemUnequipEvent;
 import sofia.sap.interview.project.game.events.ItemUsedEvent;
-import sofia.sap.interview.project.game.items.Consumable;
-import sofia.sap.interview.project.game.items.Gear;
+import sofia.sap.interview.project.game.items.consumable.Consumable;
+import sofia.sap.interview.project.game.items.gear.Gear;
 import sofia.sap.interview.project.game.items.ItemRegistry;
 import sofia.sap.interview.project.game.items.ItemType;
 import sofia.sap.interview.project.game.map.room.Room;
@@ -31,9 +31,10 @@ public class ItemsService {
     }
 
     public List<CommandResult> unequip(Character character, ItemType itemType) {
-        Gear unequippedGear = character.unequipGear(itemType);
+        Gear gearToUnequip = ItemRegistry.createGear(itemType);
+        character.unequipGear(gearToUnequip);
 
-        return List.of(ItemUnequipEvent.unequipEvent(unequippedGear));
+        return List.of(ItemUnequipEvent.unequipEvent(gearToUnequip));
     }
 
     public List<CommandResult> collect(Character character, Room room) {
