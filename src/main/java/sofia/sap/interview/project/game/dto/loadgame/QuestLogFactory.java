@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class QuestLogFactory {
-    public static QuestLog create(QuestsData data) {
+    public static QuestLog createQuestLog(QuestsData data) {
         List<QuestData> active = data.active();
         List<QuestData> completed = data.completed();
 

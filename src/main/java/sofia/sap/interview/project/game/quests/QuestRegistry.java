@@ -11,7 +11,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-public class QuestList {
+public class QuestRegistry {
     private static final int MAX_QUESTS = 4;
     private static final int MIN_QUESTS = 1;
     private static final Map<QuestType, Supplier<Quest>> QUESTS = new EnumMap<>(QuestType.class);
@@ -36,7 +36,7 @@ public class QuestList {
             .collect(Collectors.toList());
     }
 
-    public static Quest create(QuestType type) {
+    public static Quest createQuest(QuestType type) {
         Supplier<Quest> supplier = QUESTS.get(type);
 
         if (supplier == null) {
@@ -45,6 +45,6 @@ public class QuestList {
         return supplier.get();
     }
 
-    private QuestList() {
+    private QuestRegistry() {
     }
 }

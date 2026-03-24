@@ -17,8 +17,4 @@ public class GameSession {
         this.combatService = new CombatService();
         this.itemsService = new ItemsService();
     }
-
-    public static GameSession load(Campaign campaign, Character character) {
-        return new GameSession(campaign, character);
-    }
 }

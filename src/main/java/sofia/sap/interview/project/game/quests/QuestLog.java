@@ -21,7 +21,7 @@ public class QuestLog {
     }
 
     public static QuestLog createNewQuestLog() {
-        List<Quest> activeQuests = QuestList.createQuests();
+        List<Quest> activeQuests = QuestRegistry.createQuests();
         return new QuestLog(activeQuests, new ArrayList<>(), 0);
     }
 

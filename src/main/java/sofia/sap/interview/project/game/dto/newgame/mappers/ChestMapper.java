@@ -14,6 +14,6 @@ public class ChestMapper {
             return null;
         }
 
-        return Chest.createChest(dto.items);
+        return new Chest(dto.items);
     }
 }

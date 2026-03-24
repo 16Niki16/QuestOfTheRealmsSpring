@@ -7,7 +7,7 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class EnemyFactory {
+public class EnemyRegistry {
     private static final Map<EnemyType, Supplier<Enemy>> ENEMIES = new EnumMap<>(EnemyType.class);
 
     static {
@@ -17,7 +17,7 @@ public class EnemyFactory {
         ENEMIES.put(EnemyType.GOBLIN_KING, GoblinKing::new);
     }
 
-    public static Enemy create(EnemyType type) {
+    public static Enemy createEnemy(EnemyType type) {
         Supplier<Enemy> sup = ENEMIES.get(type);
 
         if (sup == null) {
@@ -26,6 +26,6 @@ public class EnemyFactory {
         return sup.get();
     }
 
-    private EnemyFactory() {
+    private EnemyRegistry() {
     }
 }

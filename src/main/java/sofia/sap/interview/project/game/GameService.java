@@ -1,7 +1,7 @@
 package sofia.sap.interview.project.game;
 
 import org.springframework.stereotype.Service;
-import sofia.sap.interview.project.game.command.CommandFactory;
+import sofia.sap.interview.project.game.command.CommandRegistry;
 import sofia.sap.interview.project.game.command.commands.Command;
 import sofia.sap.interview.project.game.command.commands.LoadCommand;
 import sofia.sap.interview.project.game.command.commands.ResumeCommand;
@@ -10,8 +10,6 @@ import sofia.sap.interview.project.game.events.EventProcessor;
 import sofia.sap.interview.project.game.events.NewGameEvent;
 import sofia.sap.interview.project.game.exceptions.UserNotFoundException;
 import sofia.sap.interview.project.game.exceptions.UsernameAlreadyExistException;
-import sofia.sap.interview.project.game.information.LoadInformation;
-import sofia.sap.interview.project.game.information.ResumeInformation;
 import sofia.sap.interview.project.game.request.CommandRequest;
 import sofia.sap.interview.project.game.request.NewGameRequest;
 import sofia.sap.interview.project.game.request.ResumeGameRequest;
@@ -21,6 +19,8 @@ import sofia.sap.interview.project.game.user.User;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import static sofia.sap.interview.project.game.command.CommandRegistry.*;
 
 @Service
 public class GameService {
@@ -48,7 +48,7 @@ public class GameService {
     }
 
     public List<CommandResult> commandExecute(User user, CommandRequest request) {
-        Command command = CommandFactory.createCommand(request.command());
+        Command command = createCommand(request.command());
         List<CommandResult> results = command.execute(user);
 
         return EventProcessor.process(user, results);

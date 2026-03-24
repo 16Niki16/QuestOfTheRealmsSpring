@@ -12,6 +12,6 @@ import java.util.stream.IntStream;
 
 public class ChestFactory {
     public static Chest create(ChestData data) {
-        return Chest.createChest(data.items());
+        return new Chest(data.items());
     }
 }
