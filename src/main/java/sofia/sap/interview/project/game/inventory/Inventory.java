@@ -3,13 +3,9 @@ package sofia.sap.interview.project.game.inventory;
 import lombok.Getter;
 import sofia.sap.interview.project.game.exceptions.ItemNotAvailableException;
 import sofia.sap.interview.project.game.items.Item;
-import sofia.sap.interview.project.game.items.ItemFactory;
 import sofia.sap.interview.project.game.items.ItemType;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
 
 @Getter

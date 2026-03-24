@@ -6,7 +6,7 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class ItemFactory {
+public class ItemRegistry {
 
     private static final Map<ItemType, Supplier<Consumable>> CONSUMABLES = new EnumMap<>(ItemType.class);
     private static final Map<ItemType, Supplier<Gear>> GEAR = new EnumMap<>(ItemType.class);
@@ -44,6 +44,6 @@ public class ItemFactory {
         return supplier.get();
     }
 
-    private ItemFactory() {
+    private ItemRegistry() {
     }
 }

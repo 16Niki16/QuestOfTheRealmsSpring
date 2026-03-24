@@ -8,7 +8,7 @@ import sofia.sap.interview.project.game.events.ItemUnequipEvent;
 import sofia.sap.interview.project.game.events.ItemUsedEvent;
 import sofia.sap.interview.project.game.items.Consumable;
 import sofia.sap.interview.project.game.items.Gear;
-import sofia.sap.interview.project.game.items.ItemFactory;
+import sofia.sap.interview.project.game.items.ItemRegistry;
 import sofia.sap.interview.project.game.items.ItemType;
 import sofia.sap.interview.project.game.map.room.Room;
 
@@ -17,14 +17,14 @@ import java.util.Map;
 
 public class ItemsService {
     public List<CommandResult> useItem(Character character, ItemType itemType) {
-        Consumable itemToConsume = ItemFactory.createConsumable(itemType);
+        Consumable itemToConsume = ItemRegistry.createConsumable(itemType);
         character.applyPotion(itemToConsume);
 
         return List.of(ItemUsedEvent.of(itemToConsume));
     }
 
     public List<CommandResult> equip(Character character, ItemType itemType) {
-        Gear gearToEquip = ItemFactory.createGear(itemType);
+        Gear gearToEquip = ItemRegistry.createGear(itemType);
         character.equipGear(gearToEquip);
 
         return List.of(ItemEquipEvent.equipEvent(gearToEquip));

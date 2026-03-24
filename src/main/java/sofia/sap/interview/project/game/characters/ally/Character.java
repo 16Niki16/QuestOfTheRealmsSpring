@@ -3,22 +3,15 @@ package sofia.sap.interview.project.game.characters.ally;
 import lombok.Getter;
 import sofia.sap.interview.project.game.characters.ally.type.AllyCharacterType;
 import sofia.sap.interview.project.game.characters.statistics.CharacterStatistics;
-import sofia.sap.interview.project.game.dto.savegame.data.CharacterData;
 import sofia.sap.interview.project.game.exceptions.EquipmentNotEquippedException;
 import sofia.sap.interview.project.game.exceptions.ItemTypeAlreadyEquippedException;
 import sofia.sap.interview.project.game.inventory.Inventory;
 import sofia.sap.interview.project.game.items.Consumable;
 import sofia.sap.interview.project.game.items.Gear;
-import sofia.sap.interview.project.game.items.Item;
-import sofia.sap.interview.project.game.items.ItemFactory;
 import sofia.sap.interview.project.game.items.ItemType;
 
-import java.util.Collection;
 import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 @Getter
 public class Character {

@@ -5,7 +5,7 @@ import sofia.sap.interview.project.game.characters.statistics.CharacterStatistic
 import sofia.sap.interview.project.game.dto.savegame.data.CharacterData;
 import sofia.sap.interview.project.game.inventory.Inventory;
 import sofia.sap.interview.project.game.items.Gear;
-import sofia.sap.interview.project.game.items.ItemFactory;
+import sofia.sap.interview.project.game.items.ItemRegistry;
 import sofia.sap.interview.project.game.items.ItemType;
 
 import java.util.EnumMap;
@@ -23,7 +23,7 @@ public class CharacterFactory {
     private static Map<ItemType, Gear> equippedItems(Set<ItemType> equippedItemsData){
         return equippedItemsData.stream()
             .collect(Collectors.toMap(itemType -> itemType,
-               ItemFactory::createGear,
+               ItemRegistry::createGear,
                 (a,b) -> b,
                 () -> new EnumMap<>(ItemType.class)));
     }
