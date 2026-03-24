@@ -33,6 +33,7 @@ public class GameService {
 
     public void registerUser(String username) {
         User existing = users.putIfAbsent(username, User.createUser(username));
+
         if (existing != null) {
             throw new UsernameAlreadyExistException("Username already taken: " + username);
         }
@@ -40,6 +41,7 @@ public class GameService {
 
     public User getUser(String username) {
         User user = users.get(username);
+
         if (user == null) {
             throw new UserNotFoundException("User not found: " + username);
         }

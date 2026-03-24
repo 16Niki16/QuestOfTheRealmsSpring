@@ -1,7 +1,6 @@
 package sofia.sap.interview.project.game.command.commands;
 
 import sofia.sap.interview.project.game.command.result.CommandResult;
-import sofia.sap.interview.project.game.command.result.EventResult;
 import sofia.sap.interview.project.game.events.CharacterMovedEvent;
 import sofia.sap.interview.project.game.gameplay.GameSession;
 import sofia.sap.interview.project.game.map.Direction;
@@ -24,6 +23,6 @@ public class MoveCommand implements Command {
             session.getCampaign().movePlayer(this.direction);
         }
         Room enteredRoom = session.getCampaign().getRoom();
-        return List.of(new EventResult(CharacterMovedEvent.of(session.getCharacter(), enteredRoom)));
+        return List.of(CharacterMovedEvent.of(session.getCharacter(), enteredRoom));
     }
 }

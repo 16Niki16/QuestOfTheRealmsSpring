@@ -1,7 +1,6 @@
 package sofia.sap.interview.project.game.command.commands;
 
 import sofia.sap.interview.project.game.command.result.CommandResult;
-import sofia.sap.interview.project.game.command.result.ViewResult;
 import sofia.sap.interview.project.game.dto.events.CommandDTO;
 import sofia.sap.interview.project.game.information.HelpInformation;
 import sofia.sap.interview.project.game.user.User;
@@ -27,6 +26,6 @@ public class HelpCommand implements Command {
             new CommandDTO("exit", "Exit the game!")
         );
 
-        return List.of(new ViewResult(new HelpInformation(commands)));
+        return List.of(new HelpInformation(commands));
     }
 }

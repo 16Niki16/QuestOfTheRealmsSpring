@@ -49,20 +49,20 @@ public class GameRestController {
 
         List<CommandResult> commandResults = gameService.commandExecute(user, request);
 
-        return ResponseEntity.ok(GameEventMapper.result(commandResults));
+        return ResponseEntity.ok(commandResults);
     }
 
     @PostMapping("/user/{username}/load")
     public ResponseEntity<?> loadGame(@PathVariable String username) {
         User user = gameService.getUser(username);
 
-        return ResponseEntity.ok(GameEventMapper.result(gameService.loadSavedGames(user)));
+        return ResponseEntity.ok(gameService.loadSavedGames(user));
     }
 
     @PostMapping("/user/{username}/resume")
     public ResponseEntity<?> resumeGame(@PathVariable String username, @RequestBody ResumeGameRequest request) {
         User user = gameService.getUser(username);
 
-        return ResponseEntity.ok(GameEventMapper.result(gameService.resumeSavedGame(user, request)));
+        return ResponseEntity.ok(gameService.resumeSavedGame(user, request));
     }
 }

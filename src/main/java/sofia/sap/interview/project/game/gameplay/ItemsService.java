@@ -2,7 +2,6 @@ package sofia.sap.interview.project.game.gameplay;
 
 import sofia.sap.interview.project.game.characters.ally.Character;
 import sofia.sap.interview.project.game.command.result.CommandResult;
-import sofia.sap.interview.project.game.command.result.EventResult;
 import sofia.sap.interview.project.game.events.CollectItemsEvent;
 import sofia.sap.interview.project.game.events.ItemEquipEvent;
 import sofia.sap.interview.project.game.events.ItemUnequipEvent;
@@ -21,26 +20,26 @@ public class ItemsService {
         Consumable itemToConsume = ItemFactory.createConsumable(itemType);
         character.applyPotion(itemToConsume);
 
-        return List.of(new EventResult(ItemUsedEvent.of(itemToConsume)));
+        return List.of(ItemUsedEvent.of(itemToConsume));
     }
 
     public List<CommandResult> equip(Character character, ItemType itemType) {
         Gear gearToEquip = ItemFactory.createGear(itemType);
         character.equipGear(gearToEquip);
 
-        return List.of(new EventResult(ItemEquipEvent.equipEvent(gearToEquip)));
+        return List.of(ItemEquipEvent.equipEvent(gearToEquip));
     }
 
     public List<CommandResult> unequip(Character character, ItemType itemType) {
         Gear unequippedGear = character.unequipGear(itemType);
 
-        return List.of(new EventResult(ItemUnequipEvent.unequipEvent(unequippedGear)));
+        return List.of(ItemUnequipEvent.unequipEvent(unequippedGear));
     }
 
     public List<CommandResult> collect(Character character, Room room) {
         Map<ItemType, Integer> items = room.collectItems();
         character.collectItems(items);
 
-        return List.of(new EventResult(CollectItemsEvent.collectEvent(items)));
+        return List.of(CollectItemsEvent.collectEvent(items));
     }
 }

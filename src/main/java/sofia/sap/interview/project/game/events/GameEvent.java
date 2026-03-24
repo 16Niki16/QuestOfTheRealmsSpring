@@ -1,4 +1,6 @@
 package sofia.sap.interview.project.game.events;
 
-public interface GameEvent {
+import sofia.sap.interview.project.game.command.result.CommandResult;
+
+public interface GameEvent extends CommandResult {
 }

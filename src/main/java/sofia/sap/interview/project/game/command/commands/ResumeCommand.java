@@ -2,7 +2,6 @@ package sofia.sap.interview.project.game.command.commands;
 
 import sofia.sap.interview.project.game.characters.ally.Character;
 import sofia.sap.interview.project.game.command.result.CommandResult;
-import sofia.sap.interview.project.game.command.result.ViewResult;
 import sofia.sap.interview.project.game.gameplay.GameSession;
 import sofia.sap.interview.project.game.information.ResumeInformation;
 import sofia.sap.interview.project.game.map.room.Room;
@@ -24,6 +23,6 @@ public class ResumeCommand implements Command {
         Character character = gameSession.getCharacter();
         Room currentRoom = gameSession.getCampaign().getRoom();
 
-        return List.of(new ViewResult(ResumeInformation.of(character, currentRoom)));
+        return List.of(ResumeInformation.of(character, currentRoom));
     }
 }

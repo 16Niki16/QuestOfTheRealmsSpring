@@ -1,9 +1,7 @@
 package sofia.sap.interview.project.game.command.commands;
 
 import sofia.sap.interview.project.game.command.result.CommandResult;
-import sofia.sap.interview.project.game.command.result.ViewResult;
 import sofia.sap.interview.project.game.information.ExitInformation;
-import sofia.sap.interview.project.game.files.SaveGame;
 import sofia.sap.interview.project.game.information.QuestInformation;
 import sofia.sap.interview.project.game.quests.QuestLog;
 import sofia.sap.interview.project.game.user.User;
@@ -18,7 +16,7 @@ public class ExitCommand implements Command {
         QuestLog log = user.getLog();
         user.exitGame();
         return List.of(
-            new ViewResult(QuestInformation.of(log)),
-            new ViewResult(new ExitInformation(filename)));
+            QuestInformation.of(log),
+            new ExitInformation(filename));
     }
 }

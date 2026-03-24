@@ -1,7 +1,6 @@
 package sofia.sap.interview.project.game.command.commands;
 
 import sofia.sap.interview.project.game.command.result.CommandResult;
-import sofia.sap.interview.project.game.command.result.ViewResult;
 import sofia.sap.interview.project.game.information.PathsInformation;
 import sofia.sap.interview.project.game.map.Direction;
 import sofia.sap.interview.project.game.user.User;
@@ -14,6 +13,6 @@ public class PathsCommand implements Command {
     public List<CommandResult> execute(User user) {
         Set<Direction> possibleDirections = user.getSession().getCampaign().getPossibleDirections();
 
-        return List.of(new ViewResult(new PathsInformation(possibleDirections)));
+        return List.of(new PathsInformation(possibleDirections));
     }
 }

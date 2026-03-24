@@ -4,8 +4,6 @@ import lombok.Getter;
 import sofia.sap.interview.project.game.characters.enemy.Enemy;
 import sofia.sap.interview.project.game.characters.enemy.type.EnemyType;
 import sofia.sap.interview.project.game.command.result.CommandResult;
-import sofia.sap.interview.project.game.command.result.EventResult;
-import sofia.sap.interview.project.game.command.result.ViewResult;
 import sofia.sap.interview.project.game.events.CollectSpecialItemEvent;
 import sofia.sap.interview.project.game.exceptions.DirectionNotAvailableException;
 import sofia.sap.interview.project.game.information.RoomInformation;
@@ -39,7 +37,7 @@ public class Campaign {
             this.playerCoordinates = direction.move(this.playerCoordinates);
         } else {
             throw new DirectionNotAvailableException(
-                    "The provided direction is not correct, choose another direction!");
+                "The provided direction is not correct, choose another direction!");
         }
     }
 
@@ -50,12 +48,11 @@ public class Campaign {
         EnemyType enemyType = enemy != null ? enemy.getType() : null;
         SpecialItem specialItem = currentRoom.getSpecialItem();
 
-        resultList.add(new ViewResult(new RoomInformation(getRoom().hasChest(),
-                enemyType, specialItem)));
+        resultList.add(new RoomInformation(getRoom().hasChest(), enemyType, specialItem));
 
         if (specialItem != null) {
             currentRoom.collectSpecialItem();
-            resultList.add(new EventResult(CollectSpecialItemEvent.of(specialItem)));
+            resultList.add(CollectSpecialItemEvent.of(specialItem));
         }
 
         return resultList;
