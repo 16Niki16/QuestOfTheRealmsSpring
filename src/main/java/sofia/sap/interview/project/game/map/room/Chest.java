@@ -7,7 +7,9 @@ import java.util.EnumMap;
 import java.util.Map;
 
 @Getter
-public record Chest(Map<ItemType, Integer> content) {
+public class Chest {
+    private final Map<ItemType, Integer> content;
+
     public Chest(Map<ItemType, Integer> content) {
         this.content = new EnumMap<>(content);
     }

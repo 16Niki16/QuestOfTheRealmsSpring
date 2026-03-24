@@ -26,10 +26,6 @@ import sofia.sap.interview.project.game.exceptions.UsernameAlreadyExistException
 
 @RestControllerAdvice
 public class GameExceptionHandler {
-    @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<String> handleInvalidJson(HttpMessageNotReadableException e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid request format!");
-    }
 
 
     @ExceptionHandler({
@@ -74,6 +70,11 @@ public class GameExceptionHandler {
     })
     public ResponseEntity<String> handleFileErrors(RuntimeException e) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<String> handleInvalidJson(HttpMessageNotReadableException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid request format!");
     }
 
     @ExceptionHandler(Exception.class)
