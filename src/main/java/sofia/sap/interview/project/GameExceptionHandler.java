@@ -26,8 +26,6 @@ import sofia.sap.interview.project.game.exceptions.UsernameAlreadyExistException
 
 @RestControllerAdvice
 public class GameExceptionHandler {
-
-
     @ExceptionHandler({
         UsernameAlreadyExistException.class,
         IllegalArgumentException.class,
@@ -35,12 +33,14 @@ public class GameExceptionHandler {
         NoActiveSessionException.class,
         BadRequestException.class})
     public ResponseEntity<String> handleInvalidInput(RuntimeException e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+            .body(e.getMessage());
     }
 
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<String> userNotFound(UserNotFoundException e) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+            .body(e.getMessage());
     }
 
     @ExceptionHandler({
@@ -54,12 +54,14 @@ public class GameExceptionHandler {
         UnknownResultTypeException.class
     })
     public ResponseEntity<String> handleNotFound(RuntimeException e) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+            .body(e.getMessage());
     }
 
     @ExceptionHandler(ItemTypeAlreadyEquippedException.class)
     public ResponseEntity<String> handleAlreadyEquipped(ItemTypeAlreadyEquippedException e) {
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+            .body(e.getMessage());
     }
 
     @ExceptionHandler({
@@ -69,12 +71,14 @@ public class GameExceptionHandler {
         EndGameFileException.class
     })
     public ResponseEntity<String> handleFileErrors(RuntimeException e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+            .body(e.getMessage());
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<String> handleInvalidJson(HttpMessageNotReadableException e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid request format!");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+            .body("Invalid request format!");
     }
 
     @ExceptionHandler(Exception.class)
