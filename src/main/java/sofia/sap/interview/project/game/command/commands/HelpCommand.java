@@ -19,6 +19,7 @@ public class HelpCommand implements Command {
             new CommandDTO("use [item]", "Use some of the collected items in the inventory!"),
             new CommandDTO("equip [item]", "Equip item from the inventory to increase your stats!"),
             new CommandDTO("unequip [item]", "Unequip item!"),
+            new CommandDTO("inventory","check the available items in the inventory!"),
             new CommandDTO("quests", "Shows list with active and completed quests!"),
             new CommandDTO("save [filename]", "Save the current game session!"),
             new CommandDTO("load", "Provides a list of saved games!"),

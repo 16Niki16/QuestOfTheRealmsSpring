@@ -30,5 +30,9 @@ public class SystemsStarter {
     @PreDestroy
     public void stop() {
         scheduler.shutdown();
+
+        for (User user : this.activeUsers) {
+            user.save();
+        }
     }
 }
