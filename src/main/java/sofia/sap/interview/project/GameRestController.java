@@ -1,6 +1,7 @@
 package sofia.sap.interview.project;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -52,8 +53,8 @@ public class GameRestController {
         return ResponseEntity.ok(commandResults);
     }
 
-    @PostMapping("/user/{username}/load")
-    public ResponseEntity<?> loadGame(@PathVariable String username) {
+    @GetMapping("/user/{username}/saves")
+    public ResponseEntity<?> savesGame(@PathVariable String username) {
         User user = gameService.getUser(username);
 
         return ResponseEntity.ok(gameService.loadSavedGames(user));

@@ -39,6 +39,7 @@ public class ItemRegistry {
 
     public static Consumable createConsumable(ItemType itemType) {
         Supplier<Consumable> supplier = CONSUMABLES.get(itemType);
+
         if (supplier == null) {
             throw new ItemNotAvailableException("The provided item is not consumable!");
         }
@@ -48,6 +49,7 @@ public class ItemRegistry {
 
     public static Gear createGear(ItemType itemType) {
         Supplier<Gear> supplier = GEAR.get(itemType);
+
         if (supplier == null) {
             throw new ItemNotAvailableException("The provided item is not gear!");
         }
