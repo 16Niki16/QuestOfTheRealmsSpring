@@ -1,10 +1,9 @@
 package sofia.sap.interview.project.game.dto.newgame.mappers;
 
 import sofia.sap.interview.project.game.characters.enemy.Enemy;
-import sofia.sap.interview.project.game.characters.enemy.EnemyRegistry;
 import sofia.sap.interview.project.game.characters.enemy.type.EnemyType;
 
-import static sofia.sap.interview.project.game.characters.enemy.EnemyRegistry.*;
+import static sofia.sap.interview.project.game.characters.enemy.EnemyRegistry.createEnemy;
 
 public class EnemyMapper {
     public static Enemy map(EnemyType enemy) {

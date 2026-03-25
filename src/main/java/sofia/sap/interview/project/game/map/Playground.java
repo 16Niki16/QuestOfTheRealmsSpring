@@ -2,7 +2,6 @@ package sofia.sap.interview.project.game.map;
 
 import sofia.sap.interview.project.game.characters.enemy.Enemy;
 import sofia.sap.interview.project.game.map.room.Room;
-import sofia.sap.interview.project.game.map.room.SpecialItem;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -31,7 +30,7 @@ public record Playground(Room[][] rooms) {
 
     private boolean isInside(Coordinates c) {
         return c.y() >= 0 && c.y() < rooms.length
-            && c.x() >= 0 && c.x() < rooms[c.y()].length;
+                && c.x() >= 0 && c.x() < rooms[c.y()].length;
     }
 
     public Enemy getEnemyByPosition(Coordinates coordinates) {

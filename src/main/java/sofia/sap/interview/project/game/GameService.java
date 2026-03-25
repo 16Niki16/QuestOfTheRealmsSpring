@@ -1,14 +1,12 @@
 package sofia.sap.interview.project.game;
 
 import org.springframework.stereotype.Service;
-import sofia.sap.interview.project.game.command.CommandRegistry;
 import sofia.sap.interview.project.game.command.commands.Command;
 import sofia.sap.interview.project.game.command.commands.LoadCommand;
 import sofia.sap.interview.project.game.command.commands.NewGameCommand;
 import sofia.sap.interview.project.game.command.commands.ResumeCommand;
 import sofia.sap.interview.project.game.command.result.CommandResult;
 import sofia.sap.interview.project.game.events.EventProcessor;
-import sofia.sap.interview.project.game.events.NewGameEvent;
 import sofia.sap.interview.project.game.exceptions.UserNotFoundException;
 import sofia.sap.interview.project.game.exceptions.UsernameAlreadyExistException;
 import sofia.sap.interview.project.game.request.CommandRequest;
@@ -21,8 +19,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static sofia.sap.interview.project.game.command.CommandRegistry.*;
-import static sofia.sap.interview.project.game.user.User.*;
+import static sofia.sap.interview.project.game.command.CommandRegistry.createCommand;
+import static sofia.sap.interview.project.game.user.User.createUser;
 
 @Service
 public class GameService {

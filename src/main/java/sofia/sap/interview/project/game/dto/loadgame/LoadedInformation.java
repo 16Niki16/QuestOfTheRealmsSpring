@@ -4,8 +4,8 @@ import sofia.sap.interview.project.game.dto.savegame.data.GameData;
 import sofia.sap.interview.project.game.gameplay.GameSession;
 import sofia.sap.interview.project.game.quests.QuestLog;
 
-import static sofia.sap.interview.project.game.dto.loadgame.GameSessionFactory.*;
-import static sofia.sap.interview.project.game.dto.loadgame.QuestLogFactory.*;
+import static sofia.sap.interview.project.game.dto.loadgame.GameSessionFactory.createGameSession;
+import static sofia.sap.interview.project.game.dto.loadgame.QuestLogFactory.createQuestLog;
 
 public record LoadedInformation(GameSession session, QuestLog log) {
     public static LoadedInformation load(GameData data) {

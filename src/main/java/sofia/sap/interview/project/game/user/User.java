@@ -4,18 +4,17 @@ import lombok.Getter;
 import sofia.sap.interview.project.game.characters.ally.type.AllyCharacterType;
 import sofia.sap.interview.project.game.dto.loadgame.LoadedInformation;
 import sofia.sap.interview.project.game.files.EndGame;
-import sofia.sap.interview.project.game.files.SaveGame;
 import sofia.sap.interview.project.game.gameplay.GameSession;
 import sofia.sap.interview.project.game.quests.QuestLog;
 
 import java.util.List;
 
 import static sofia.sap.interview.project.game.files.LoadGame.load;
-import static sofia.sap.interview.project.game.files.NewGameSave.*;
-import static sofia.sap.interview.project.game.files.SaveGame.*;
+import static sofia.sap.interview.project.game.files.NewGameSave.saveNewGame;
+import static sofia.sap.interview.project.game.files.SaveGame.saveGame;
 import static sofia.sap.interview.project.game.files.SavedGamesList.getSaveFiles;
 import static sofia.sap.interview.project.game.gameplay.GameFactory.createSession;
-import static sofia.sap.interview.project.game.quests.QuestLog.*;
+import static sofia.sap.interview.project.game.quests.QuestLog.createNewQuestLog;
 
 @Getter
 public class User {

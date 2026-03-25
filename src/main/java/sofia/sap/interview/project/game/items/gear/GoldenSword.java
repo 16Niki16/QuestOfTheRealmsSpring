@@ -2,7 +2,7 @@ package sofia.sap.interview.project.game.items.gear;
 
 import sofia.sap.interview.project.game.items.ItemType;
 
-public class GoldenSword extends Sword{
+public class GoldenSword extends Sword {
     private static final int EFFECT = 6;
 
     @Override

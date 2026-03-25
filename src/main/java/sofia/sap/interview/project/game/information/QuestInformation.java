@@ -5,20 +5,19 @@ import sofia.sap.interview.project.game.quests.Quest;
 import sofia.sap.interview.project.game.quests.QuestLog;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public record QuestInformation(ViewType viewType, List<QuestDTO> active, List<QuestDTO> completed)
-    implements ViewInformation {
+        implements ViewInformation {
     public static QuestInformation of(QuestLog questLog) {
 
         return new QuestInformation(ViewType.QUESTS,
-            transformToDTO(questLog.getActiveQuests()),
-            transformToDTO(questLog.getCompletedQuests()));
+                transformToDTO(questLog.getActiveQuests()),
+                transformToDTO(questLog.getCompletedQuests()));
     }
 
     private static List<QuestDTO> transformToDTO(List<Quest> quests) {
         return quests.stream()
-            .map(QuestDTO::of)
-            .toList();
+                .map(QuestDTO::of)
+                .toList();
     }
 }

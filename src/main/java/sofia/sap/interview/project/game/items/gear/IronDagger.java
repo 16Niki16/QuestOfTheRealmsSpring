@@ -15,6 +15,4 @@ public class IronDagger extends Dagger {
     public int getEffect() {
         return EFFECT;
     }
-
-
 }
