@@ -19,7 +19,7 @@ public class CharacterStatistics extends BaseStatistics {
         this.manaCost = manaCost;
     }
 
-    public static CharacterStatistics createNewCharacter(CharacterType type) {
+    public static CharacterStatistics newCharacterStatistics(CharacterType type) {
         return new CharacterStatistics(type.getHealth(), type.getAttackRange(),
                 type.getMana(), type.getManaCost());
     }

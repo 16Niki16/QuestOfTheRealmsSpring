@@ -3,6 +3,7 @@ package sofia.sap.interview.project.game.characters.enemy;
 import lombok.Getter;
 import sofia.sap.interview.project.game.characters.statistics.EnemyStatistics;
 import sofia.sap.interview.project.game.characters.enemy.type.EnemyType;
+import sofia.sap.interview.project.game.characters.statistics.attack.AttackType;
 
 @Getter
 public abstract class Enemy {
@@ -27,7 +28,7 @@ public abstract class Enemy {
         this.enemyStats.decreaseHealth(damage);
     }
 
-    public abstract String getDamageMessage(int damage);
+    public abstract AttackType attackType();
 
     public void load(int health) {
         this.enemyStats.updateHealth(health);

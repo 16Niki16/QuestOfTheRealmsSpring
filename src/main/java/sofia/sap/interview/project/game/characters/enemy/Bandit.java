@@ -1,15 +1,18 @@
 package sofia.sap.interview.project.game.characters.enemy;
 
 import sofia.sap.interview.project.game.characters.enemy.type.EnemyType;
+import sofia.sap.interview.project.game.characters.statistics.attack.AttackType;
 
 public class Bandit extends Enemy {
+    private static final EnemyType BANDIT = EnemyType.BANDIT;
+    private static final AttackType CRITICAL_ATTACK = AttackType.CRITICAL;
 
     public Bandit() {
-        super(EnemyType.BANDIT);
+        super(BANDIT);
     }
 
     @Override
-    public String getDamageMessage(int damage) {
-        return String.format("The bandit caused %d damage to your character!", damage);
+    public AttackType attackType() {
+        return CRITICAL_ATTACK;
     }
 }

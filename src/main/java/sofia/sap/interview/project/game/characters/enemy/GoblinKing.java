@@ -1,14 +1,18 @@
 package sofia.sap.interview.project.game.characters.enemy;
 
 import sofia.sap.interview.project.game.characters.enemy.type.EnemyType;
+import sofia.sap.interview.project.game.characters.statistics.attack.AttackType;
 
 public class GoblinKing extends Enemy {
+    private static final EnemyType GOBLIN_KING = EnemyType.GOBLIN_KING;
+    private static final AttackType POISONOUS_ATTACK = AttackType.POISONOUS;
+
     public GoblinKing() {
-        super(EnemyType.GOBLIN_KING);
+        super(GOBLIN_KING);
     }
 
     @Override
-    public String getDamageMessage(int damage) {
-        return String.format("The goblin king attack caused %d damage!", damage);
+    public AttackType attackType() {
+        return POISONOUS_ATTACK;
     }
 }

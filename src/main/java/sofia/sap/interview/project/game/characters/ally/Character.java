@@ -11,9 +11,12 @@ import sofia.sap.interview.project.game.inventory.Inventory;
 import sofia.sap.interview.project.game.items.ItemType;
 import sofia.sap.interview.project.game.items.consumable.Consumable;
 import sofia.sap.interview.project.game.items.gear.Gear;
-import sofia.sap.interview.project.game.items.gear.GearType;
 
 import java.util.Map;
+
+import static sofia.sap.interview.project.game.characters.statistics.CharacterStatistics.newCharacterStatistics;
+import static sofia.sap.interview.project.game.inventory.Equipment.newCharacterEquipment;
+import static sofia.sap.interview.project.game.inventory.Inventory.newCharacterInventory;
 
 @Getter
 public class Character {
@@ -33,9 +36,10 @@ public class Character {
     }
 
     public static Character createNewCharacter(String characterName, CharacterType type) {
-        return new Character(characterName, type, CharacterStatistics.createNewCharacter(type),
-            Inventory.newCharacterInventory(),
-            Equipment.newCharacterEquipment());
+        return new Character(characterName, type,
+            newCharacterStatistics(type),
+            newCharacterInventory(),
+            newCharacterEquipment());
     }
 
     public int attackEnemy() {
