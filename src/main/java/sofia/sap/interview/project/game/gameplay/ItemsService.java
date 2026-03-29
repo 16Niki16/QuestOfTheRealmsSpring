@@ -15,23 +15,26 @@ import sofia.sap.interview.project.game.map.room.Room;
 import java.util.List;
 import java.util.Map;
 
+import static sofia.sap.interview.project.game.items.ItemRegistry.createConsumable;
+import static sofia.sap.interview.project.game.items.ItemRegistry.createGear;
+
 public class ItemsService {
     public List<CommandResult> useItem(Character character, ItemType itemType) {
-        Consumable itemToConsume = ItemRegistry.createConsumable(itemType);
+        Consumable itemToConsume = createConsumable(itemType);
         character.applyPotion(itemToConsume);
 
         return List.of(ItemUsedEvent.of(itemToConsume));
     }
 
     public List<CommandResult> equip(Character character, ItemType itemType) {
-        Gear gearToEquip = ItemRegistry.createGear(itemType);
+        Gear gearToEquip = createGear(itemType);
         character.equipGear(gearToEquip);
 
         return List.of(ItemEquipEvent.equipEvent(gearToEquip));
     }
 
     public List<CommandResult> unequip(Character character, ItemType itemType) {
-        Gear gearToUnequip = ItemRegistry.createGear(itemType);
+        Gear gearToUnequip = createGear(itemType);
         character.unequipGear(gearToUnequip);
 
         return List.of(ItemUnequipEvent.unequipEvent(gearToUnequip));
