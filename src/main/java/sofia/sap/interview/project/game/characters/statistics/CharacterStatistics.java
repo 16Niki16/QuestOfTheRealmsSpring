@@ -8,6 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class CharacterStatistics extends BaseStatistics {
+    private static final int NOT_ENOUGH_MANA = 0;
     private final AtomicInteger mana;
     @Getter
     private final int manaCost;
@@ -20,7 +21,7 @@ public class CharacterStatistics extends BaseStatistics {
 
     public static CharacterStatistics createNewCharacter(AllyCharacterType type) {
         return new CharacterStatistics(type.getHealth(), type.getAttackRange(),
-            type.getMana(), type.getManaCost());
+                type.getMana(), type.getManaCost());
     }
 
     public int getMana() {
@@ -29,7 +30,7 @@ public class CharacterStatistics extends BaseStatistics {
 
     public boolean decreaseMana(int amount) {
         int prev = mana.getAndUpdate(current ->
-            current >= amount ? current - amount : current
+                current >= amount ? current - amount : current
         );
 
         return prev >= amount;
@@ -42,10 +43,12 @@ public class CharacterStatistics extends BaseStatistics {
     @Override
     public int attack() {
         boolean enoughMana = decreaseMana(this.manaCost);
+
         if (enoughMana) {
             return ThreadLocalRandom.current().nextInt(getAttackRange().minDamage(), getAttackRange().maxDamage() + 1);
         }
-        return 0;
+
+        return NOT_ENOUGH_MANA;
     }
 
     public void increaseAttackRange(int amount) {
@@ -60,6 +63,10 @@ public class CharacterStatistics extends BaseStatistics {
         int max = Math.max(min, getAttackRange().maxDamage() - amount);
 
         setAttackRange(new AttackRange(min, max));
+    }
+
+    public boolean needsRegen() {
+        return getHealth() < MAX_STAT || this.mana.get() < MAX_STAT;
     }
 
     public void regenerate(int amount) {

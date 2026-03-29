@@ -35,7 +35,7 @@ public abstract class BaseStatistics implements Statistics {
 
     @Override
     public void decreaseHealth(int amount) {
-        health.updateAndGet(currentHealth -> Math.max(currentHealth - amount, 0));
+        health.updateAndGet(currentHealth -> Math.max(currentHealth - amount, MIN_STAT));
     }
 
     @Override

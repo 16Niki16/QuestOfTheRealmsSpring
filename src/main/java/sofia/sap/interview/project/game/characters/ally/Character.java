@@ -6,9 +6,9 @@ import sofia.sap.interview.project.game.characters.statistics.CharacterStatistic
 import sofia.sap.interview.project.game.exceptions.EquipmentNotEquippedException;
 import sofia.sap.interview.project.game.exceptions.ItemTypeAlreadyEquippedException;
 import sofia.sap.interview.project.game.inventory.Inventory;
+import sofia.sap.interview.project.game.items.ItemType;
 import sofia.sap.interview.project.game.items.consumable.Consumable;
 import sofia.sap.interview.project.game.items.gear.Gear;
-import sofia.sap.interview.project.game.items.ItemType;
 import sofia.sap.interview.project.game.items.gear.GearType;
 
 import java.util.EnumMap;
@@ -33,7 +33,7 @@ public class Character {
 
     public static Character createNewCharacter(String characterName, AllyCharacterType type) {
         return new Character(characterName, type, CharacterStatistics.createNewCharacter(type), new Inventory(),
-            new EnumMap<>(GearType.class));
+                new EnumMap<>(GearType.class));
     }
 
     public int attackEnemy() {
@@ -65,7 +65,7 @@ public class Character {
         GearType gearType = itemToUnequip.getGearType();
 
         if (!this.equippedItems.containsKey(gearType) ||
-            !this.equippedItems.get(gearType).getType().equals(itemToUnequip.getType())) {
+                !this.equippedItems.get(gearType).getType().equals(itemToUnequip.getType())) {
             throw new EquipmentNotEquippedException("The provided item is not equipped!");
         }
 
@@ -92,10 +92,6 @@ public class Character {
 
     public void decreaseAttackDamage(int amount) {
         this.characterStats.decreaseAttackRange(amount);
-    }
-
-    public void regen(int amount) {
-        this.characterStats.regenerate(amount);
     }
 
 }
