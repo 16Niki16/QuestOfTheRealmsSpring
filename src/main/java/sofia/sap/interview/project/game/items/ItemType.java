@@ -7,19 +7,17 @@ import java.util.Arrays;
 
 @Getter
 public enum ItemType {
-    MANA_POTION("mana potion", "mana"),
-    HEALING_HERB("healing herb", "health"),
-    IRON_DAGGER("iron dagger", "attack damage"),
-    IRON_SWORD("iron sword", "attack damage"),
-    GOLDEN_DAGGER("golden dagger", "attack damage"),
-    GOLDEN_SWORD("golden sword", "attack damage");
+    MANA_POTION("mana potion"),
+    HEALING_HERB("healing herb"),
+    IRON_DAGGER("iron dagger"),
+    IRON_SWORD("iron sword"),
+    GOLDEN_DAGGER("golden dagger"),
+    GOLDEN_SWORD("golden sword");
 
     private final String name;
-    private final String source;
 
-    ItemType(String name, String source) {
+    ItemType(String name) {
         this.name = name;
-        this.source = source;
     }
 
     public static ItemType getByName(String itemName) {
