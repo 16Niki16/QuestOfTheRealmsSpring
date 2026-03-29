@@ -1,7 +1,7 @@
 package sofia.sap.interview.project.game.command.commands;
 
 import sofia.sap.interview.project.game.characters.ally.type.CharacterType;
-import sofia.sap.interview.project.game.command.result.CommandResult;
+import sofia.sap.interview.project.game.command.CommandResult;
 import sofia.sap.interview.project.game.events.NewGameEvent;
 import sofia.sap.interview.project.game.user.User;
 

@@ -2,7 +2,7 @@ package sofia.sap.interview.project.game.gameplay;
 
 import sofia.sap.interview.project.game.characters.ally.Character;
 import sofia.sap.interview.project.game.characters.enemy.Enemy;
-import sofia.sap.interview.project.game.command.result.CommandResult;
+import sofia.sap.interview.project.game.command.CommandResult;
 import sofia.sap.interview.project.game.events.AttackEvent;
 import sofia.sap.interview.project.game.events.GameOverEvent;
 import sofia.sap.interview.project.game.events.DefendEvent;

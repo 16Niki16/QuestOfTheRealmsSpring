@@ -1,6 +1,6 @@
 package sofia.sap.interview.project.game.command.commands;
 
-import sofia.sap.interview.project.game.command.result.CommandResult;
+import sofia.sap.interview.project.game.command.CommandResult;
 import sofia.sap.interview.project.game.events.CharacterMovedEvent;
 import sofia.sap.interview.project.game.gameplay.GameSession;
 import sofia.sap.interview.project.game.map.Direction;

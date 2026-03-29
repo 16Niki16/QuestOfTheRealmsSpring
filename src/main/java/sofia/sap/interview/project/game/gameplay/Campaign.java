@@ -3,7 +3,7 @@ package sofia.sap.interview.project.game.gameplay;
 import lombok.Getter;
 import sofia.sap.interview.project.game.characters.enemy.Enemy;
 import sofia.sap.interview.project.game.characters.enemy.type.EnemyType;
-import sofia.sap.interview.project.game.command.result.CommandResult;
+import sofia.sap.interview.project.game.command.CommandResult;
 import sofia.sap.interview.project.game.events.CollectSpecialItemEvent;
 import sofia.sap.interview.project.game.exceptions.DirectionNotAvailableException;
 import sofia.sap.interview.project.game.information.RoomInformation;
