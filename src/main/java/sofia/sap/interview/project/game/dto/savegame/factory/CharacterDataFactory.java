@@ -12,15 +12,8 @@ import java.util.stream.Collectors;
 public class CharacterDataFactory {
     public static CharacterData create(Character character) {
         return new CharacterData(character.getCharacterName(), character.getType(),
-                CharacterStatisticsDataFactory.create(character.getCharacterStats()),
-                InventoryDataFactory.create(character.getInventory()),
-                transformToItemType(character.getEquippedItems().values()));
-    }
-
-    private static Set<ItemType> transformToItemType(Collection<Gear> equippedGears) {
-
-        return equippedGears.stream()
-                .map(Gear::getType)
-                .collect(Collectors.toSet());
+            CharacterStatisticsDataFactory.create(character.getCharacterStats()),
+            InventoryDataFactory.create(character.getInventory()),
+            EquipmentDataFactory.create(character.getEquipment()));
     }
 }

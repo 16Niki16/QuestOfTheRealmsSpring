@@ -1,7 +1,7 @@
 package sofia.sap.interview.project.game.user;
 
 import lombok.Getter;
-import sofia.sap.interview.project.game.characters.ally.type.AllyCharacterType;
+import sofia.sap.interview.project.game.characters.ally.type.CharacterType;
 import sofia.sap.interview.project.game.dto.loadgame.LoadedInformation;
 import sofia.sap.interview.project.game.files.EndGame;
 import sofia.sap.interview.project.game.gameplay.GameSession;
@@ -38,7 +38,7 @@ public class User {
         return this.session != null && this.log != null;
     }
 
-    public synchronized void createNewGame(String name, AllyCharacterType type) {
+    public synchronized void createNewGame(String name, CharacterType type) {
         this.log = createNewQuestLog();
         this.session = createSession(name, type);
         this.currentGameSessionName = saveNewGame(this);

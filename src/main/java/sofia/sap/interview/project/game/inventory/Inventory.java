@@ -12,16 +12,16 @@ import java.util.Map;
 public class Inventory {
     private final Map<ItemType, Integer> items;
 
-    public Inventory() {
-        this.items = new EnumMap<>(ItemType.class);
-    }
-
     public Inventory(Map<ItemType, Integer> items) {
         this.items = items;
     }
 
-    public void addItem(ItemType itemType) {
-        this.items.merge(itemType, 1, Integer::sum);
+    public static Inventory newCharacterInventory() {
+        return new Inventory(new EnumMap<>(ItemType.class));
+    }
+
+    public void addItem(Item item) {
+        this.items.merge(item.getType(), 1, Integer::sum);
     }
 
     public void addAllItems(Map<ItemType, Integer> items) {
@@ -30,10 +30,12 @@ public class Inventory {
     }
 
     public void removeItem(Item item) {
-        Integer count = this.items.get(item.getType());
-        if (count == null || count == 0) {
-            throw new ItemNotAvailableException("There is not an item of this type in inventory!");
-        }
-        this.items.put(item.getType(), count - 1);
+        items.computeIfPresent(item.getType(), (type, count) -> (count > 1) ? count - 1 : null);
+    }
+
+    public boolean checkItemAvailable(Item item) {
+        Integer numberOfItemByType = this.items.get(item.getType());
+
+        return numberOfItemByType != null && numberOfItemByType > 0;
     }
 }

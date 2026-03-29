@@ -4,7 +4,7 @@ import lombok.Getter;
 import sofia.sap.interview.project.game.characters.statistics.attack.AttackRange;
 
 @Getter
-public enum AllyCharacterType {
+public enum CharacterType {
     MAGE(100, 100, new AttackRange(6, 7), 15),
     WARRIOR(100, 100, new AttackRange(2, 4), 8),
     ROGUE(100, 100, new AttackRange(3, 5), 10);
@@ -14,7 +14,7 @@ public enum AllyCharacterType {
     private final AttackRange attackRange;
     private final int manaCost;
 
-    AllyCharacterType(int health, int mana, AttackRange attackRange, int manaCost) {
+    CharacterType(int health, int mana, AttackRange attackRange, int manaCost) {
         this.health = health;
         this.mana = mana;
         this.attackRange = attackRange;

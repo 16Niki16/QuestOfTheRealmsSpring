@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 public class RegenerationSystem implements GameSystem {
     private static final int AMOUNT = 5;
-    private static final Duration TIMER = Duration.ofSeconds(1);
+    private static final Duration TIMER = Duration.ofSeconds(5);
 
     @Override
     public void start(ScheduledExecutorService scheduler, Collection<User> activeUsers) {

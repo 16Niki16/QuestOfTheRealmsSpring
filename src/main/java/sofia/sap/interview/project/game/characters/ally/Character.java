@@ -1,39 +1,41 @@
 package sofia.sap.interview.project.game.characters.ally;
 
 import lombok.Getter;
-import sofia.sap.interview.project.game.characters.ally.type.AllyCharacterType;
+import sofia.sap.interview.project.game.characters.ally.type.CharacterType;
 import sofia.sap.interview.project.game.characters.statistics.CharacterStatistics;
 import sofia.sap.interview.project.game.exceptions.EquipmentNotEquippedException;
+import sofia.sap.interview.project.game.exceptions.ItemNotAvailableException;
 import sofia.sap.interview.project.game.exceptions.ItemTypeAlreadyEquippedException;
+import sofia.sap.interview.project.game.inventory.Equipment;
 import sofia.sap.interview.project.game.inventory.Inventory;
 import sofia.sap.interview.project.game.items.ItemType;
 import sofia.sap.interview.project.game.items.consumable.Consumable;
 import sofia.sap.interview.project.game.items.gear.Gear;
 import sofia.sap.interview.project.game.items.gear.GearType;
 
-import java.util.EnumMap;
 import java.util.Map;
 
 @Getter
 public class Character {
     private final String characterName;
-    private final AllyCharacterType type;
+    private final CharacterType type;
     private final CharacterStatistics characterStats;
     private final Inventory inventory;
-    private final Map<GearType, Gear> equippedItems;
+    private final Equipment equipment;
 
-    public Character(String characterName, AllyCharacterType type, CharacterStatistics stats,
-                     Inventory inventory, Map<GearType, Gear> equipped) {
+    public Character(String characterName, CharacterType type, CharacterStatistics stats,
+                     Inventory inventory, Equipment equipment) {
         this.characterName = characterName;
         this.type = type;
         this.characterStats = stats;
         this.inventory = inventory;
-        this.equippedItems = equipped;
+        this.equipment = equipment;
     }
 
-    public static Character createNewCharacter(String characterName, AllyCharacterType type) {
-        return new Character(characterName, type, CharacterStatistics.createNewCharacter(type), new Inventory(),
-                new EnumMap<>(GearType.class));
+    public static Character createNewCharacter(String characterName, CharacterType type) {
+        return new Character(characterName, type, CharacterStatistics.createNewCharacter(type),
+            Inventory.newCharacterInventory(),
+            Equipment.newCharacterEquipment());
     }
 
     public int attackEnemy() {
@@ -45,32 +47,31 @@ public class Character {
     }
 
     public void applyPotion(Consumable potionToConsume) {
+        if (!this.inventory.checkItemAvailable(potionToConsume)) {
+            throw new ItemNotAvailableException("There is not an item of this type in inventory!");
+        }
+
         this.inventory.removeItem(potionToConsume);
         potionToConsume.consume(this);
     }
 
     public void equipGear(Gear itemToEquip) {
-        GearType gearType = itemToEquip.getGearType();
-
-        if (this.equippedItems.containsKey(gearType)) {
+        if (equipment.alreadyEquippedType(itemToEquip)) {
             throw new ItemTypeAlreadyEquippedException("Item of this type is already equipped by the character!");
         }
 
         this.inventory.removeItem(itemToEquip);
-        this.equippedItems.put(itemToEquip.getGearType(), itemToEquip);
+        this.equipment.addEquipment(itemToEquip);
         itemToEquip.equip(this);
     }
 
     public void unequipGear(Gear itemToUnequip) {
-        GearType gearType = itemToUnequip.getGearType();
-
-        if (!this.equippedItems.containsKey(gearType) ||
-                !this.equippedItems.get(gearType).getType().equals(itemToUnequip.getType())) {
+        if (!equipment.compatibleItem(itemToUnequip)) {
             throw new EquipmentNotEquippedException("The provided item is not equipped!");
         }
 
-        this.equippedItems.remove(gearType);
-        this.inventory.addItem(itemToUnequip.getType());
+        this.equipment.removeEquipment(itemToUnequip);
+        this.inventory.addItem(itemToUnequip);
         itemToUnequip.unequip(this);
     }
 

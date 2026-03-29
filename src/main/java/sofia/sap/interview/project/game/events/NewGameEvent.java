@@ -1,11 +1,11 @@
 package sofia.sap.interview.project.game.events;
 
 import sofia.sap.interview.project.game.characters.ally.Character;
-import sofia.sap.interview.project.game.characters.ally.type.AllyCharacterType;
+import sofia.sap.interview.project.game.characters.ally.type.CharacterType;
 import sofia.sap.interview.project.game.characters.statistics.CharacterStatistics;
 import sofia.sap.interview.project.game.characters.statistics.attack.AttackRange;
 
-public record NewGameEvent(EventType eventType, String characterName, AllyCharacterType characterType,
+public record NewGameEvent(EventType eventType, String characterName, CharacterType characterType,
                            int characterHealth, int characterMana, AttackRange characterAttackRange)
         implements GameEvent {
 

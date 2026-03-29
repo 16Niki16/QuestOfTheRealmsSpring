@@ -1,7 +1,6 @@
 package sofia.sap.interview.project.game.command.commands;
 
-import sofia.sap.interview.project.game.characters.ally.type.AllyCharacterType;
-import sofia.sap.interview.project.game.command.commands.Command;
+import sofia.sap.interview.project.game.characters.ally.type.CharacterType;
 import sofia.sap.interview.project.game.command.result.CommandResult;
 import sofia.sap.interview.project.game.events.NewGameEvent;
 import sofia.sap.interview.project.game.user.User;
@@ -10,9 +9,9 @@ import java.util.List;
 
 public class NewGameCommand implements Command {
     private final String characterName;
-    private final AllyCharacterType characterType;
+    private final CharacterType characterType;
 
-    public NewGameCommand(String characterName, AllyCharacterType characterType) {
+    public NewGameCommand(String characterName, CharacterType characterType) {
         this.characterName = characterName;
         this.characterType = characterType;
     }
