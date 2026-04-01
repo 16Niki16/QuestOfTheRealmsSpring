@@ -11,12 +11,15 @@ public class EventProcessor {
     public static List<CommandResult> process(User user, List<CommandResult> commandResults) {
         List<CommandResult> allResults = new ArrayList<>(commandResults);
         QuestLog questLog = user.getLog();
+
         for (CommandResult result : commandResults) {
+
             if (result instanceof GameEvent event) {
                 boolean questCompleted = questLog.handleEvent(event);
 
                 if (questCompleted) {
                     allResults.add(QuestCompletedEvent.of(questLog.getLastCompletedQuest()));
+
                     if (questLog.getActiveQuests().isEmpty()) {
                         allResults.add(GameWonEvent.of(user.getSession().getCharacter(), questLog));
                         user.endGame();

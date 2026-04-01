@@ -10,6 +10,7 @@ public class SaveCommand implements Command {
     @Override
     public List<CommandResult> execute(User user) {
         user.save();
+
         return List.of(SaveInformation.of(user.getCurrentGameSessionName()));
     }
 }

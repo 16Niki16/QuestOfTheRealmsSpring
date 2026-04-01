@@ -15,6 +15,7 @@ public class ExitCommand implements Command {
         String filename = user.getCurrentGameSessionName();
         QuestLog log = user.getLog();
         user.exitGame();
+
         return List.of(
             QuestInformation.of(log),
             ExitInformation.of(filename));

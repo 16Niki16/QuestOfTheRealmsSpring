@@ -19,10 +19,12 @@ public class MoveCommand implements Command {
     @Override
     public List<CommandResult> execute(User user) {
         GameSession session = user.getSession();
+
         synchronized (user) {
             session.getCampaign().movePlayer(this.direction);
         }
         Room enteredRoom = session.getCampaign().getRoom();
+
         return List.of(CharacterMovedEvent.of(session.getCharacter(), enteredRoom));
     }
 }

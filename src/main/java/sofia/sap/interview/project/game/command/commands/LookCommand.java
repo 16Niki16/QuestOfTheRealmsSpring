@@ -10,6 +10,7 @@ public class LookCommand implements Command {
     @Override
     public List<CommandResult> execute(User user) {
         GameSession session = user.getSession();
+
         return session.getCampaign().lookAround();
     }
 }
