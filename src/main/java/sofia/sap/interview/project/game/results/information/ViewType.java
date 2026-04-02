@@ -1,4 +1,4 @@
-package sofia.sap.interview.project.game.information;
+package sofia.sap.interview.project.game.results.information;
 
 public enum ViewType {
     ROOM,

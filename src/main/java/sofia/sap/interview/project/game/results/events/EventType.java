@@ -1,4 +1,4 @@
-package sofia.sap.interview.project.game.events;
+package sofia.sap.interview.project.game.results.events;
 
 public enum EventType {
     ATTACK,

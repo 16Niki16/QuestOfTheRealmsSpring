@@ -1,4 +1,4 @@
-package sofia.sap.interview.project.game.information;
+package sofia.sap.interview.project.game.results.information;
 
 import sofia.sap.interview.project.game.characters.enemy.type.EnemyType;
 import sofia.sap.interview.project.game.map.room.SpecialItem;

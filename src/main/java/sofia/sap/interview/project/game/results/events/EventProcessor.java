@@ -1,6 +1,6 @@
-package sofia.sap.interview.project.game.events;
+package sofia.sap.interview.project.game.results.events;
 
-import sofia.sap.interview.project.game.command.CommandResult;
+import sofia.sap.interview.project.game.results.CommandResult;
 import sofia.sap.interview.project.game.quests.QuestLog;
 import sofia.sap.interview.project.game.user.User;
 

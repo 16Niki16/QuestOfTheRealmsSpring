@@ -2,12 +2,12 @@ package sofia.sap.interview.project.game.gameplay;
 
 import sofia.sap.interview.project.game.characters.ally.Character;
 import sofia.sap.interview.project.game.characters.enemy.Enemy;
-import sofia.sap.interview.project.game.command.CommandResult;
-import sofia.sap.interview.project.game.events.AttackEvent;
-import sofia.sap.interview.project.game.events.GameOverEvent;
-import sofia.sap.interview.project.game.events.DefendEvent;
-import sofia.sap.interview.project.game.events.KillEnemyEvent;
-import sofia.sap.interview.project.game.events.NotEnoughManaEvent;
+import sofia.sap.interview.project.game.results.CommandResult;
+import sofia.sap.interview.project.game.results.events.AttackEvent;
+import sofia.sap.interview.project.game.results.events.GameOverEvent;
+import sofia.sap.interview.project.game.results.events.DefendEvent;
+import sofia.sap.interview.project.game.results.events.KillEnemyEvent;
+import sofia.sap.interview.project.game.results.events.NotEnoughManaEvent;
 import sofia.sap.interview.project.game.map.room.Room;
 
 import java.util.ArrayList;

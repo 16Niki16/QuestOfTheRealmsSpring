@@ -1,8 +1,8 @@
 package sofia.sap.interview.project.game.command.commands;
 
-import sofia.sap.interview.project.game.command.CommandResult;
-import sofia.sap.interview.project.game.information.ExitInformation;
-import sofia.sap.interview.project.game.information.QuestInformation;
+import sofia.sap.interview.project.game.results.CommandResult;
+import sofia.sap.interview.project.game.results.information.ExitInformation;
+import sofia.sap.interview.project.game.results.information.QuestInformation;
 import sofia.sap.interview.project.game.quests.QuestLog;
 import sofia.sap.interview.project.game.user.User;
 

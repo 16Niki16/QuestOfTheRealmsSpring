@@ -2,8 +2,8 @@ package sofia.sap.interview.project.game.quests;
 
 import sofia.sap.interview.project.game.characters.enemy.type.EnemyType;
 import sofia.sap.interview.project.game.dto.data.QuestData;
-import sofia.sap.interview.project.game.events.GameEvent;
-import sofia.sap.interview.project.game.events.KillEnemyEvent;
+import sofia.sap.interview.project.game.results.events.GameEvent;
+import sofia.sap.interview.project.game.results.events.KillEnemyEvent;
 
 public class KillGoblinKing extends QuestBase {
     private static final EnemyType TARGET = EnemyType.GOBLIN_KING;

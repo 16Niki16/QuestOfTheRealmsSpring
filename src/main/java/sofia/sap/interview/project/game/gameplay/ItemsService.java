@@ -1,14 +1,13 @@
 package sofia.sap.interview.project.game.gameplay;
 
 import sofia.sap.interview.project.game.characters.ally.Character;
-import sofia.sap.interview.project.game.command.CommandResult;
-import sofia.sap.interview.project.game.events.CollectItemsEvent;
-import sofia.sap.interview.project.game.events.ItemEquipEvent;
-import sofia.sap.interview.project.game.events.ItemUnequipEvent;
-import sofia.sap.interview.project.game.events.ItemUsedEvent;
+import sofia.sap.interview.project.game.results.CommandResult;
+import sofia.sap.interview.project.game.results.events.CollectItemsEvent;
+import sofia.sap.interview.project.game.results.events.ItemEquipEvent;
+import sofia.sap.interview.project.game.results.events.ItemUnequipEvent;
+import sofia.sap.interview.project.game.results.events.ItemUsedEvent;
 import sofia.sap.interview.project.game.items.consumable.Consumable;
 import sofia.sap.interview.project.game.items.gear.Gear;
-import sofia.sap.interview.project.game.items.ItemRegistry;
 import sofia.sap.interview.project.game.items.ItemType;
 import sofia.sap.interview.project.game.map.room.Room;
 

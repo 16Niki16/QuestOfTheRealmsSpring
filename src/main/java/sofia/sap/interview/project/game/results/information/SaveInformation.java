@@ -1,4 +1,4 @@
-package sofia.sap.interview.project.game.information;
+package sofia.sap.interview.project.game.results.information;
 
 public record SaveInformation(ViewType viewType, String filename) implements ViewInformation {
     public static SaveInformation of(String filename) {

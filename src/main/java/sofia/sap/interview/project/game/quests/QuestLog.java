@@ -1,7 +1,7 @@
 package sofia.sap.interview.project.game.quests;
 
 import lombok.Getter;
-import sofia.sap.interview.project.game.events.GameEvent;
+import sofia.sap.interview.project.game.results.events.GameEvent;
 
 import java.util.ArrayList;
 import java.util.Collections;

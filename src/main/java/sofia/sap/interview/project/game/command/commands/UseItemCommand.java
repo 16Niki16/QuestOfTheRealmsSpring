@@ -1,6 +1,6 @@
 package sofia.sap.interview.project.game.command.commands;
 
-import sofia.sap.interview.project.game.command.CommandResult;
+import sofia.sap.interview.project.game.results.CommandResult;
 import sofia.sap.interview.project.game.gameplay.GameSession;
 import sofia.sap.interview.project.game.items.ItemType;
 import sofia.sap.interview.project.game.user.User;

@@ -1,7 +1,7 @@
 package sofia.sap.interview.project.game.command.commands;
 
-import sofia.sap.interview.project.game.command.CommandResult;
-import sofia.sap.interview.project.game.information.PathsInformation;
+import sofia.sap.interview.project.game.results.CommandResult;
+import sofia.sap.interview.project.game.results.information.PathsInformation;
 import sofia.sap.interview.project.game.map.Direction;
 import sofia.sap.interview.project.game.user.User;
 

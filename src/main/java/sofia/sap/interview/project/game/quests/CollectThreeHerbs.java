@@ -1,8 +1,8 @@
 package sofia.sap.interview.project.game.quests;
 
 import sofia.sap.interview.project.game.dto.data.QuestData;
-import sofia.sap.interview.project.game.events.CollectItemsEvent;
-import sofia.sap.interview.project.game.events.GameEvent;
+import sofia.sap.interview.project.game.results.events.CollectItemsEvent;
+import sofia.sap.interview.project.game.results.events.GameEvent;
 import sofia.sap.interview.project.game.items.ItemType;
 
 public class CollectThreeHerbs extends QuestBase {

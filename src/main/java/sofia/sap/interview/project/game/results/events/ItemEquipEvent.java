@@ -1,4 +1,4 @@
-package sofia.sap.interview.project.game.events;
+package sofia.sap.interview.project.game.results.events;
 
 import sofia.sap.interview.project.game.items.Item;
 import sofia.sap.interview.project.game.items.ItemType;
