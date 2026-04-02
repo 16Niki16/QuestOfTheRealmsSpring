@@ -1,5 +1,6 @@
 package sofia.sap.interview.project.game.command.commands;
 
+import org.springframework.stereotype.Component;
 import sofia.sap.interview.project.game.characters.ally.Character;
 import sofia.sap.interview.project.game.characters.enemy.Enemy;
 import sofia.sap.interview.project.game.results.CommandResult;
@@ -11,6 +12,7 @@ import sofia.sap.interview.project.game.user.User;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class AttackCommand implements Command {
 
     @Override

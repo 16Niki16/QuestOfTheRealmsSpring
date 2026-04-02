@@ -1,5 +1,6 @@
 package sofia.sap.interview.project.game.gameplay;
 
+import org.springframework.stereotype.Service;
 import sofia.sap.interview.project.game.characters.ally.Character;
 import sofia.sap.interview.project.game.results.CommandResult;
 import sofia.sap.interview.project.game.results.events.CollectItemsEvent;

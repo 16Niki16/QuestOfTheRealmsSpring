@@ -1,6 +1,7 @@
 package sofia.sap.interview.project.game;
 
 import org.springframework.stereotype.Service;
+import sofia.sap.interview.project.game.command.CommandRegistry;
 import sofia.sap.interview.project.game.command.commands.Command;
 import sofia.sap.interview.project.game.command.commands.LoadCommand;
 import sofia.sap.interview.project.game.command.commands.NewGameCommand;
@@ -19,15 +20,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static sofia.sap.interview.project.game.command.CommandRegistry.createCommand;
 import static sofia.sap.interview.project.game.user.User.createUser;
 
 @Service
 public class GameService {
+    private final CommandRegistry commandRegistry;
     private final Map<String, User> users = new ConcurrentHashMap<>();
 
-    public GameService() {
+    public GameService(CommandRegistry commandRegistry) {
         SystemsStarter starter = new SystemsStarter(users.values());
+        this.commandRegistry = commandRegistry;
         starter.start();
     }
 
@@ -50,7 +52,7 @@ public class GameService {
     }
 
     public List<CommandResult> commandExecute(User user, CommandRequest request) {
-        Command command = createCommand(request.command());
+        Command command = commandRegistry.createCommand(request.command());
         List<CommandResult> results = command.execute(user);
 
         return EventProcessor.process(user, results);

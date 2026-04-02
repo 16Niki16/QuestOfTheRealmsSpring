@@ -1,5 +1,6 @@
 package sofia.sap.interview.project.game.inventory;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import sofia.sap.interview.project.game.exceptions.ItemNotAvailableException;
 import sofia.sap.interview.project.game.items.Item;
@@ -9,12 +10,9 @@ import java.util.EnumMap;
 import java.util.Map;
 
 @Getter
+@AllArgsConstructor
 public class Inventory {
     private final Map<ItemType, Integer> items;
-
-    public Inventory(Map<ItemType, Integer> items) {
-        this.items = items;
-    }
 
     public static Inventory newCharacterInventory() {
         return new Inventory(new EnumMap<>(ItemType.class));

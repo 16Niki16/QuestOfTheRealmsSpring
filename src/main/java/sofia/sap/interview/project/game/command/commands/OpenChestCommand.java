@@ -1,5 +1,6 @@
 package sofia.sap.interview.project.game.command.commands;
 
+import org.springframework.stereotype.Component;
 import sofia.sap.interview.project.game.characters.ally.Character;
 import sofia.sap.interview.project.game.results.CommandResult;
 import sofia.sap.interview.project.game.gameplay.GameSession;
@@ -7,7 +8,7 @@ import sofia.sap.interview.project.game.map.room.Room;
 import sofia.sap.interview.project.game.user.User;
 
 import java.util.List;
-
+@Component
 public class OpenChestCommand implements Command {
     @Override
     public List<CommandResult> execute(User user) {

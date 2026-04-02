@@ -1,5 +1,6 @@
 package sofia.sap.interview.project.game.characters.ally;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import sofia.sap.interview.project.game.characters.ally.type.CharacterType;
 import sofia.sap.interview.project.game.characters.statistics.CharacterStatistics;
@@ -19,21 +20,13 @@ import static sofia.sap.interview.project.game.inventory.Equipment.newCharacterE
 import static sofia.sap.interview.project.game.inventory.Inventory.newCharacterInventory;
 
 @Getter
+@AllArgsConstructor
 public class Character {
     private final String characterName;
     private final CharacterType type;
     private final CharacterStatistics characterStats;
     private final Inventory inventory;
     private final Equipment equipment;
-
-    public Character(String characterName, CharacterType type, CharacterStatistics stats,
-                     Inventory inventory, Equipment equipment) {
-        this.characterName = characterName;
-        this.type = type;
-        this.characterStats = stats;
-        this.inventory = inventory;
-        this.equipment = equipment;
-    }
 
     public static Character createNewCharacter(String characterName, CharacterType type) {
         return new Character(characterName, type,

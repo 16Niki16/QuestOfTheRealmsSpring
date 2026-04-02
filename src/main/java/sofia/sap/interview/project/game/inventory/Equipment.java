@@ -1,5 +1,6 @@
 package sofia.sap.interview.project.game.inventory;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import sofia.sap.interview.project.game.items.ItemType;
 import sofia.sap.interview.project.game.items.gear.Gear;
@@ -9,12 +10,9 @@ import java.util.EnumMap;
 import java.util.Map;
 
 @Getter
+@AllArgsConstructor
 public class Equipment {
     private final Map<GearType, ItemType> items;
-
-    public Equipment(Map<GearType, ItemType> items) {
-        this.items = items;
-    }
 
     public static Equipment newCharacterEquipment() {
         return new Equipment(new EnumMap<>(GearType.class));

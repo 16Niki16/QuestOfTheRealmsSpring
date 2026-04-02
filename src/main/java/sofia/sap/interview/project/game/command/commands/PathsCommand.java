@@ -1,5 +1,6 @@
 package sofia.sap.interview.project.game.command.commands;
 
+import org.springframework.stereotype.Component;
 import sofia.sap.interview.project.game.results.CommandResult;
 import sofia.sap.interview.project.game.results.information.PathsInformation;
 import sofia.sap.interview.project.game.map.Direction;
@@ -7,7 +8,7 @@ import sofia.sap.interview.project.game.user.User;
 
 import java.util.List;
 import java.util.Set;
-
+@Component
 public class PathsCommand implements Command {
     @Override
     public List<CommandResult> execute(User user) {
