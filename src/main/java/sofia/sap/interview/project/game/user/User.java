@@ -10,7 +10,7 @@ import sofia.sap.interview.project.game.quests.QuestLog;
 import java.util.List;
 
 import static sofia.sap.interview.project.game.files.LoadGame.load;
-import static sofia.sap.interview.project.game.files.NewGameSave.saveNewGame;
+import static sofia.sap.interview.project.game.files.GameName.newGameName;
 import static sofia.sap.interview.project.game.files.SaveGame.saveGame;
 import static sofia.sap.interview.project.game.files.SavedGamesList.getSaveFiles;
 import static sofia.sap.interview.project.game.gameplay.GameFactory.createSession;
@@ -41,7 +41,7 @@ public class User {
     public synchronized void createNewGame(String name, CharacterType type) {
         this.log = createNewQuestLog();
         this.session = createSession(name, type);
-        this.currentGameSessionName = saveNewGame(this);
+        this.currentGameSessionName = newGameName(this);
     }
 
     public synchronized void resumeGame(String filename) {

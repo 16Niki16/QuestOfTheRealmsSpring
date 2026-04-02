@@ -7,15 +7,17 @@ import sofia.sap.interview.project.game.exceptions.SaveGameException;
 import sofia.sap.interview.project.game.user.User;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class SaveGame {
     private static final ObjectMapper MAPPER = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
     public static void saveGame(User user) {
-        Path path = Path.of("files", user.getUsername(), user.getCurrentGameSessionName());
+        Path path = Path.of("files", user.getUsername(), user.getCurrentGameSessionName() + ".json");
 
         try {
+            Files.createDirectories(path.getParent());
             MAPPER.writeValue(path.toFile(), GameDataFactory.save(user.getSession(), user.getLog()));
         } catch (IOException e) {
             throw new SaveGameException("Failed to auto save game", e);
