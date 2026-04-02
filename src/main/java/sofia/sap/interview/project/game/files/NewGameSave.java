@@ -2,7 +2,7 @@ package sofia.sap.interview.project.game.files;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import sofia.sap.interview.project.game.dto.savegame.factory.GameDataFactory;
+import sofia.sap.interview.project.game.dto.savegame.GameDataFactory;
 import sofia.sap.interview.project.game.exceptions.SaveGameException;
 import sofia.sap.interview.project.game.user.User;
 

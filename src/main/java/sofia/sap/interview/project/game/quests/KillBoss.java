@@ -1,7 +1,7 @@
 package sofia.sap.interview.project.game.quests;
 
 import sofia.sap.interview.project.game.characters.enemy.type.EnemyType;
-import sofia.sap.interview.project.game.dto.savegame.data.QuestData;
+import sofia.sap.interview.project.game.dto.data.QuestData;
 import sofia.sap.interview.project.game.events.GameEvent;
 import sofia.sap.interview.project.game.events.KillEnemyEvent;
 

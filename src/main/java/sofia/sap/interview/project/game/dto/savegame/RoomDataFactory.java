@@ -1,8 +1,8 @@
-package sofia.sap.interview.project.game.dto.savegame.factory;
+package sofia.sap.interview.project.game.dto.savegame;
 
-import sofia.sap.interview.project.game.dto.savegame.data.ChestData;
-import sofia.sap.interview.project.game.dto.savegame.data.EnemyData;
-import sofia.sap.interview.project.game.dto.savegame.data.RoomData;
+import sofia.sap.interview.project.game.dto.data.ChestData;
+import sofia.sap.interview.project.game.dto.data.EnemyData;
+import sofia.sap.interview.project.game.dto.data.RoomData;
 import sofia.sap.interview.project.game.map.room.Room;
 
 public class RoomDataFactory {

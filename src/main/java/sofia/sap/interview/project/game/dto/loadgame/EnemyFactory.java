@@ -1,7 +1,7 @@
 package sofia.sap.interview.project.game.dto.loadgame;
 
 import sofia.sap.interview.project.game.characters.enemy.Enemy;
-import sofia.sap.interview.project.game.dto.savegame.data.EnemyData;
+import sofia.sap.interview.project.game.dto.data.EnemyData;
 
 import static sofia.sap.interview.project.game.characters.enemy.EnemyRegistry.createEnemy;
 

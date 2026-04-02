@@ -1,7 +1,7 @@
-package sofia.sap.interview.project.game.dto.savegame.factory;
+package sofia.sap.interview.project.game.dto.savegame;
 
 import sofia.sap.interview.project.game.characters.statistics.CharacterStatistics;
-import sofia.sap.interview.project.game.dto.savegame.data.CharacterStatisticsData;
+import sofia.sap.interview.project.game.dto.data.CharacterStatisticsData;
 
 public class CharacterStatisticsDataFactory {
     public static CharacterStatisticsData create(CharacterStatistics statistics) {

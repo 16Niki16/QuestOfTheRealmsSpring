@@ -1,6 +1,6 @@
-package sofia.sap.interview.project.game.dto.savegame.factory;
+package sofia.sap.interview.project.game.dto.savegame;
 
-import sofia.sap.interview.project.game.dto.savegame.data.MapData;
+import sofia.sap.interview.project.game.dto.data.MapData;
 import sofia.sap.interview.project.game.gameplay.Campaign;
 
 public class MapDataFactory {

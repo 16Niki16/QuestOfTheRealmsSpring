@@ -2,7 +2,7 @@ package sofia.sap.interview.project.game.files;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import sofia.sap.interview.project.game.dto.loadgame.LoadedInformation;
-import sofia.sap.interview.project.game.dto.savegame.data.GameData;
+import sofia.sap.interview.project.game.dto.data.GameData;
 import sofia.sap.interview.project.game.exceptions.LoadGameException;
 import sofia.sap.interview.project.game.user.User;
 

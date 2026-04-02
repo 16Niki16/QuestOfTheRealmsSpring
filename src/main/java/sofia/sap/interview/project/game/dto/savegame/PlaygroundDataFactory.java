@@ -1,7 +1,7 @@
-package sofia.sap.interview.project.game.dto.savegame.factory;
+package sofia.sap.interview.project.game.dto.savegame;
 
-import sofia.sap.interview.project.game.dto.savegame.data.PlaygroundData;
-import sofia.sap.interview.project.game.dto.savegame.data.RoomData;
+import sofia.sap.interview.project.game.dto.data.PlaygroundData;
+import sofia.sap.interview.project.game.dto.data.RoomData;
 import sofia.sap.interview.project.game.map.Playground;
 import sofia.sap.interview.project.game.map.room.Room;
 

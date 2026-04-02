@@ -1,6 +1,6 @@
 package sofia.sap.interview.project.game.dto.loadgame;
 
-import sofia.sap.interview.project.game.dto.savegame.data.GameData;
+import sofia.sap.interview.project.game.dto.data.GameData;
 import sofia.sap.interview.project.game.gameplay.GameSession;
 import sofia.sap.interview.project.game.quests.QuestLog;
 

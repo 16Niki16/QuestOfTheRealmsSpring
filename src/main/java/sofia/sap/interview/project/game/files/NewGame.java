@@ -1,8 +1,8 @@
 package sofia.sap.interview.project.game.files;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import sofia.sap.interview.project.game.dto.newgame.PlaygroundDTO;
-import sofia.sap.interview.project.game.dto.newgame.mappers.PlaygroundMapper;
+import sofia.sap.interview.project.game.dto.loadgame.PlaygroundFactory;
+import sofia.sap.interview.project.game.dto.data.PlaygroundData;
 import sofia.sap.interview.project.game.exceptions.NewGameFileException;
 import sofia.sap.interview.project.game.map.Playground;
 
@@ -14,8 +14,8 @@ public class NewGame {
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            PlaygroundDTO dto = mapper.readValue(new File("files\\maps\\CommonMap.json"), PlaygroundDTO.class);
-            return PlaygroundMapper.map(dto);
+            PlaygroundData dto = mapper.readValue(new File("files\\maps\\CommonMap.json"), PlaygroundData.class);
+            return PlaygroundFactory.create(dto);
         } catch (IOException e) {
             throw new NewGameFileException("Failed to load playground!", e);
         }

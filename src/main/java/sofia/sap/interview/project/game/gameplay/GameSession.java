@@ -3,8 +3,6 @@ package sofia.sap.interview.project.game.gameplay;
 import lombok.Getter;
 import sofia.sap.interview.project.game.characters.ally.Character;
 
-import java.util.concurrent.ScheduledFuture;
-
 @Getter
 public class GameSession {
 

@@ -1,4 +1,4 @@
-package sofia.sap.interview.project.game.dto.savegame.data;
+package sofia.sap.interview.project.game.dto.data;
 
 import sofia.sap.interview.project.game.map.Coordinates;
 

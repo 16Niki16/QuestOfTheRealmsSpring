@@ -1,6 +1,6 @@
 package sofia.sap.interview.project.game.dto.loadgame;
 
-import sofia.sap.interview.project.game.dto.savegame.data.InventoryData;
+import sofia.sap.interview.project.game.dto.data.InventoryData;
 import sofia.sap.interview.project.game.inventory.Inventory;
 
 public class InventoryFactory {

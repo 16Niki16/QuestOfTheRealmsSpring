@@ -1,8 +1,8 @@
 package sofia.sap.interview.project.game.dto.loadgame;
 
 import sofia.sap.interview.project.game.characters.ally.Character;
-import sofia.sap.interview.project.game.dto.savegame.data.CharacterData;
-import sofia.sap.interview.project.game.dto.savegame.data.MapData;
+import sofia.sap.interview.project.game.dto.data.CharacterData;
+import sofia.sap.interview.project.game.dto.data.MapData;
 import sofia.sap.interview.project.game.gameplay.GameSession;
 import sofia.sap.interview.project.game.gameplay.Campaign;
 

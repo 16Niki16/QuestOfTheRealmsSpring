@@ -20,13 +20,19 @@
             "IRON_SWORD": 1
           }
         },
-        "enemy": "GOBLIN_KING",
+        "enemy": {
+          "enemy": "GOBLIN_KING",
+          "health": 100
+        },
         "specialItem": null
       },
       {
         "name": "salty springs",
         "chest": null,
-        "enemy": "GOBLIN",
+        "enemy": {
+          "enemy": "GOBLIN",
+          "health": 20
+        },
         "specialItem": null
       }
     ],
@@ -34,15 +40,18 @@
       {
         "name": "tilted towers",
         "chest": null,
-        "enemy": "BOSS",
+        "enemy": {
+          "enemy": "BOSS",
+          "health": 40
+        },
         "specialItem": "IRON_KEY"
       },
       {
         "name": "pleasant park",
         "chest": {
           "items": {
-            "GOLDEN_DAGGER": 1,
-            "HEALING_HERB": 2
+            "HEALING_HERB": 2,
+            "GOLDEN_DAGGER": 1
           }
         },
         "enemy": null,
@@ -57,7 +66,10 @@
             "GOLDEN_SWORD": 1
           }
         },
-        "enemy": "BANDIT",
+        "enemy": {
+          "enemy": "BANDIT",
+          "health": 20
+        },
         "specialItem": "TORCH"
       }
     ]

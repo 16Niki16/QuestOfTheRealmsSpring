@@ -1,7 +1,7 @@
 package sofia.sap.interview.project.game.dto.loadgame;
 
 import sofia.sap.interview.project.game.characters.enemy.Enemy;
-import sofia.sap.interview.project.game.dto.savegame.data.RoomData;
+import sofia.sap.interview.project.game.dto.data.RoomData;
 import sofia.sap.interview.project.game.map.room.Chest;
 import sofia.sap.interview.project.game.map.room.Room;
 

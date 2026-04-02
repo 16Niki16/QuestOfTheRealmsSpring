@@ -1,7 +1,7 @@
-package sofia.sap.interview.project.game.dto.savegame.factory;
+package sofia.sap.interview.project.game.dto.savegame;
 
-import sofia.sap.interview.project.game.dto.savegame.data.QuestData;
-import sofia.sap.interview.project.game.dto.savegame.data.QuestsData;
+import sofia.sap.interview.project.game.dto.data.QuestData;
+import sofia.sap.interview.project.game.dto.data.QuestsData;
 import sofia.sap.interview.project.game.quests.Quest;
 import sofia.sap.interview.project.game.quests.QuestLog;
 

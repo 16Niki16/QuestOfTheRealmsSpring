@@ -1,6 +1,6 @@
 package sofia.sap.interview.project.game.quests;
 
-import sofia.sap.interview.project.game.dto.savegame.data.QuestData;
+import sofia.sap.interview.project.game.dto.data.QuestData;
 import sofia.sap.interview.project.game.events.GameEvent;
 
 public interface Quest {

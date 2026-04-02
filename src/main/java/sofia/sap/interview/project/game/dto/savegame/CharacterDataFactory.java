@@ -1,13 +1,7 @@
-package sofia.sap.interview.project.game.dto.savegame.factory;
+package sofia.sap.interview.project.game.dto.savegame;
 
 import sofia.sap.interview.project.game.characters.ally.Character;
-import sofia.sap.interview.project.game.dto.savegame.data.CharacterData;
-import sofia.sap.interview.project.game.items.ItemType;
-import sofia.sap.interview.project.game.items.gear.Gear;
-
-import java.util.Collection;
-import java.util.Set;
-import java.util.stream.Collectors;
+import sofia.sap.interview.project.game.dto.data.CharacterData;
 
 public class CharacterDataFactory {
     public static CharacterData create(Character character) {
