@@ -1,15 +1,14 @@
 package sofia.sap.interview.project.game.gameplay;
 
-import org.springframework.stereotype.Service;
 import sofia.sap.interview.project.game.characters.ally.Character;
 import sofia.sap.interview.project.game.characters.enemy.Enemy;
+import sofia.sap.interview.project.game.map.room.Room;
 import sofia.sap.interview.project.game.results.CommandResult;
 import sofia.sap.interview.project.game.results.events.AttackEvent;
-import sofia.sap.interview.project.game.results.events.GameOverEvent;
 import sofia.sap.interview.project.game.results.events.DefendEvent;
+import sofia.sap.interview.project.game.results.events.GameOverEvent;
 import sofia.sap.interview.project.game.results.events.KillEnemyEvent;
 import sofia.sap.interview.project.game.results.events.NotEnoughManaEvent;
-import sofia.sap.interview.project.game.map.room.Room;
 
 import java.util.ArrayList;
 import java.util.List;

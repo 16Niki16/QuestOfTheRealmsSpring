@@ -26,7 +26,8 @@ import java.util.function.Function;
 
 @Component
 public class CommandRegistry {
-    private static final Map<CommandOption, Function<String, Command>> commands = new EnumMap<>(CommandOption.class);
+    private static final Map<CommandOption, Function<String, Command>> COMMANDS = new EnumMap<>(CommandOption.class);
+
     public CommandRegistry(HelpCommand helpCommand,
                            AttackCommand attackCommand,
                            CheckQuestsCommand questsCommand,
@@ -36,30 +37,30 @@ public class CommandRegistry {
                            InventoryCommand inventoryCommand,
                            SaveCommand saveCommand,
                            ExitCommand exitCommand,
-                           LoadCommand loadCommand){
+                           LoadCommand loadCommand) {
 
-        commands.put(CommandOption.HELP, args -> helpCommand);
-        commands.put(CommandOption.ATTACK, args -> attackCommand);
-        commands.put(CommandOption.QUESTS, args -> questsCommand);
-        commands.put(CommandOption.LOOK, args -> lookCommand);
-        commands.put(CommandOption.PATHS, args -> pathsCommand);
-        commands.put(CommandOption.OPEN, args -> chestCommand);
-        commands.put(CommandOption.INVENTORY, args -> inventoryCommand);
-        commands.put(CommandOption.SAVE, args -> saveCommand);
-        commands.put(CommandOption.EXIT, args -> exitCommand);
-        commands.put(CommandOption.LOAD, args -> loadCommand);
+        COMMANDS.put(CommandOption.HELP, args -> helpCommand);
+        COMMANDS.put(CommandOption.ATTACK, args -> attackCommand);
+        COMMANDS.put(CommandOption.QUESTS, args -> questsCommand);
+        COMMANDS.put(CommandOption.LOOK, args -> lookCommand);
+        COMMANDS.put(CommandOption.PATHS, args -> pathsCommand);
+        COMMANDS.put(CommandOption.OPEN, args -> chestCommand);
+        COMMANDS.put(CommandOption.INVENTORY, args -> inventoryCommand);
+        COMMANDS.put(CommandOption.SAVE, args -> saveCommand);
+        COMMANDS.put(CommandOption.EXIT, args -> exitCommand);
+        COMMANDS.put(CommandOption.LOAD, args -> loadCommand);
 
-        commands.put(CommandOption.EQUIP, args -> new EquipGearCommand(itemType(args)));
-        commands.put(CommandOption.UNEQUIP, args -> new UnequipGearCommand(itemType(args)));
-        commands.put(CommandOption.USE_ITEM, args -> new UseItemCommand(itemType(args)));
-        commands.put(CommandOption.MOVE, args -> new MoveCommand(Direction.getDirection(args)));
-        commands.put(CommandOption.RESUME, ResumeCommand::new);
+        COMMANDS.put(CommandOption.EQUIP, args -> new EquipGearCommand(itemType(args)));
+        COMMANDS.put(CommandOption.UNEQUIP, args -> new UnequipGearCommand(itemType(args)));
+        COMMANDS.put(CommandOption.USE_ITEM, args -> new UseItemCommand(itemType(args)));
+        COMMANDS.put(CommandOption.MOVE, args -> new MoveCommand(Direction.getDirection(args)));
+        COMMANDS.put(CommandOption.RESUME, ResumeCommand::new);
     }
 
     public Command createCommand(String input) {
         String[] commandSplit = input.split(" ", 2);
         CommandOption command = CommandOption.fromString(commandSplit[0]);
-        Function<String, Command> parser = commands.get(command);
+        Function<String, Command> parser = COMMANDS.get(command);
 
         String args = commandSplit.length > 1 ? commandSplit[1] : "";
         return parser.apply(args);

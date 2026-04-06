@@ -37,6 +37,12 @@ public class GameExceptionHandler {
             .body(e.getMessage());
     }
 
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<String> handleInvalidJson(HttpMessageNotReadableException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body("Invalid request format!");
+    }
+
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<String> userNotFound(UserNotFoundException e) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
@@ -71,15 +77,8 @@ public class GameExceptionHandler {
         EndGameFileException.class
     })
     public ResponseEntity<String> handleFileErrors(RuntimeException e) {
-        e.printStackTrace();
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
             .body(e.getMessage());
-    }
-
-    @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<String> handleInvalidJson(HttpMessageNotReadableException e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-            .body("Invalid request format!");
     }
 
     @ExceptionHandler(Exception.class)
