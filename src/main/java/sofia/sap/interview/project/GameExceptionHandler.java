@@ -43,13 +43,8 @@ public class GameExceptionHandler {
                 .body("Invalid request format!");
     }
 
-    @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<String> userNotFound(UserNotFoundException e) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-            .body(e.getMessage());
-    }
-
     @ExceptionHandler({
+        UserNotFoundException.class,
         ChestNotAvailableException.class,
         EquipmentNotEquippedException.class,
         ItemNotAvailableException.class,

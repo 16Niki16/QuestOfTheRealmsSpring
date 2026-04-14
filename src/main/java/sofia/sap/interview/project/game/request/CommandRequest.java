@@ -1,11 +1,6 @@
 package sofia.sap.interview.project.game.request;
 
-import sofia.sap.interview.project.game.exceptions.BadRequestException;
+import jakarta.validation.constraints.NotNull;
 
-public record CommandRequest(String command) {
-    public CommandRequest {
-        if (command == null) {
-            throw new BadRequestException("Command is null!");
-        }
-    }
+public record CommandRequest(@NotNull String command) {
 }
