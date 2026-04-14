@@ -1,4 +1,4 @@
-# ⚔️ Quest of the Realms
+#  Quest of the Realms
 
 ##  Overview
 This project is a Java-based console RPG. It allows players to explore a fantasy world, 
