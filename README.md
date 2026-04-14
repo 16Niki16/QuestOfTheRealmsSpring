@@ -1,25 +1,25 @@
 # ⚔️ Quest of the Realms
 
-## 📌 Overview
+##  Overview
 This project is a Java-based console RPG. It allows players to explore a fantasy world, 
 engage in combat, manage inventory and progress through a structured game system.
 
 ---
 
-## 🚀 Features
+##  Features
 
-- 🎮 Console-based RPG gameplay
-- ⚔️ Turn-based combat system
-- 🧭 World exploration and movement system
-- 🎒 Inventory and item management
-- 🧙 Player progression and stats system
-- 💾 Game state persistence
-- ⚡ Server-side game logic (REST-style API via Spring Boot)
-- 🔄 Background processing for game mechanics (auto-save, regeneration)
+-  Console-based RPG gameplay
+-  Turn-based combat system
+-  World exploration and movement system
+-  Inventory and item management
+-  Player progression and stats system
+-  Game state persistence
+-  Server-side game logic (REST-style API via Spring Boot)
+-  Background processing for game mechanics (auto-save, regeneration)
 
 ---
 
-## 🧠 Architecture & Design
+##  Architecture & Design
 
 The project follows a layered backend-inspired architecture:
 
@@ -31,7 +31,7 @@ The project follows a layered backend-inspired architecture:
 
 ---
 
-## 📡 Game System Design
+##  Game System Design
 
 The game is structured around:
 
@@ -43,7 +43,7 @@ The game is structured around:
 
 ---
 
-## 🧪 Technologies & Tools
+##  Technologies & Tools
 
 - Java 23
 - Spring Boot
