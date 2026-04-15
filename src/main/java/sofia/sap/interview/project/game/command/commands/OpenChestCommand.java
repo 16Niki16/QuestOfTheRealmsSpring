@@ -8,15 +8,16 @@ import sofia.sap.interview.project.game.map.room.Room;
 import sofia.sap.interview.project.game.user.User;
 
 import java.util.List;
+
 @Component
 public class OpenChestCommand implements Command {
     @Override
     public List<CommandResult> execute(User user) {
-        synchronized (user) {
-            GameSession gameSession = user.getSession();
-            Character character = gameSession.getCharacter();
-            Room currentRoom = gameSession.getCampaign().getRoom();
+        GameSession gameSession = user.getSession();
+        Character character = gameSession.getCharacter();
+        Room currentRoom = gameSession.getCampaign().getRoom();
 
+        synchronized (user) {
             return gameSession.getItemsService().collect(character, currentRoom);
         }
     }

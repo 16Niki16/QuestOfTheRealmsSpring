@@ -1,11 +1,12 @@
 package sofia.sap.interview.project;
 
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import sofia.sap.interview.project.game.exceptions.BadRequestException;
 import sofia.sap.interview.project.game.exceptions.ChestNotAvailableException;
 import sofia.sap.interview.project.game.exceptions.CommandNotAvailableException;
 import sofia.sap.interview.project.game.exceptions.DirectionNotAvailableException;
@@ -33,7 +34,6 @@ public class GameExceptionHandler {
         IllegalArgumentException.class,
         CommandNotAvailableException.class,
         NoActiveSessionException.class,
-        BadRequestException.class,
     })
     public ResponseEntity<String> handleInvalidInput(RuntimeException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -44,6 +44,18 @@ public class GameExceptionHandler {
     public ResponseEntity<String> handleInvalidJson(HttpMessageNotReadableException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body("Invalid request format!");
+    }
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<String> handleValidation(MethodArgumentNotValidException e) {
+        String errorMessage = e.getBindingResult()
+            .getFieldErrors()
+            .stream()
+            .map(DefaultMessageSourceResolvable::getDefaultMessage)
+            .findFirst()
+            .orElse("Invalid request");
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+            .body(errorMessage);
     }
 
     @ExceptionHandler({

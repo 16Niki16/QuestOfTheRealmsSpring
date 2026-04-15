@@ -1,5 +1,6 @@
 package sofia.sap.interview.project;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,14 +35,16 @@ public class GameRestController {
     }
 
     @PostMapping("/user/{username}/new")
-    public ResponseEntity<?> newGame(@PathVariable String username, @RequestBody NewGameRequest request) {
+    public ResponseEntity<?> newGame(@PathVariable String username,
+                                     @Valid @RequestBody NewGameRequest request) {
         User user = gameService.getUser(username);
 
         return ResponseEntity.ok(gameService.createNewGame(user, request));
     }
 
     @PostMapping("/user/{username}/command")
-    public ResponseEntity<List<?>> executeCommand(@PathVariable String username, @RequestBody CommandRequest request) {
+    public ResponseEntity<List<?>> executeCommand(@PathVariable String username,
+                                                  @Valid @RequestBody CommandRequest request) {
         User user = gameService.getUser(username);
 
         if (!user.isActiveSession()) {
@@ -61,7 +64,8 @@ public class GameRestController {
     }
 
     @PostMapping("/user/{username}/resume")
-    public ResponseEntity<?> resumeGame(@PathVariable String username, @RequestBody ResumeGameRequest request) {
+    public ResponseEntity<?> resumeGame(@PathVariable String username,
+                                        @Valid @RequestBody ResumeGameRequest request) {
         User user = gameService.getUser(username);
 
         return ResponseEntity.ok(gameService.resumeSavedGame(user, request));

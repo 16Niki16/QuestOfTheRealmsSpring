@@ -20,11 +20,10 @@ public class ExitCommand implements Command {
     public List<CommandResult> execute(User user) {
         String filename = user.getCurrentGameSessionName();
         QuestLog log = user.getLog();
-        gameSessionService.saveGame(user);
-        user.clearSession();
+        gameSessionService.exitGame(user);
 
         return List.of(
-                QuestInformation.of(log),
-                ExitInformation.of(filename));
+            QuestInformation.of(log),
+            ExitInformation.of(filename));
     }
 }
