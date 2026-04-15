@@ -6,6 +6,7 @@ import sofia.sap.interview.project.game.results.information.QuestInformation;
 import sofia.sap.interview.project.game.user.User;
 
 import java.util.List;
+
 @Component
 public class CheckQuestsCommand implements Command {
 

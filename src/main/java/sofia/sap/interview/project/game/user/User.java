@@ -1,76 +1,41 @@
 package sofia.sap.interview.project.game.user;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import sofia.sap.interview.project.game.characters.ally.type.CharacterType;
-import sofia.sap.interview.project.game.dto.loadgame.LoadedInformation;
-import sofia.sap.interview.project.game.files.EndGame;
+import sofia.sap.interview.project.game.exceptions.SessionInProgressException;
 import sofia.sap.interview.project.game.gameplay.GameSession;
 import sofia.sap.interview.project.game.quests.QuestLog;
 
-import java.util.List;
-
-import static sofia.sap.interview.project.game.files.LoadGame.load;
-import static sofia.sap.interview.project.game.files.GameName.newGameName;
-import static sofia.sap.interview.project.game.files.SaveGame.saveGame;
-import static sofia.sap.interview.project.game.files.SavedGamesList.getSaveFiles;
-import static sofia.sap.interview.project.game.gameplay.GameFactory.createSession;
-import static sofia.sap.interview.project.game.quests.QuestLog.createNewQuestLog;
-
 @Getter
+@AllArgsConstructor
 public class User {
     private final String username;
     private String currentGameSessionName;
     private GameSession session;
     private QuestLog log;
 
-    private User(String username, String currentGameSessionName, GameSession session, QuestLog log) {
-        this.username = username;
-        this.currentGameSessionName = currentGameSessionName;
-        this.session = session;
-        this.log = log;
-    }
-
     public static User createUser(String username) {
         return new User(username, null, null, null);
     }
 
     public boolean isActiveSession() {
-        return this.session != null && this.log != null;
+        return this.currentGameSessionName != null;
     }
 
-    public synchronized void createNewGame(String name, CharacterType type) {
-        this.log = createNewQuestLog();
-        this.session = createSession(name, type);
-        this.currentGameSessionName = newGameName(this);
-    }
-
-    public synchronized void resumeGame(String filename) {
-        LoadedInformation info = load(this, filename);
-        this.currentGameSessionName = filename;
-        this.session = info.session();
-        this.log = info.log();
-    }
-
-    public synchronized List<String> savedGames() {
-        return getSaveFiles(this);
-    }
-
-    public synchronized void exitGame() {
+    public void clearSession() {
         this.currentGameSessionName = null;
         this.session = null;
         this.log = null;
     }
 
-    public synchronized void endGame() {
-        EndGame.endGame(this, currentGameSessionName);
-        this.currentGameSessionName = null;
-        this.session = null;
-        this.log = null;
-    }
-
-    public synchronized void save() {
+    public void createSession(String currentGameSessionName, GameSession session, QuestLog log) {
         if (isActiveSession()) {
-            saveGame(this);
+            throw new SessionInProgressException(
+                    "You already have session in progress, end or exit the current session to create new one!");
         }
+
+        this.currentGameSessionName = currentGameSessionName;
+        this.session = session;
+        this.log = log;
     }
 }

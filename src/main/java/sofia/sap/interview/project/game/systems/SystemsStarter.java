@@ -17,8 +17,8 @@ public class SystemsStarter {
         this.scheduler = Executors.newScheduledThreadPool(2);
         this.activeUsers = activeUsers;
         this.systems = List.of(
-            new AutoSaveSystem(),
-            new RegenerationSystem());
+                new AutoSaveSystem(),
+                new RegenerationSystem());
     }
 
     public void start() {

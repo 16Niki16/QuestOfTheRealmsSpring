@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sofia.sap.interview.project.game.GameService;
-import sofia.sap.interview.project.game.results.CommandResult;
 import sofia.sap.interview.project.game.exceptions.NoActiveSessionException;
 import sofia.sap.interview.project.game.request.CommandRequest;
 import sofia.sap.interview.project.game.request.NewGameRequest;
 import sofia.sap.interview.project.game.request.ResumeGameRequest;
+import sofia.sap.interview.project.game.results.CommandResult;
 import sofia.sap.interview.project.game.user.User;
 
 import java.util.List;

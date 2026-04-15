@@ -7,10 +7,10 @@ import sofia.sap.interview.project.game.quests.QuestLog;
 import static sofia.sap.interview.project.game.dto.loadgame.GameSessionFactory.createGameSession;
 import static sofia.sap.interview.project.game.dto.loadgame.QuestLogFactory.createQuestLog;
 
-public record LoadedInformation(GameSession session, QuestLog log) {
-    public static LoadedInformation load(GameData data) {
+public record LoadedSessionInformation(GameSession session, QuestLog log) {
+    public static LoadedSessionInformation load(GameData data) {
         QuestLog log = createQuestLog(data.quests());
         GameSession session = createGameSession(data.character(), data.map());
-        return new LoadedInformation(session, log);
+        return new LoadedSessionInformation(session, log);
     }
 }

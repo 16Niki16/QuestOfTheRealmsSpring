@@ -22,11 +22,11 @@ public class EventProcessor {
 
                     if (questLog.getActiveQuests().isEmpty()) {
                         allResults.add(GameWonEvent.of(user.getSession().getCharacter(), questLog));
-                        user.endGame();
+                        user.clearSession();
                     }
                 }
                 if (event instanceof GameOverEvent) {
-                    user.endGame();
+                    user.clearSession();
                 }
             }
         }
