@@ -1,28 +1,29 @@
 package sofia.sap.interview.project.game.command.commands;
 
-import sofia.sap.interview.project.game.characters.ally.Character;
-import sofia.sap.interview.project.game.results.CommandResult;
+import lombok.AllArgsConstructor;
+import sofia.sap.interview.project.game.dto.loadgame.LoadedSessionInformation;
+import sofia.sap.interview.project.game.files.GameRepositoryService;
 import sofia.sap.interview.project.game.gameplay.GameSession;
+import sofia.sap.interview.project.game.quests.QuestLog;
+import sofia.sap.interview.project.game.results.CommandResult;
 import sofia.sap.interview.project.game.results.information.ResumeInformation;
-import sofia.sap.interview.project.game.map.room.Room;
 import sofia.sap.interview.project.game.user.User;
 
 import java.util.List;
 
+@AllArgsConstructor
 public class ResumeCommand implements Command {
+    private final GameRepositoryService gameRepositoryService;
     private final String filename;
-
-    public ResumeCommand(String filename) {
-        this.filename = filename;
-    }
 
     @Override
     public List<CommandResult> execute(User user) {
-        user.resumeGame(filename);
-        GameSession gameSession = user.getSession();
-        Character character = gameSession.getCharacter();
-        Room currentRoom = gameSession.getCampaign().getRoom();
+        LoadedSessionInformation loadedSessionInformation =
+                gameRepositoryService.getPreviousGameSession(user, filename);
+        GameSession loadedSession = loadedSessionInformation.session();
+        QuestLog loadedQuestLog = loadedSessionInformation.log();
+        user.createSession(filename, loadedSession, loadedQuestLog);
 
-        return List.of(ResumeInformation.of(character, currentRoom));
+        return List.of(ResumeInformation.of(loadedSession.getCharacter(), loadedSession.getCampaign().getRoom()));
     }
 }

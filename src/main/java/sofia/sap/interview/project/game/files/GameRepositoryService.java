@@ -33,4 +33,8 @@ public class GameRepositoryService {
     public LoadedSessionInformation getPreviousGameSession(User user, String filename) {
         return loadGameService.load(user, filename);
     }
+
+    public String getNewGameFilename(User user) {
+        return fileGameService.getNewGameName(user);
+    }
 }

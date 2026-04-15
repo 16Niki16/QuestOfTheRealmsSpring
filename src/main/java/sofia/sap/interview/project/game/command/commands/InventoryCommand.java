@@ -6,6 +6,7 @@ import sofia.sap.interview.project.game.results.information.InventoryInformation
 import sofia.sap.interview.project.game.user.User;
 
 import java.util.List;
+
 @Component
 public class InventoryCommand implements Command {
     @Override

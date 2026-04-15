@@ -6,6 +6,8 @@ import sofia.sap.interview.project.game.characters.ally.Character;
 import sofia.sap.interview.project.game.characters.ally.type.CharacterType;
 import sofia.sap.interview.project.game.files.MapService;
 
+import static sofia.sap.interview.project.game.characters.ally.Character.createNewCharacter;
+
 @Component
 @AllArgsConstructor
 public class GameFactory {
@@ -13,7 +15,7 @@ public class GameFactory {
 
     public GameSession createSession(String characterName, CharacterType characterType) {
         Campaign campaign = new Campaign(mapService.createPlayground());
-        Character character = Character.createNewCharacter(characterName, characterType);
+        Character character = createNewCharacter(characterName, characterType);
 
         return new GameSession(campaign, character);
     }

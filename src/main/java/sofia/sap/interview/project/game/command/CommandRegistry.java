@@ -17,21 +17,38 @@ import sofia.sap.interview.project.game.command.commands.ResumeCommand;
 import sofia.sap.interview.project.game.command.commands.SaveCommand;
 import sofia.sap.interview.project.game.command.commands.UnequipGearCommand;
 import sofia.sap.interview.project.game.command.commands.UseItemCommand;
+import sofia.sap.interview.project.game.exceptions.CommandArgumentException;
+import sofia.sap.interview.project.game.files.GameRepositoryService;
 import sofia.sap.interview.project.game.items.ItemType;
-import sofia.sap.interview.project.game.map.Direction;
 
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.function.Function;
 
-import static sofia.sap.interview.project.game.command.CommandOption.*;
+import static sofia.sap.interview.project.game.command.CommandOption.ATTACK;
+import static sofia.sap.interview.project.game.command.CommandOption.EQUIP;
+import static sofia.sap.interview.project.game.command.CommandOption.EXIT;
+import static sofia.sap.interview.project.game.command.CommandOption.HELP;
+import static sofia.sap.interview.project.game.command.CommandOption.INVENTORY;
+import static sofia.sap.interview.project.game.command.CommandOption.LOAD;
+import static sofia.sap.interview.project.game.command.CommandOption.LOOK;
+import static sofia.sap.interview.project.game.command.CommandOption.MOVE;
+import static sofia.sap.interview.project.game.command.CommandOption.OPEN;
+import static sofia.sap.interview.project.game.command.CommandOption.PATHS;
+import static sofia.sap.interview.project.game.command.CommandOption.QUESTS;
+import static sofia.sap.interview.project.game.command.CommandOption.RESUME;
+import static sofia.sap.interview.project.game.command.CommandOption.SAVE;
+import static sofia.sap.interview.project.game.command.CommandOption.UNEQUIP;
+import static sofia.sap.interview.project.game.command.CommandOption.USE_ITEM;
+import static sofia.sap.interview.project.game.command.CommandOption.fromString;
 import static sofia.sap.interview.project.game.map.Direction.getDirection;
 
 @Component
 public class CommandRegistry {
     private static final Map<CommandOption, Function<String, Command>> COMMANDS = new EnumMap<>(CommandOption.class);
 
-    public CommandRegistry(HelpCommand helpCommand,
+    public CommandRegistry(GameRepositoryService gameRepositoryService,
+                           HelpCommand helpCommand,
                            AttackCommand attackCommand,
                            CheckQuestsCommand questsCommand,
                            LookCommand lookCommand,
@@ -57,7 +74,7 @@ public class CommandRegistry {
         COMMANDS.put(UNEQUIP, args -> new UnequipGearCommand(itemType(args)));
         COMMANDS.put(USE_ITEM, args -> new UseItemCommand(itemType(args)));
         COMMANDS.put(MOVE, args -> new MoveCommand(getDirection(args)));
-        COMMANDS.put(RESUME, ResumeCommand::new);
+        COMMANDS.put(RESUME, args -> new ResumeCommand(gameRepositoryService, args));
     }
 
     public Command createCommand(String input) {
@@ -67,6 +84,23 @@ public class CommandRegistry {
 
         String args = commandSplit.length > 1 ? commandSplit[1] : "";
         return parser.apply(args);
+    }
+
+    public Command getCommand(CommandOption commandOption, String argument) {
+        if (argument == null) {
+            throw new CommandArgumentException("The provided command argument can not be null!");
+        }
+        Function<String, Command> parser = COMMANDS.get(commandOption);
+
+        if (parser == null) {
+            throw new IllegalArgumentException("Unknown command: " + commandOption);
+        }
+
+        return parser.apply(argument);
+    }
+
+    public Command getCommand(CommandOption commandOption) {
+        return getCommand(commandOption, "");
     }
 
     private ItemType itemType(String itemName) {

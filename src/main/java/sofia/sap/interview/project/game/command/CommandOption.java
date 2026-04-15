@@ -22,6 +22,7 @@ public enum CommandOption {
     EXIT("exit"),
     LOAD("load"),
     RESUME("resume");
+
     private final String command;
 
     CommandOption(String command) {
@@ -30,8 +31,8 @@ public enum CommandOption {
 
     public static CommandOption fromString(String input) {
         return Arrays.stream(values())
-            .filter(c -> c.command.equalsIgnoreCase(input))
-            .findFirst()
-            .orElseThrow(() -> new CommandNotAvailableException("The provided command is not correct!"));
+                .filter(c -> c.command.equalsIgnoreCase(input))
+                .findFirst()
+                .orElseThrow(() -> new CommandNotAvailableException("The provided command is not correct!"));
     }
 }
