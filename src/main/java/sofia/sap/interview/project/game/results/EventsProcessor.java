@@ -31,15 +31,13 @@ public class EventsProcessor {
                     allResults.add(QuestCompletedEvent.of(questLog.getLastCompletedQuest()));
                 }
                 if (event instanceof GameOverEvent) {
-                    gameSessionService.deleteGame(user);
-                    user.clearSession();
+                    gameSessionService.endGame(user);
                     break;
                 }
             }
             if (questLog.areAllQuestsCompleted()) {
                 allResults.add(GameWonEvent.of(user.getSession().getCharacter(), questLog));
-                gameSessionService.deleteGame(user);
-                user.clearSession();
+                gameSessionService.endGame(user);
             }
         }
         return allResults;

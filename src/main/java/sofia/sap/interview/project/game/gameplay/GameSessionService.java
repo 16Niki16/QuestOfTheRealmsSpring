@@ -34,7 +34,7 @@ public class GameSessionService {
         gameRepositoryService.saveGame(user);
     }
 
-    public void deleteGame(User user) {
+    public void endGame(User user) {
         gameRepositoryService.deleteGame(user, user.getCurrentGameSessionName());
         user.clearSession();
     }
