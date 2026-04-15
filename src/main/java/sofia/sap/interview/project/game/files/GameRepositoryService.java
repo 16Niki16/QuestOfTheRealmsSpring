@@ -32,14 +32,20 @@ public class GameRepositoryService {
     }
 
     public List<String> getPreviousGames(User user) {
-        return fileGameService.getSavedFiles(user);
+        synchronized (user) {
+            return fileGameService.getSavedFiles(user);
+        }
     }
 
     public LoadedSessionInformation getPreviousGameSession(User user, String filename) {
-        return loadGameService.load(user, filename);
+        synchronized (user) {
+            return loadGameService.load(user, filename);
+        }
     }
 
     public String getNewGameFilename(User user) {
-        return fileGameService.getNewGameName(user);
+        synchronized (user) {
+            return fileGameService.getNewGameName(user);
+        }
     }
 }

@@ -11,7 +11,7 @@ import sofia.sap.interview.project.game.request.CommandRequest;
 import sofia.sap.interview.project.game.request.NewGameRequest;
 import sofia.sap.interview.project.game.request.ResumeGameRequest;
 import sofia.sap.interview.project.game.results.CommandResult;
-import sofia.sap.interview.project.game.results.events.EventProcessor;
+import sofia.sap.interview.project.game.results.EventsProcessor;
 import sofia.sap.interview.project.game.systems.SystemsStarter;
 import sofia.sap.interview.project.game.user.User;
 
@@ -27,12 +27,14 @@ import static sofia.sap.interview.project.game.user.User.createUser;
 public class GameService {
     private final CommandRegistry commandRegistry;
     private final GameSessionService gameSessionService;
+    private final EventsProcessor eventsProcessor;
     private final Map<String, User> users = new ConcurrentHashMap<>();
 
-    public GameService(CommandRegistry commandRegistry, GameSessionService gameSessionService) {
+    public GameService(CommandRegistry commandRegistry, GameSessionService gameSessionService, EventsProcessor eventsProcessor) {
         SystemsStarter starter = new SystemsStarter(users.values(), gameSessionService);
         this.commandRegistry = commandRegistry;
         this.gameSessionService = gameSessionService;
+        this.eventsProcessor = eventsProcessor;
         starter.start();
     }
 
@@ -58,7 +60,7 @@ public class GameService {
         Command command = commandRegistry.createCommand(request.command());
         List<CommandResult> results = command.execute(user);
 
-        return EventProcessor.process(user, results);
+        return eventsProcessor.process(user, results);
     }
 
     public List<CommandResult> createNewGame(User user, NewGameRequest request) {

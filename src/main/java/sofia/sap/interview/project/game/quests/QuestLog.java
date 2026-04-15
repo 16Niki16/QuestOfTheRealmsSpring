@@ -37,6 +37,10 @@ public class QuestLog {
         return this.completedQuests.getLast();
     }
 
+    public boolean areAllQuestsCompleted() {
+        return this.activeQuests.isEmpty();
+    }
+
     public boolean handleEvent(GameEvent event) {
         Iterator<Quest> it = activeQuests.iterator();
         while (it.hasNext()) {
