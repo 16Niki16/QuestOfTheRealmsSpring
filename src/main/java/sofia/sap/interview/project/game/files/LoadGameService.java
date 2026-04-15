@@ -1,22 +1,27 @@
 package sofia.sap.interview.project.game.files;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import sofia.sap.interview.project.game.dto.loadgame.LoadedSessionInformation;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 import sofia.sap.interview.project.game.dto.data.GameData;
+import sofia.sap.interview.project.game.dto.loadgame.LoadedSessionInformation;
 import sofia.sap.interview.project.game.exceptions.LoadGameException;
 import sofia.sap.interview.project.game.user.User;
 
 import java.io.IOException;
 import java.nio.file.Path;
 
+@Service
+@AllArgsConstructor
 public class LoadGameService {
-    private static final ObjectMapper MAPPER = new ObjectMapper();
+    private final ObjectMapper mapper;
+    private final PathResolver pathResolver;
 
     public LoadedSessionInformation load(User user, String filename) {
-        Path path = Path.of("files", user.getUsername(), filename);
+        Path path = pathResolver.userFile(user, filename);
 
         try {
-            GameData data = MAPPER.readValue(path.toFile(), GameData.class);
+            GameData data = mapper.readValue(path.toFile(), GameData.class);
             return LoadedSessionInformation.load(data);
 
         } catch (IOException e) {

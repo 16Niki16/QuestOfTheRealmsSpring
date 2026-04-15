@@ -33,12 +33,13 @@ public class GameSessionService {
         gameRepositoryService.saveGame(user);
     }
 
-    public void endGame(User user) {
-        gameRepositoryService.endGame(user);
+    public void deleteGame(User user) {
+        gameRepositoryService.deleteGame(user, user.getCurrentGameSessionName());
         user.clearSession();
     }
 
     public void exitGame(User user) {
+        gameRepositoryService.saveGame(user);
         user.clearSession();
     }
 }

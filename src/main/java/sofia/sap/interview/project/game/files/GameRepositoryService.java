@@ -8,18 +8,19 @@ import java.util.List;
 
 @Service
 public class GameRepositoryService {
-    private final FileOperationsService fileGameService;
+    private final GameFileService fileGameService;
     private final SaveGameService saveGameService;
     private final LoadGameService loadGameService;
 
-    public GameRepositoryService(FileOperationsService fileGameService, SaveGameService saveGameService, LoadGameService loadGameService) {
+    public GameRepositoryService(GameFileService fileGameService, SaveGameService saveGameService,
+                                 LoadGameService loadGameService) {
         this.fileGameService = fileGameService;
         this.saveGameService = saveGameService;
         this.loadGameService = loadGameService;
     }
 
-    public void endGame(User user) {
-        fileGameService.deleteGame(user);
+    public void deleteGame(User user, String filename) {
+        fileGameService.deleteGame(user, filename);
     }
 
     public void saveGame(User user) {

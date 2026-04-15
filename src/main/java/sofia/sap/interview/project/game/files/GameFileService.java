@@ -1,5 +1,6 @@
 package sofia.sap.interview.project.game.files;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import sofia.sap.interview.project.game.exceptions.EndGameFileException;
 import sofia.sap.interview.project.game.exceptions.LoadGameException;
@@ -12,11 +13,12 @@ import java.util.List;
 import java.util.stream.Stream;
 
 @Service
-public class FileOperationsService {
-    private static final String BASE = "files";
+@AllArgsConstructor
+public class GameFileService {
+    private PathResolver pathResolver;
 
-    public void deleteGame(User user) {
-        Path path = Path.of(BASE, user.getUsername(), user.getCurrentGameSessionName());
+    public void deleteGame(User user, String filename) {
+        Path path = pathResolver.userFile(user, filename);
 
         try {
             Files.deleteIfExists(path);
@@ -26,7 +28,7 @@ public class FileOperationsService {
     }
 
     public List<String> getSavedFiles(User user) {
-        Path dir = Path.of(BASE, user.getUsername());
+        Path dir = pathResolver.userDir(user);
 
         if (!Files.exists(dir)) {
             throw new LoadGameException("No saved games found!");
@@ -43,13 +45,13 @@ public class FileOperationsService {
     }
 
     public String getNewGameName(User user) {
-        int saveNumber = getNextSaveNumber(user.getUsername());
+        int saveNumber = getNextSaveNumber(user);
 
         return user.getUsername() + "_" + saveNumber;
     }
 
-    private int getNextSaveNumber(String username) {
-        Path userDirectory = Path.of(BASE, username);
+    private int getNextSaveNumber(User user) {
+        Path userDirectory = pathResolver.userDir(user);
 
         if (!Files.exists(userDirectory)) {
             return 1;
@@ -59,7 +61,7 @@ public class FileOperationsService {
 
             return files
                     .map(p -> p.getFileName().toString())
-                    .map(name -> name.replace(username + "_", "").replace(".json", ""))
+                    .map(name -> name.replace(user.getUsername() + "_", "").replace(".json", ""))
                     .mapToInt(Integer::parseInt)
                     .max()
                     .orElse(0) + 1;

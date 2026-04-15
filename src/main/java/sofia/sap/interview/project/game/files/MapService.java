@@ -1,6 +1,7 @@
 package sofia.sap.interview.project.game.files;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import sofia.sap.interview.project.game.dto.data.PlaygroundData;
 import sofia.sap.interview.project.game.dto.loadgame.PlaygroundFactory;
@@ -11,10 +12,13 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 @Service
+@AllArgsConstructor
 public class MapService {
+    private ObjectMapper mapper;
+    private PathResolver pathResolver;
+
     public Playground createPlayground() {
-        ObjectMapper mapper = new ObjectMapper();
-        Path mapPath = Path.of("files", "maps", "CommonMap.json");
+        Path mapPath = pathResolver.mapFile("CommonMap.json");
 
         try {
             PlaygroundData dto = mapper.readValue(mapPath.toFile(), PlaygroundData.class);
