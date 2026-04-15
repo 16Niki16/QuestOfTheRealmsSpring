@@ -20,6 +20,7 @@ import sofia.sap.interview.project.game.exceptions.NoActiveSessionException;
 import sofia.sap.interview.project.game.exceptions.NoEnemyInTheRoomException;
 import sofia.sap.interview.project.game.exceptions.QuestTypeNotFoundException;
 import sofia.sap.interview.project.game.exceptions.SaveGameException;
+import sofia.sap.interview.project.game.exceptions.SessionInProgressException;
 import sofia.sap.interview.project.game.exceptions.UnknownResultTypeException;
 import sofia.sap.interview.project.game.exceptions.UserNotFoundException;
 import sofia.sap.interview.project.game.exceptions.UsernameAlreadyExistException;
@@ -27,14 +28,16 @@ import sofia.sap.interview.project.game.exceptions.UsernameAlreadyExistException
 @RestControllerAdvice
 public class GameExceptionHandler {
     @ExceptionHandler({
+        SessionInProgressException.class,
         UsernameAlreadyExistException.class,
         IllegalArgumentException.class,
         CommandNotAvailableException.class,
         NoActiveSessionException.class,
-        BadRequestException.class})
+        BadRequestException.class,
+    })
     public ResponseEntity<String> handleInvalidInput(RuntimeException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-            .body(e.getMessage());
+                .body(e.getMessage());
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
@@ -56,13 +59,13 @@ public class GameExceptionHandler {
     })
     public ResponseEntity<String> handleNotFound(RuntimeException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-            .body(e.getMessage());
+                .body(e.getMessage());
     }
 
     @ExceptionHandler(ItemTypeAlreadyEquippedException.class)
     public ResponseEntity<String> handleAlreadyEquipped(ItemTypeAlreadyEquippedException e) {
         return ResponseEntity.status(HttpStatus.CONFLICT)
-            .body(e.getMessage());
+                .body(e.getMessage());
     }
 
     @ExceptionHandler({
@@ -73,12 +76,12 @@ public class GameExceptionHandler {
     })
     public ResponseEntity<String> handleFileErrors(RuntimeException e) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-            .body(e.getMessage());
+                .body(e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleUnexpected(Exception e) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-            .body("Unexpected error occurred");
+                .body("Unexpected error occurred");
     }
 }

@@ -18,7 +18,7 @@ public class MapService {
     private PathResolver pathResolver;
 
     public Playground createPlayground() {
-        Path mapPath = pathResolver.mapFile("CommonMap.json");
+        Path mapPath = pathResolver.mapFile("CommonMap");
 
         try {
             PlaygroundData dto = mapper.readValue(mapPath.toFile(), PlaygroundData.class);

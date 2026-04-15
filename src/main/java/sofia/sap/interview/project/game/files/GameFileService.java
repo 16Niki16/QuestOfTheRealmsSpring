@@ -37,6 +37,7 @@ public class GameFileService {
         try (Stream<Path> files = Files.list(dir)) {
             return files
                     .map(p -> p.getFileName().toString())
+                    .map(name -> name.replace(".json", ""))
                     .sorted()
                     .toList();
         } catch (IOException e) {

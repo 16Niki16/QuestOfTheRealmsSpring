@@ -7,11 +7,13 @@ import java.nio.file.Path;
 
 @Component
 public class PathResolver {
-    private static final String BASE = "file";
+    private static final String BASE = "files";
     private static final String MAPS_FOLDER = "maps";
+    private static final String EXT = ".json";
 
     public Path userFile(User user, String filename) {
-        return Path.of(BASE, user.getUsername(), filename);
+        String fullFileName = ensureExtension(filename);
+        return Path.of(BASE, user.getUsername(), fullFileName);
     }
 
     public Path userDir(User user) {
@@ -19,6 +21,11 @@ public class PathResolver {
     }
 
     public Path mapFile(String mapName) {
-        return Path.of(BASE, MAPS_FOLDER, mapName);
+        String fullFileName = ensureExtension(mapName);
+        return Path.of(BASE, MAPS_FOLDER, fullFileName);
+    }
+
+    private String ensureExtension(String filename) {
+        return filename.endsWith(EXT) ? filename : filename + EXT;
     }
 }

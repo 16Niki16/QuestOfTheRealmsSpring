@@ -20,6 +20,7 @@ public class GameSessionService {
         String fileName = gameRepositoryService.getNewGameFilename(user);
         GameSession session = gameFactory.createSession(characterName, characterType);
         QuestLog log = createNewQuestLog();
+        saveGame(user);
 
         user.createSession(fileName, session, log);
     }
