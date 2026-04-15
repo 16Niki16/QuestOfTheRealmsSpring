@@ -32,14 +32,16 @@ public class EventsProcessor {
                 }
                 if (event instanceof GameOverEvent) {
                     gameSessionService.endGame(user);
-                    break;
+                    return allResults;
                 }
             }
-            if (questLog.areAllQuestsCompleted()) {
-                allResults.add(GameWonEvent.of(user.getSession().getCharacter(), questLog));
-                gameSessionService.endGame(user);
-            }
         }
+
+        if (questLog.areAllQuestsCompleted()) {
+            allResults.add(GameWonEvent.of(user.getSession().getCharacter(), questLog));
+            gameSessionService.endGame(user);
+        }
+
         return allResults;
     }
 }
