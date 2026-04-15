@@ -3,6 +3,7 @@ package sofia.sap.interview.project.game.gameplay;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import sofia.sap.interview.project.game.characters.ally.type.CharacterType;
+import sofia.sap.interview.project.game.dto.loadgame.LoadedSessionInformation;
 import sofia.sap.interview.project.game.files.GameRepositoryService;
 import sofia.sap.interview.project.game.quests.QuestLog;
 import sofia.sap.interview.project.game.user.User;
@@ -21,5 +22,23 @@ public class GameSessionService {
         QuestLog log = createNewQuestLog();
 
         user.createSession(fileName, session, log);
+    }
+
+    public void resumeGame(User user, String filename) {
+        LoadedSessionInformation info = gameRepositoryService.getPreviousGameSession(user, filename);
+        user.createSession(filename, info.session(), info.log());
+    }
+
+    public void saveGame(User user) {
+        gameRepositoryService.saveGame(user);
+    }
+
+    public void endGame(User user) {
+        gameRepositoryService.endGame(user);
+        user.clearSession();
+    }
+
+    public void exitGame(User user) {
+        user.clearSession();
     }
 }

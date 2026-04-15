@@ -22,9 +22,9 @@ public enum ItemType {
 
     public static ItemType getByName(String itemName) {
         return Arrays.stream(values())
-            .filter(type -> type.name.equalsIgnoreCase(itemName))
-            .findFirst()
-            .orElseThrow(() -> new ItemNotAvailableException("The provided item is not available!"));
+                .filter(type -> type.name.equalsIgnoreCase(itemName))
+                .findFirst()
+                .orElseThrow(() -> new ItemNotAvailableException("The provided item is not available!"));
     }
 
 }

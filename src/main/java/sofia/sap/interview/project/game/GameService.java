@@ -30,7 +30,7 @@ public class GameService {
     private final Map<String, User> users = new ConcurrentHashMap<>();
 
     public GameService(CommandRegistry commandRegistry, GameSessionService gameSessionService) {
-        SystemsStarter starter = new SystemsStarter(users.values());
+        SystemsStarter starter = new SystemsStarter(users.values(), gameSessionService);
         this.commandRegistry = commandRegistry;
         this.gameSessionService = gameSessionService;
         starter.start();

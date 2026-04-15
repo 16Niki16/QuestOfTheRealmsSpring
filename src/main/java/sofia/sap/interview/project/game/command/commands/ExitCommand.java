@@ -2,7 +2,7 @@ package sofia.sap.interview.project.game.command.commands;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import sofia.sap.interview.project.game.files.GameRepositoryService;
+import sofia.sap.interview.project.game.gameplay.GameSessionService;
 import sofia.sap.interview.project.game.quests.QuestLog;
 import sofia.sap.interview.project.game.results.CommandResult;
 import sofia.sap.interview.project.game.results.information.ExitInformation;
@@ -14,13 +14,13 @@ import java.util.List;
 @Component
 @AllArgsConstructor
 public class ExitCommand implements Command {
-    private final GameRepositoryService gameRepositoryService;
+    private final GameSessionService gameSessionService;
 
     @Override
     public List<CommandResult> execute(User user) {
         String filename = user.getCurrentGameSessionName();
         QuestLog log = user.getLog();
-        gameRepositoryService.saveGame(user);
+        gameSessionService.saveGame(user);
         user.clearSession();
 
         return List.of(
