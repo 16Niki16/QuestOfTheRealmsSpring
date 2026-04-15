@@ -20,11 +20,15 @@ public class GameRepositoryService {
     }
 
     public void deleteGame(User user, String filename) {
-        fileGameService.deleteGame(user, filename);
+        synchronized (user) {
+            fileGameService.deleteGame(user, filename);
+        }
     }
 
     public void saveGame(User user) {
-        saveGameService.saveGame(user);
+        synchronized (user) {
+            saveGameService.saveGame(user);
+        }
     }
 
     public List<String> getPreviousGames(User user) {
