@@ -1,5 +1,6 @@
 package sofia.sap.interview.project.game.systems;
 
+import org.springframework.stereotype.Service;
 import sofia.sap.interview.project.game.characters.statistics.CharacterStatistics;
 import sofia.sap.interview.project.game.user.User;
 
@@ -8,6 +9,7 @@ import java.util.Collection;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+@Service
 public class RegenerationSystem implements GameSystem {
     private static final int AMOUNT = 5;
     private static final Duration TIMER = Duration.ofSeconds(5);

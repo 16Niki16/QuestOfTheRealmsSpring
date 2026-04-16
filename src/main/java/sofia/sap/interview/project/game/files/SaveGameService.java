@@ -15,9 +15,10 @@ import java.nio.file.Path;
 @AllArgsConstructor
 public class SaveGameService {
     private final ObjectMapper mapper;
+    private final PathResolver pathResolver;
 
     public void saveGame(User user) {
-        Path path = Path.of("files", user.getUsername(), user.getCurrentGameSessionName() + ".json");
+        Path path = pathResolver.userFile(user, user.getCurrentGameSessionName());
 
         try {
             Files.createDirectories(path.getParent());

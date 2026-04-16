@@ -1,36 +1,39 @@
 package sofia.sap.interview.project.game.systems;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+import sofia.sap.interview.project.game.GameService;
 import sofia.sap.interview.project.game.gameplay.GameSessionService;
 import sofia.sap.interview.project.game.user.User;
+import sofia.sap.interview.project.game.user.UserRegistry;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
+@Component
+@RequiredArgsConstructor
 public class SystemsStarter {
-    private final ScheduledExecutorService scheduler;
-    private final GameSessionService gameSessionService;
-    private final Collection<User> activeUsers;
-    private final List<GameSystem> systems;
+    private final AutoSaveSystem autoSaveSystem;
+    private final RegenerationSystem regenerationSystem;
+    private final UserRegistry userRegistry;
+    private ScheduledExecutorService scheduler;
 
-    public SystemsStarter(Collection<User> activeUsers, GameSessionService gameSessionService) {
-        this.scheduler = Executors.newScheduledThreadPool(2);
-        this.activeUsers = activeUsers;
-        this.gameSessionService = gameSessionService;
-        this.systems = List.of(
-                new AutoSaveSystem(gameSessionService),
-                new RegenerationSystem());
-    }
-
+    @PostConstruct
     public void start() {
-        this.systems.forEach(system -> system.start(scheduler, activeUsers));
+        scheduler = Executors.newScheduledThreadPool(2);
+
+        autoSaveSystem.start(scheduler, userRegistry.getAllUsers());
+        regenerationSystem.start(scheduler, userRegistry.getAllUsers());
     }
 
     @PreDestroy
     public void stop() {
-        scheduler.shutdown();
-        activeUsers.forEach(gameSessionService::saveGame);
+        if (scheduler != null) {
+            scheduler.shutdownNow();
+        }
     }
 }

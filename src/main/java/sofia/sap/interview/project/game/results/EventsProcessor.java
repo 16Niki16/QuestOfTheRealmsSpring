@@ -37,7 +37,7 @@ public class EventsProcessor {
             }
         }
 
-        if (questLog.areAllQuestsCompleted()) {
+        if (questLog != null && questLog.areAllQuestsCompleted()) {
             allResults.add(GameWonEvent.of(user.getSession().getCharacter(), questLog));
             gameSessionService.endGame(user);
         }

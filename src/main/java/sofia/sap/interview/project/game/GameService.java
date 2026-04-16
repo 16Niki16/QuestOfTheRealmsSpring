@@ -1,5 +1,6 @@
 package sofia.sap.interview.project.game;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import sofia.sap.interview.project.game.command.CommandRegistry;
 import sofia.sap.interview.project.game.command.commands.Command;
@@ -14,6 +15,7 @@ import sofia.sap.interview.project.game.results.CommandResult;
 import sofia.sap.interview.project.game.results.EventsProcessor;
 import sofia.sap.interview.project.game.systems.SystemsStarter;
 import sofia.sap.interview.project.game.user.User;
+import sofia.sap.interview.project.game.user.UserRegistry;
 
 import java.util.List;
 import java.util.Map;
@@ -24,22 +26,15 @@ import static sofia.sap.interview.project.game.command.CommandOption.RESUME;
 import static sofia.sap.interview.project.game.user.User.createUser;
 
 @Service
+@AllArgsConstructor
 public class GameService {
     private final CommandRegistry commandRegistry;
     private final GameSessionService gameSessionService;
     private final EventsProcessor eventsProcessor;
-    private final Map<String, User> users = new ConcurrentHashMap<>();
-
-    public GameService(CommandRegistry commandRegistry, GameSessionService gameSessionService, EventsProcessor eventsProcessor) {
-        SystemsStarter starter = new SystemsStarter(users.values(), gameSessionService);
-        this.commandRegistry = commandRegistry;
-        this.gameSessionService = gameSessionService;
-        this.eventsProcessor = eventsProcessor;
-        starter.start();
-    }
+    private final UserRegistry userRegistry;
 
     public void registerUser(String username) {
-        User existing = users.putIfAbsent(username, createUser(username));
+        User existing = userRegistry.putIfAbsent(username, createUser(username));
 
         if (existing != null) {
             throw new UsernameAlreadyExistException("Username already taken: " + username);
@@ -47,7 +42,7 @@ public class GameService {
     }
 
     public User getUser(String username) {
-        User user = users.get(username);
+        User user = userRegistry.get(username);
 
         if (user == null) {
             throw new UserNotFoundException("User not found: " + username);
