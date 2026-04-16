@@ -9,7 +9,6 @@ import java.util.Map;
 
 @Getter
 public class Room {
-    private static final String SAFE_PATH = "Safe path";
     private final String name;
     private Enemy enemy;
     private Chest chest;

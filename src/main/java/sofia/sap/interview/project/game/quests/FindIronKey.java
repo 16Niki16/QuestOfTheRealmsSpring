@@ -5,8 +5,11 @@ import sofia.sap.interview.project.game.results.events.CollectSpecialItemEvent;
 import sofia.sap.interview.project.game.results.events.GameEvent;
 import sofia.sap.interview.project.game.map.room.SpecialItem;
 
+import static sofia.sap.interview.project.game.map.room.SpecialItem.*;
+import static sofia.sap.interview.project.game.quests.QuestType.*;
+
 public class FindIronKey extends QuestBase {
-    private static final SpecialItem SPECIAL_ITEM = SpecialItem.IRON_KEY;
+    private static final SpecialItem SPECIAL_ITEM = IRON_KEY;
     private static final Reward REWARD = Reward.BIG;
 
     public FindIronKey() {
@@ -15,7 +18,7 @@ public class FindIronKey extends QuestBase {
 
     @Override
     public QuestType getType() {
-        return QuestType.FIND_IRON_KEY;
+        return FIND_IRON_KEY;
     }
 
     @Override

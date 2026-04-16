@@ -5,9 +5,13 @@ import sofia.sap.interview.project.game.dto.data.QuestData;
 import sofia.sap.interview.project.game.results.events.GameEvent;
 import sofia.sap.interview.project.game.results.events.KillEnemyEvent;
 
+import static sofia.sap.interview.project.game.characters.enemy.type.EnemyType.*;
+import static sofia.sap.interview.project.game.quests.QuestType.*;
+import static sofia.sap.interview.project.game.quests.Reward.*;
+
 public class KillBoss extends QuestBase {
-    private static final EnemyType TARGET = EnemyType.BOSS;
-    private static final Reward REWARD = Reward.GRAND;
+    private static final EnemyType TARGET = BOSS;
+    private static final Reward REWARD = GRAND;
 
     public KillBoss() {
         super(REWARD);
@@ -15,7 +19,7 @@ public class KillBoss extends QuestBase {
 
     @Override
     public QuestType getType() {
-        return QuestType.KILL_BOSS;
+        return KILL_BOSS;
     }
 
     @Override

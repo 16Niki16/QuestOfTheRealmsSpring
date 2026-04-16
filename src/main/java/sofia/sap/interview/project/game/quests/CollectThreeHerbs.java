@@ -5,9 +5,13 @@ import sofia.sap.interview.project.game.results.events.CollectItemsEvent;
 import sofia.sap.interview.project.game.results.events.GameEvent;
 import sofia.sap.interview.project.game.items.ItemType;
 
+import static sofia.sap.interview.project.game.items.ItemType.*;
+import static sofia.sap.interview.project.game.quests.QuestType.*;
+import static sofia.sap.interview.project.game.quests.Reward.*;
+
 public class CollectThreeHerbs extends QuestBase {
-    private static final ItemType ITEM = ItemType.HEALING_HERB;
-    private static final Reward REWARD = Reward.GRAND;
+    private static final ItemType ITEM = HEALING_HERB;
+    private static final Reward REWARD = GRAND;
     private static final int NEEDED_HERBS = 3;
     private int numberOfCollectedHerbs;
 
@@ -18,7 +22,7 @@ public class CollectThreeHerbs extends QuestBase {
 
     @Override
     public QuestType getType() {
-        return QuestType.COLLECT_THREE_HERBS;
+        return COLLECT_THREE_HERBS;
     }
 
     @Override
