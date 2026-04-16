@@ -2,6 +2,7 @@ package sofia.sap.interview.project.game.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import sofia.sap.interview.project.game.exceptions.SessionInProgressException;
 import sofia.sap.interview.project.game.gameplay.GameSession;
 import sofia.sap.interview.project.game.quests.QuestLog;
 
@@ -28,6 +29,10 @@ public class User {
     }
 
     public void createSession(String currentGameSessionName, GameSession session, QuestLog log) {
+        if (isActiveSession()) {
+            throw new SessionInProgressException("Exit the current session to start new one!");
+        }
+
         this.currentGameSessionName = currentGameSessionName;
         this.session = session;
         this.log = log;

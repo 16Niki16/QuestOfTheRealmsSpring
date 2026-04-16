@@ -1,18 +1,16 @@
 package sofia.sap.interview.project.game.files;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import sofia.sap.interview.project.game.dto.data.PlaygroundData;
-import sofia.sap.interview.project.game.dto.loadgame.PlaygroundFactory;
 import sofia.sap.interview.project.game.exceptions.NewGameFileException;
 import sofia.sap.interview.project.game.map.Playground;
 
 import java.io.IOException;
 import java.nio.file.Path;
 
-import static sofia.sap.interview.project.game.dto.loadgame.PlaygroundFactory.*;
+import static sofia.sap.interview.project.game.dto.loadgame.PlaygroundFactory.create;
 
 @Service
 @RequiredArgsConstructor
@@ -21,7 +19,7 @@ public class MapService {
     private final PathResolver pathResolver;
     private PlaygroundData mapData;
 
-    public Playground createPlayground() {
+    public synchronized Playground createPlayground() {
         if (mapData == null) {
             Path mapPath = pathResolver.mapFile("CommonMap");
 

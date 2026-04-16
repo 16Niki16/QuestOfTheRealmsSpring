@@ -26,7 +26,7 @@ public enum Direction {
 
     public static Direction getDirection(String input) {
         return Arrays.stream(values())
-                .filter(direction -> direction.direction.equalsIgnoreCase(input))
+                .filter(direction -> direction.direction.equalsIgnoreCase(input.strip()))
                 .findFirst()
                 .orElseThrow(() -> new DirectionNotAvailableException("The provided direction is not in the list!"));
     }

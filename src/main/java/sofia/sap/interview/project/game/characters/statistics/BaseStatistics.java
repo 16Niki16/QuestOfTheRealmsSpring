@@ -3,30 +3,25 @@ package sofia.sap.interview.project.game.characters.statistics;
 import lombok.Getter;
 import sofia.sap.interview.project.game.characters.statistics.attack.AttackRange;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
+@Getter
 public abstract class BaseStatistics implements Statistics {
     protected static final int MAX_STAT = 100;
     protected static final int MIN_STAT = 0;
-    private final AtomicInteger health;
     @Getter
+    private int health;
     private AttackRange attackRange;
 
     public BaseStatistics(int health, AttackRange attackRange) {
         this.attackRange = attackRange;
-        this.health = new AtomicInteger(health);
-    }
-
-    public int getHealth() {
-        return this.health.get();
+        this.health = health;
     }
 
     public void updateHealth(int health) {
-        this.health.set(health);
+        this.health = health;
     }
 
     public boolean isDead() {
-        return health.get() <= MIN_STAT;
+        return health <= MIN_STAT;
     }
 
     protected void setAttackRange(AttackRange attackRange) {
@@ -35,12 +30,12 @@ public abstract class BaseStatistics implements Statistics {
 
     @Override
     public void decreaseHealth(int amount) {
-        health.updateAndGet(currentHealth -> Math.max(currentHealth - amount, MIN_STAT));
+        health = Math.max(health - amount, MIN_STAT);
     }
 
     @Override
     public void increaseHealth(int amount) {
-        health.updateAndGet(currentHealth -> Math.min(currentHealth + amount, MAX_STAT));
+        health = Math.min(health + amount, MAX_STAT);
     }
 
     @Override

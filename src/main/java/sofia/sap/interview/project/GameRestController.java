@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import sofia.sap.interview.project.game.GameService;
 import sofia.sap.interview.project.game.exceptions.NoActiveSessionException;
 import sofia.sap.interview.project.game.request.CommandRequest;
+import sofia.sap.interview.project.game.request.CreateUserRequest;
 import sofia.sap.interview.project.game.request.NewGameRequest;
 import sofia.sap.interview.project.game.request.ResumeGameRequest;
 import sofia.sap.interview.project.game.results.CommandResult;
@@ -27,9 +28,9 @@ public class GameRestController {
         this.gameService = gameService;
     }
 
-    @PostMapping("/user/{username}")
-    public ResponseEntity<?> userRegistration(@PathVariable String username) {
-        gameService.registerUser(username);
+    @PostMapping("/user")
+    public ResponseEntity<?> userRegistration(@Valid @RequestBody CreateUserRequest createUserRequest) {
+        gameService.registerUser(createUserRequest.username());
 
         return ResponseEntity.ok().build();
     }

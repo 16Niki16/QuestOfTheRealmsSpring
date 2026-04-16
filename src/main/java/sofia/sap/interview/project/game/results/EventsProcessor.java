@@ -2,7 +2,7 @@ package sofia.sap.interview.project.game.results;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import sofia.sap.interview.project.game.gameplay.GameSessionService;
+import sofia.sap.interview.project.game.files.GameSessionService;
 import sofia.sap.interview.project.game.quests.QuestLog;
 import sofia.sap.interview.project.game.results.events.GameEvent;
 import sofia.sap.interview.project.game.results.events.GameOverEvent;

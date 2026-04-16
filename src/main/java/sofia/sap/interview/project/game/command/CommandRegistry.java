@@ -18,7 +18,7 @@ import sofia.sap.interview.project.game.command.commands.SaveCommand;
 import sofia.sap.interview.project.game.command.commands.UnequipGearCommand;
 import sofia.sap.interview.project.game.command.commands.UseItemCommand;
 import sofia.sap.interview.project.game.exceptions.CommandArgumentException;
-import sofia.sap.interview.project.game.gameplay.GameSessionService;
+import sofia.sap.interview.project.game.files.GameSessionService;
 import sofia.sap.interview.project.game.items.ItemType;
 
 import java.util.EnumMap;

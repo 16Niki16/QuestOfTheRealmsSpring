@@ -8,6 +8,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import sofia.sap.interview.project.game.exceptions.ChestNotAvailableException;
+import sofia.sap.interview.project.game.exceptions.CommandArgumentException;
 import sofia.sap.interview.project.game.exceptions.CommandNotAvailableException;
 import sofia.sap.interview.project.game.exceptions.DirectionNotAvailableException;
 import sofia.sap.interview.project.game.exceptions.EndGameFileException;
@@ -34,6 +35,7 @@ public class GameExceptionHandler {
         IllegalArgumentException.class,
         CommandNotAvailableException.class,
         NoActiveSessionException.class,
+        CommandArgumentException.class
     })
     public ResponseEntity<String> handleInvalidInput(RuntimeException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)

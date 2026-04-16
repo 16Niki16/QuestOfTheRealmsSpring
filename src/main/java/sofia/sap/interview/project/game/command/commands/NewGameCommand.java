@@ -2,7 +2,7 @@ package sofia.sap.interview.project.game.command.commands;
 
 import lombok.AllArgsConstructor;
 import sofia.sap.interview.project.game.characters.ally.type.CharacterType;
-import sofia.sap.interview.project.game.gameplay.GameSessionService;
+import sofia.sap.interview.project.game.files.GameSessionService;
 import sofia.sap.interview.project.game.results.CommandResult;
 import sofia.sap.interview.project.game.results.events.NewGameEvent;
 import sofia.sap.interview.project.game.user.User;

@@ -5,17 +5,16 @@ import sofia.sap.interview.project.game.characters.ally.type.CharacterType;
 import sofia.sap.interview.project.game.characters.statistics.attack.AttackRange;
 
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.atomic.AtomicInteger;
 
+@Getter
 public class CharacterStatistics extends BaseStatistics {
     private static final int NOT_ENOUGH_MANA = 0;
-    private final AtomicInteger mana;
-    @Getter
+    private int mana;
     private final int manaCost;
 
     public CharacterStatistics(int health, AttackRange attackRange, int mana, int manaCost) {
         super(health, attackRange);
-        this.mana = new AtomicInteger(mana);
+        this.mana = mana;
         this.manaCost = manaCost;
     }
 
@@ -24,20 +23,17 @@ public class CharacterStatistics extends BaseStatistics {
                 type.getMana(), type.getManaCost());
     }
 
-    public int getMana() {
-        return this.mana.get();
-    }
-
     public boolean decreaseMana(int amount) {
-        int prev = mana.getAndUpdate(current ->
-                current >= amount ? current - amount : current
-        );
+        if (amount > mana) {
+            return false;
+        }
 
-        return prev >= amount;
+        mana -= amount;
+        return true;
     }
 
     public void increaseMana(int amount) {
-        this.mana.updateAndGet(h -> Math.min(h + amount, MAX_STAT));
+        mana = Math.min(mana + amount, MAX_STAT);
     }
 
     @Override
@@ -66,7 +62,7 @@ public class CharacterStatistics extends BaseStatistics {
     }
 
     public boolean needsRegen() {
-        return getHealth() < MAX_STAT || this.mana.get() < MAX_STAT;
+        return getHealth() < MAX_STAT || this.mana < MAX_STAT;
     }
 
     public void regenerate(int amount) {
