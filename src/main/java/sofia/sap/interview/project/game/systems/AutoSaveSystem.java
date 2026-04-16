@@ -18,13 +18,11 @@ public class AutoSaveSystem implements GameSystem {
 
     @Override
     public void start(ScheduledExecutorService scheduler, Collection<User> activeUsers) {
-        scheduler.scheduleAtFixedRate(() -> {
-                activeUsers.forEach(user -> {
-                    if (user.isActiveSession()) {
-                        gameSessionService.saveGame(user);
-                    }
-                });
+        scheduler.scheduleAtFixedRate(() -> activeUsers.forEach(user -> {
+            if (user.isActiveSession()) {
+                gameSessionService.saveGame(user);
             }
-            , TIME_INTERVAL.getSeconds(), TIME_INTERVAL.getSeconds(), TimeUnit.SECONDS);
+        })
+                , TIME_INTERVAL.getSeconds(), TIME_INTERVAL.getSeconds(), TimeUnit.SECONDS);
     }
 }

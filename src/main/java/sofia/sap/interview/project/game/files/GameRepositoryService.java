@@ -20,32 +20,22 @@ public class GameRepositoryService {
     }
 
     public void deleteGame(User user, String filename) {
-        synchronized (user) {
-            fileGameService.deleteGame(user, filename);
-        }
+        fileGameService.deleteGame(user, filename);
     }
 
     public void saveGame(User user) {
-        synchronized (user) {
-            saveGameService.saveGame(user);
-        }
+        saveGameService.saveGame(user);
     }
 
     public List<String> getPreviousGames(User user) {
-        synchronized (user) {
-            return fileGameService.getSavedFiles(user);
-        }
+        return fileGameService.getSavedFiles(user);
     }
 
     public LoadedSessionInformation getPreviousGameSession(User user, String filename) {
-        synchronized (user) {
-            return loadGameService.load(user, filename);
-        }
+        return loadGameService.load(user, filename);
     }
 
     public String getNewGameFilename(User user) {
-        synchronized (user) {
-            return fileGameService.getNewGameName(user);
-        }
+        return fileGameService.getNewGameName(user);
     }
 }

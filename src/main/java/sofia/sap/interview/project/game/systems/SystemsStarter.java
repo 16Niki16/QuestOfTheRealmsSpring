@@ -4,13 +4,8 @@ import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import sofia.sap.interview.project.game.GameService;
-import sofia.sap.interview.project.game.gameplay.GameSessionService;
-import sofia.sap.interview.project.game.user.User;
 import sofia.sap.interview.project.game.user.UserRegistry;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 

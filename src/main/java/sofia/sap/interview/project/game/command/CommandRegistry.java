@@ -45,7 +45,7 @@ import static sofia.sap.interview.project.game.map.Direction.getDirection;
 
 @Component
 public class CommandRegistry {
-    private static final Map<CommandOption, Function<String, Command>> COMMANDS = new EnumMap<>(CommandOption.class);
+    private final Map<CommandOption, Function<String, Command>> commands = new EnumMap<>(CommandOption.class);
 
     public CommandRegistry(GameSessionService gameSessionService,
                            HelpCommand helpCommand,
@@ -59,28 +59,28 @@ public class CommandRegistry {
                            ExitCommand exitCommand,
                            LoadCommand loadCommand) {
 
-        COMMANDS.put(HELP, args -> helpCommand);
-        COMMANDS.put(ATTACK, args -> attackCommand);
-        COMMANDS.put(QUESTS, args -> questsCommand);
-        COMMANDS.put(LOOK, args -> lookCommand);
-        COMMANDS.put(PATHS, args -> pathsCommand);
-        COMMANDS.put(OPEN, args -> chestCommand);
-        COMMANDS.put(INVENTORY, args -> inventoryCommand);
-        COMMANDS.put(SAVE, args -> saveCommand);
-        COMMANDS.put(EXIT, args -> exitCommand);
-        COMMANDS.put(LOAD, args -> loadCommand);
+        commands.put(HELP, args -> helpCommand);
+        commands.put(ATTACK, args -> attackCommand);
+        commands.put(QUESTS, args -> questsCommand);
+        commands.put(LOOK, args -> lookCommand);
+        commands.put(PATHS, args -> pathsCommand);
+        commands.put(OPEN, args -> chestCommand);
+        commands.put(INVENTORY, args -> inventoryCommand);
+        commands.put(SAVE, args -> saveCommand);
+        commands.put(EXIT, args -> exitCommand);
+        commands.put(LOAD, args -> loadCommand);
 
-        COMMANDS.put(EQUIP, args -> new EquipGearCommand(itemType(args)));
-        COMMANDS.put(UNEQUIP, args -> new UnequipGearCommand(itemType(args)));
-        COMMANDS.put(USE_ITEM, args -> new UseItemCommand(itemType(args)));
-        COMMANDS.put(MOVE, args -> new MoveCommand(getDirection(args)));
-        COMMANDS.put(RESUME, args -> new ResumeCommand(gameSessionService, args));
+        commands.put(EQUIP, args -> new EquipGearCommand(itemType(args)));
+        commands.put(UNEQUIP, args -> new UnequipGearCommand(itemType(args)));
+        commands.put(USE_ITEM, args -> new UseItemCommand(itemType(args)));
+        commands.put(MOVE, args -> new MoveCommand(getDirection(args)));
+        commands.put(RESUME, args -> new ResumeCommand(gameSessionService, args));
     }
 
     public Command createCommand(String input) {
         String[] commandSplit = input.split(" ", 2);
         CommandOption command = fromString(commandSplit[0]);
-        Function<String, Command> parser = COMMANDS.get(command);
+        Function<String, Command> parser = commands.get(command);
 
         String args = commandSplit.length > 1 ? commandSplit[1] : "";
         return parser.apply(args);
@@ -90,7 +90,7 @@ public class CommandRegistry {
         if (argument == null) {
             throw new CommandArgumentException("The provided command argument can not be null!");
         }
-        Function<String, Command> parser = COMMANDS.get(commandOption);
+        Function<String, Command> parser = commands.get(commandOption);
 
         if (parser == null) {
             throw new IllegalArgumentException("Unknown command: " + commandOption);

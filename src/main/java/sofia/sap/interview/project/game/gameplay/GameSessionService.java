@@ -17,30 +17,42 @@ public class GameSessionService {
     private final GameRepositoryService gameRepositoryService;
 
     public void newGame(User user, String characterName, CharacterType characterType) {
-        String fileName = gameRepositoryService.getNewGameFilename(user);
-        GameSession session = gameFactory.createSession(characterName, characterType);
-        QuestLog log = createNewQuestLog();
+        synchronized (user) {
+            String fileName = gameRepositoryService.getNewGameFilename(user);
+            GameSession session = gameFactory.createSession(characterName, characterType);
+            QuestLog log = createNewQuestLog();
 
-        user.createSession(fileName, session, log);
-        saveGame(user);
+            user.createSession(fileName, session, log);
+            saveGame(user);
+        }
     }
 
     public void resumeGame(User user, String filename) {
-        LoadedSessionInformation info = gameRepositoryService.getPreviousGameSession(user, filename);
-        user.createSession(filename, info.session(), info.log());
+        synchronized (user) {
+            LoadedSessionInformation info = gameRepositoryService.getPreviousGameSession(user, filename);
+            user.createSession(filename, info.session(), info.log());
+        }
     }
 
     public void saveGame(User user) {
-        gameRepositoryService.saveGame(user);
+        synchronized (user) {
+            if (user.isActiveSession()) {
+                gameRepositoryService.saveGame(user);
+            }
+        }
     }
 
     public void endGame(User user) {
-        gameRepositoryService.deleteGame(user, user.getCurrentGameSessionName());
-        user.clearSession();
+        synchronized (user) {
+            gameRepositoryService.deleteGame(user, user.getCurrentGameSessionName());
+            user.clearSession();
+        }
     }
 
     public void exitGame(User user) {
-        gameRepositoryService.saveGame(user);
-        user.clearSession();
+        synchronized (user) {
+            gameRepositoryService.saveGame(user);
+            user.clearSession();
+        }
     }
 }

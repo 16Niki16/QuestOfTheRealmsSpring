@@ -17,16 +17,18 @@ public class RegenerationSystem implements GameSystem {
     @Override
     public void start(ScheduledExecutorService scheduler, Collection<User> activeUsers) {
         scheduler.scheduleAtFixedRate(
-            () -> {
-                for (User user : activeUsers) {
-                    if (user.isActiveSession()) {
-                        CharacterStatistics stats = user.getSession().getCharacter().getCharacterStats();
-                        if (stats.needsRegen()) {
-                            stats.regenerate(AMOUNT);
+                () -> {
+                    for (User user : activeUsers) {
+                        synchronized (user) {
+                            if (user.isActiveSession()) {
+                                CharacterStatistics stats = user.getSession().getCharacter().getCharacterStats();
+                                if (stats.needsRegen()) {
+                                    stats.regenerate(AMOUNT);
+                                }
+                            }
                         }
                     }
-                }
-            },
-            TIMER.getSeconds(), TIMER.getSeconds(), TimeUnit.SECONDS);
+                },
+                TIMER.getSeconds(), TIMER.getSeconds(), TimeUnit.SECONDS);
     }
 }
