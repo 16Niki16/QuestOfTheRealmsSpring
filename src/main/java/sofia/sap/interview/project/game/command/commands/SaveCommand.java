@@ -2,7 +2,7 @@ package sofia.sap.interview.project.game.command.commands;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import sofia.sap.interview.project.game.files.GameSessionService;
+import sofia.sap.interview.project.game.gameplay.GameSessionService;
 import sofia.sap.interview.project.game.results.CommandResult;
 import sofia.sap.interview.project.game.results.information.SaveInformation;
 import sofia.sap.interview.project.game.user.User;

@@ -7,7 +7,7 @@ import sofia.sap.interview.project.game.command.commands.Command;
 import sofia.sap.interview.project.game.command.commands.NewGameCommand;
 import sofia.sap.interview.project.game.exceptions.UserNotFoundException;
 import sofia.sap.interview.project.game.exceptions.UsernameAlreadyExistException;
-import sofia.sap.interview.project.game.files.GameSessionService;
+import sofia.sap.interview.project.game.gameplay.GameSessionService;
 import sofia.sap.interview.project.game.request.CommandRequest;
 import sofia.sap.interview.project.game.request.NewGameRequest;
 import sofia.sap.interview.project.game.request.ResumeGameRequest;

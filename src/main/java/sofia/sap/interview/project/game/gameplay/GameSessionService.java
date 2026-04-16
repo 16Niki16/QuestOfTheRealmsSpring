@@ -1,4 +1,4 @@
-package sofia.sap.interview.project.game.files;
+package sofia.sap.interview.project.game.gameplay;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

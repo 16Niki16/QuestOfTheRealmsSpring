@@ -2,7 +2,7 @@ package sofia.sap.interview.project.game.systems;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import sofia.sap.interview.project.game.files.GameSessionService;
+import sofia.sap.interview.project.game.gameplay.GameSessionService;
 import sofia.sap.interview.project.game.user.User;
 
 import java.time.Duration;
