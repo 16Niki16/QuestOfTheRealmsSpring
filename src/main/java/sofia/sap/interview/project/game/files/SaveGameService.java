@@ -21,7 +21,8 @@ public class SaveGameService {
 
         try {
             Files.createDirectories(path.getParent());
-            mapper.writeValue(path.toFile(), GameDataFactory.save(user.getSession(), user.getLog()));
+            mapper.writerWithDefaultPrettyPrinter()
+                .writeValue(path.toFile(), GameDataFactory.save(user.getSession(), user.getLog()));
         } catch (IOException e) {
             throw new SaveGameException("Failed to auto save game", e);
         }

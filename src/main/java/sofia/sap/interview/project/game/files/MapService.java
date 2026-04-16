@@ -2,6 +2,7 @@ package sofia.sap.interview.project.game.files;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import sofia.sap.interview.project.game.dto.data.PlaygroundData;
 import sofia.sap.interview.project.game.dto.loadgame.PlaygroundFactory;
@@ -12,19 +13,22 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class MapService {
-    private ObjectMapper mapper;
-    private PathResolver pathResolver;
+    private final ObjectMapper mapper;
+    private final PathResolver pathResolver;
+    private PlaygroundData mapData;
 
     public Playground createPlayground() {
-        Path mapPath = pathResolver.mapFile("CommonMap");
+        if (mapData == null) {
+            Path mapPath = pathResolver.mapFile("CommonMap");
 
-        try {
-            PlaygroundData dto = mapper.readValue(mapPath.toFile(), PlaygroundData.class);
-            return PlaygroundFactory.create(dto);
-        } catch (IOException e) {
-            throw new NewGameFileException("Failed to load playground!", e);
+            try {
+                mapData = mapper.readValue(mapPath.toFile(), PlaygroundData.class);
+            } catch (IOException e) {
+                throw new NewGameFileException("Failed to load playground!", e);
+            }
         }
+        return PlaygroundFactory.create(mapData);
     }
 }
