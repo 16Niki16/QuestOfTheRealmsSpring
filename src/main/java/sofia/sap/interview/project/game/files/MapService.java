@@ -12,6 +12,8 @@ import sofia.sap.interview.project.game.map.Playground;
 import java.io.IOException;
 import java.nio.file.Path;
 
+import static sofia.sap.interview.project.game.dto.loadgame.PlaygroundFactory.*;
+
 @Service
 @RequiredArgsConstructor
 public class MapService {
@@ -29,6 +31,6 @@ public class MapService {
                 throw new NewGameFileException("Failed to load playground!", e);
             }
         }
-        return PlaygroundFactory.create(mapData);
+        return create(mapData);
     }
 }

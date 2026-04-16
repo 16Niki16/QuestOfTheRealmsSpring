@@ -37,14 +37,15 @@ public class GameExceptionHandler {
     })
     public ResponseEntity<String> handleInvalidInput(RuntimeException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(e.getMessage());
+            .body(e.getMessage());
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<String> handleInvalidJson(HttpMessageNotReadableException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body("Invalid request format!");
+            .body("Invalid request format!");
     }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<String> handleValidation(MethodArgumentNotValidException e) {
         String errorMessage = e.getBindingResult()
@@ -71,13 +72,13 @@ public class GameExceptionHandler {
     })
     public ResponseEntity<String> handleNotFound(RuntimeException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(e.getMessage());
+            .body(e.getMessage());
     }
 
     @ExceptionHandler(ItemTypeAlreadyEquippedException.class)
     public ResponseEntity<String> handleAlreadyEquipped(ItemTypeAlreadyEquippedException e) {
         return ResponseEntity.status(HttpStatus.CONFLICT)
-                .body(e.getMessage());
+            .body(e.getMessage());
     }
 
     @ExceptionHandler({
@@ -88,12 +89,12 @@ public class GameExceptionHandler {
     })
     public ResponseEntity<String> handleFileErrors(RuntimeException e) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(e.getMessage());
+            .body(e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleUnexpected(Exception e) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body("Unexpected error occurred");
+            .body("Unexpected error occurred");
     }
 }

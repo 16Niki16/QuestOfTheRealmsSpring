@@ -5,10 +5,12 @@ import sofia.sap.interview.project.game.characters.enemy.Enemy;
 import sofia.sap.interview.project.game.characters.enemy.type.EnemyType;
 import sofia.sap.interview.project.game.characters.statistics.attack.AttackType;
 
+import static sofia.sap.interview.project.game.results.events.EventType.*;
+
 public record DefendEvent(EventType eventType, String characterName, int damage, EnemyType type, AttackType attackType)
     implements GameEvent {
     public static DefendEvent of(Character character, int damage, Enemy enemy) {
-        return new DefendEvent(EventType.DEFEND, character.getCharacterName(),
+        return new DefendEvent(DEFEND, character.getCharacterName(),
             damage, enemy.getType(), enemy.attackType());
     }
 }

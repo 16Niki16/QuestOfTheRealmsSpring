@@ -6,11 +6,13 @@ import sofia.sap.interview.project.game.quests.QuestLog;
 
 import java.util.List;
 
+import static sofia.sap.interview.project.game.results.information.ViewType.*;
+
 public record QuestInformation(ViewType viewType, List<QuestDTO> active, List<QuestDTO> completed)
         implements ViewInformation {
     public static QuestInformation of(QuestLog questLog) {
 
-        return new QuestInformation(ViewType.QUESTS,
+        return new QuestInformation(QUESTS,
                 transformToDTO(questLog.getActiveQuests()),
                 transformToDTO(questLog.getCompletedQuests()));
     }
