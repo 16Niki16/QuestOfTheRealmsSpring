@@ -25,9 +25,7 @@ public class SystemsStarter {
     }
 
     public void start() {
-        for (GameSystem system : this.systems) {
-            system.start(scheduler, activeUsers);
-        }
+        this.systems.forEach(system -> system.start(scheduler, activeUsers));
     }
 
     @PreDestroy
