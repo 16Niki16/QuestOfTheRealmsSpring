@@ -19,6 +19,6 @@ public class NewGameCommand implements Command {
     public List<CommandResult> execute(User user) {
         gameSessionService.newGame(user, characterName, characterType);
 
-        return List.of(NewGameEvent.of(user.getSession().getCharacter()));
+        return List.of(NewGameEvent.of(user.getSession().character()));
     }
 }

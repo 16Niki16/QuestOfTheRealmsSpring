@@ -14,7 +14,7 @@ public class LookCommand implements Command {
         GameSession session = user.getSession();
 
         synchronized (user) {
-            return session.getCampaign().lookAround();
+            return session.campaign().lookAround();
         }
     }
 }

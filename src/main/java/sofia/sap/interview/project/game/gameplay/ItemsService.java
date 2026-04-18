@@ -1,5 +1,6 @@
 package sofia.sap.interview.project.game.gameplay;
 
+import org.springframework.stereotype.Service;
 import sofia.sap.interview.project.game.characters.ally.Character;
 import sofia.sap.interview.project.game.items.ItemType;
 import sofia.sap.interview.project.game.items.consumable.Consumable;
@@ -17,6 +18,7 @@ import java.util.Map;
 import static sofia.sap.interview.project.game.items.ItemRegistry.createConsumable;
 import static sofia.sap.interview.project.game.items.ItemRegistry.createGear;
 
+@Service
 public class ItemsService {
     public List<CommandResult> useItem(Character character, ItemType itemType) {
         Consumable itemToConsume = createConsumable(itemType);

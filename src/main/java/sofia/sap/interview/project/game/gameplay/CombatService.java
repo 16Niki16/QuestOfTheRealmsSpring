@@ -1,5 +1,6 @@
 package sofia.sap.interview.project.game.gameplay;
 
+import org.springframework.stereotype.Service;
 import sofia.sap.interview.project.game.characters.ally.Character;
 import sofia.sap.interview.project.game.characters.enemy.Enemy;
 import sofia.sap.interview.project.game.map.room.Room;
@@ -13,6 +14,7 @@ import sofia.sap.interview.project.game.results.events.NotEnoughManaEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class CombatService {
     public List<CommandResult> attack(Character character, Enemy currentEnemy, Room currentRoom) {
         List<CommandResult> attackResults = new ArrayList<>();

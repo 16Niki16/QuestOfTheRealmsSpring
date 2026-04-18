@@ -21,7 +21,7 @@ public class RegenerationSystem implements GameSystem {
                     for (User user : activeUsers) {
                         synchronized (user) {
                             if (user.isActiveSession()) {
-                                CharacterStatistics stats = user.getSession().getCharacter().getCharacterStats();
+                                CharacterStatistics stats = user.getSession().character().getCharacterStats();
                                 if (stats.needsRegen()) {
                                     stats.regenerate(AMOUNT);
                                 }

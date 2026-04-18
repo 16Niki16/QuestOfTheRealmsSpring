@@ -13,7 +13,7 @@ import java.util.Set;
 public class PathsCommand implements Command {
     @Override
     public List<CommandResult> execute(User user) {
-        Set<Direction> possibleDirections = user.getSession().getCampaign().getPossibleDirections();
+        Set<Direction> possibleDirections = user.getSession().campaign().getPossibleDirections();
 
         return List.of(PathsInformation.of(possibleDirections));
     }

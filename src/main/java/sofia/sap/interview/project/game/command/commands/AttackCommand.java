@@ -1,8 +1,10 @@
 package sofia.sap.interview.project.game.command.commands;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import sofia.sap.interview.project.game.characters.ally.Character;
 import sofia.sap.interview.project.game.characters.enemy.Enemy;
+import sofia.sap.interview.project.game.gameplay.CombatService;
 import sofia.sap.interview.project.game.results.CommandResult;
 import sofia.sap.interview.project.game.exceptions.NoEnemyInTheRoomException;
 import sofia.sap.interview.project.game.gameplay.GameSession;
@@ -13,25 +15,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@AllArgsConstructor
 public class AttackCommand implements Command {
+    private final CombatService combatService;
 
     @Override
     public List<CommandResult> execute(User user) {
         GameSession session = user.getSession();
-        Enemy enemy = session.getCampaign().getEnemyOnCharacterCoordinates();
+        Enemy enemy = session.campaign().getEnemyOnCharacterCoordinates();
 
         if (enemy == null) {
             throw new NoEnemyInTheRoomException("There is no enemy in the current room!");
         }
 
-        Character character = session.getCharacter();
-        Room room = session.getCampaign().getRoom();
+        Character character = session.character();
+        Room room = session.campaign().getRoom();
 
         List<CommandResult> results = new ArrayList<>();
 
         synchronized (user) {
-            results.addAll(session.getCombatService().attack(character, enemy, room));
-            results.addAll(session.getCombatService().defend(character, enemy));
+            results.addAll(combatService.attack(character, enemy, room));
+            results.addAll(combatService.defend(character, enemy));
         }
 
         return results;

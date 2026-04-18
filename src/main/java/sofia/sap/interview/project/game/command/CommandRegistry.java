@@ -18,7 +18,9 @@ import sofia.sap.interview.project.game.command.commands.SaveCommand;
 import sofia.sap.interview.project.game.command.commands.UnequipGearCommand;
 import sofia.sap.interview.project.game.command.commands.UseItemCommand;
 import sofia.sap.interview.project.game.exceptions.CommandArgumentException;
+import sofia.sap.interview.project.game.gameplay.CombatService;
 import sofia.sap.interview.project.game.gameplay.GameSessionService;
+import sofia.sap.interview.project.game.gameplay.ItemsService;
 import sofia.sap.interview.project.game.items.ItemType;
 
 import java.util.EnumMap;
@@ -48,6 +50,8 @@ public class CommandRegistry {
     private final Map<CommandOption, Function<String, Command>> commands = new EnumMap<>(CommandOption.class);
 
     public CommandRegistry(GameSessionService gameSessionService,
+                           CombatService combatService,
+                           ItemsService itemsService,
                            HelpCommand helpCommand,
                            AttackCommand attackCommand,
                            CheckQuestsCommand questsCommand,
@@ -70,9 +74,9 @@ public class CommandRegistry {
         commands.put(EXIT, args -> exitCommand);
         commands.put(LOAD, args -> loadCommand);
 
-        commands.put(EQUIP, args -> new EquipGearCommand(itemType(args)));
-        commands.put(UNEQUIP, args -> new UnequipGearCommand(itemType(args)));
-        commands.put(USE_ITEM, args -> new UseItemCommand(itemType(args)));
+        commands.put(EQUIP, args -> new EquipGearCommand(itemsService, itemType(args)));
+        commands.put(UNEQUIP, args -> new UnequipGearCommand(itemsService, itemType(args)));
+        commands.put(USE_ITEM, args -> new UseItemCommand(itemsService, itemType(args)));
         commands.put(MOVE, args -> new MoveCommand(getDirection(args)));
         commands.put(RESUME, args -> new ResumeCommand(gameSessionService, args));
     }

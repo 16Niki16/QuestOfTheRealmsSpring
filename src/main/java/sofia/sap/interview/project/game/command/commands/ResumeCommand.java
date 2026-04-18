@@ -19,6 +19,6 @@ public class ResumeCommand implements Command {
         gameSessionService.resumeGame(user, filename);
         GameSession loadedSession = user.getSession();
 
-        return List.of(ResumeInformation.of(loadedSession.getCharacter(), loadedSession.getCampaign().getRoom()));
+        return List.of(ResumeInformation.of(loadedSession.character(), loadedSession.campaign().getRoom()));
     }
 }
