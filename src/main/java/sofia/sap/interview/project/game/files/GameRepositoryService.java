@@ -1,5 +1,6 @@
 package sofia.sap.interview.project.game.files;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import sofia.sap.interview.project.game.dto.loadgame.LoadedSessionInformation;
 import sofia.sap.interview.project.game.user.User;
@@ -7,17 +8,11 @@ import sofia.sap.interview.project.game.user.User;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class GameRepositoryService {
     private final GameFileService fileGameService;
     private final SaveGameService saveGameService;
     private final LoadGameService loadGameService;
-
-    public GameRepositoryService(GameFileService fileGameService, SaveGameService saveGameService,
-                                 LoadGameService loadGameService) {
-        this.fileGameService = fileGameService;
-        this.saveGameService = saveGameService;
-        this.loadGameService = loadGameService;
-    }
 
     public void deleteGame(User user, String filename) {
         fileGameService.deleteGame(user, filename);
