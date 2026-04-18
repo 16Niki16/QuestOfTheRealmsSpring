@@ -1,5 +1,6 @@
 package sofia.sap.interview.project.game.gameplay;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import sofia.sap.interview.project.game.characters.enemy.Enemy;
 import sofia.sap.interview.project.game.characters.enemy.type.EnemyType;
@@ -17,19 +18,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import static sofia.sap.interview.project.game.map.Coordinates.*;
+
 @Getter
+@AllArgsConstructor
 public class Campaign {
     private final Playground playground;
     private Coordinates playerCoordinates;
 
-    public Campaign(Playground playground) {
-        this.playground = playground;
-        this.playerCoordinates = Coordinates.startingCoordinates();
-    }
-
-    public Campaign(Playground playground, Coordinates coordinates) {
-        this.playground = playground;
-        this.playerCoordinates = coordinates;
+    public static Campaign createNewCampaign(Playground playground) {
+        return new Campaign(playground, startingCoordinates());
     }
 
     public void movePlayer(Direction direction) {

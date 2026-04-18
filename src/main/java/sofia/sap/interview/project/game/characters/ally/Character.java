@@ -55,6 +55,8 @@ public class Character {
     public void equipGear(Gear itemToEquip) {
         if (equipment.alreadyEquippedType(itemToEquip)) {
             throw new ItemTypeAlreadyEquippedException("Item of this type is already equipped by the character!");
+        } else if (!inventory.checkItemAvailable(itemToEquip)) {
+            throw new ItemNotAvailableException("The provided item is not part of the inventory!");
         }
 
         this.inventory.removeItem(itemToEquip);
