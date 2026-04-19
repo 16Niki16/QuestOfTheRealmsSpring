@@ -2,23 +2,21 @@ package sofia.sap.interview.project.game.gameplay;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import sofia.sap.interview.project.game.characters.enemy.Enemy;
-import sofia.sap.interview.project.game.characters.enemy.type.EnemyType;
-import sofia.sap.interview.project.game.results.CommandResult;
-import sofia.sap.interview.project.game.results.events.CollectSpecialItemEvent;
 import sofia.sap.interview.project.game.exceptions.DirectionNotAvailableException;
-import sofia.sap.interview.project.game.results.information.RoomInformation;
 import sofia.sap.interview.project.game.map.Coordinates;
 import sofia.sap.interview.project.game.map.Direction;
 import sofia.sap.interview.project.game.map.Playground;
 import sofia.sap.interview.project.game.map.room.Room;
 import sofia.sap.interview.project.game.map.room.SpecialItem;
+import sofia.sap.interview.project.game.results.CommandResult;
+import sofia.sap.interview.project.game.results.events.CollectSpecialItemEvent;
+import sofia.sap.interview.project.game.results.information.RoomInformation;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static sofia.sap.interview.project.game.map.Coordinates.*;
+import static sofia.sap.interview.project.game.map.Coordinates.startingCoordinates;
 
 @Getter
 @AllArgsConstructor
@@ -35,7 +33,7 @@ public class Campaign {
             this.playerCoordinates = direction.move(this.playerCoordinates);
         } else {
             throw new DirectionNotAvailableException(
-                "The provided direction is not correct, choose another direction!");
+                    "The provided direction is not correct, choose another direction!");
         }
     }
 
@@ -55,10 +53,6 @@ public class Campaign {
 
     public Set<Direction> getPossibleDirections() {
         return this.playground.possibleDirections(this.playerCoordinates);
-    }
-
-    public Enemy getEnemyOnCharacterCoordinates() {
-        return playground.getEnemyByPosition(playerCoordinates);
     }
 
     public Room getRoom() {

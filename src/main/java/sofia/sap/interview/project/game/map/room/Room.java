@@ -36,7 +36,7 @@ public class Room {
         this.specialItem = null;
     }
 
-    public void killEnemy() {
+    public void removeEnemy() {
         this.enemy = null;
     }
 

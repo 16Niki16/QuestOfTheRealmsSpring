@@ -7,10 +7,13 @@ import sofia.sap.interview.project.game.exceptions.LoadGameException;
 import sofia.sap.interview.project.game.user.User;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Stream;
+
+import static java.nio.file.Files.deleteIfExists;
+import static java.nio.file.Files.exists;
+import static java.nio.file.Files.list;
 
 @Service
 @AllArgsConstructor
@@ -21,7 +24,7 @@ public class GameFileService {
         Path path = pathResolver.userFile(user, filename);
 
         try {
-            Files.deleteIfExists(path);
+            deleteIfExists(path);
         } catch (IOException e) {
             throw new EndGameFileException("Problem in end game file delete!", e);
         }
@@ -30,11 +33,11 @@ public class GameFileService {
     public List<String> getSavedFiles(User user) {
         Path dir = pathResolver.userDir(user);
 
-        if (!Files.exists(dir)) {
+        if (!exists(dir)) {
             throw new LoadGameException("No saved games found!");
         }
 
-        try (Stream<Path> files = Files.list(dir)) {
+        try (Stream<Path> files = list(dir)) {
             return files
                     .map(p -> p.getFileName().toString())
                     .map(name -> name.replace(".json", ""))
@@ -54,11 +57,11 @@ public class GameFileService {
     private int getNextSaveNumber(User user) {
         Path userDirectory = pathResolver.userDir(user);
 
-        if (!Files.exists(userDirectory)) {
+        if (!exists(userDirectory)) {
             return 1;
         }
 
-        try (Stream<Path> files = Files.list(userDirectory)) {
+        try (Stream<Path> files = list(userDirectory)) {
 
             return files
                     .map(p -> p.getFileName().toString())

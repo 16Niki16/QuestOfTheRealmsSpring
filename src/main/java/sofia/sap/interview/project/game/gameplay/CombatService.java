@@ -29,7 +29,7 @@ public class CombatService {
         attackResults.add(AttackEvent.of(character, damageDealt, currentEnemy));
 
         if (currentEnemy.getEnemyStats().isDead()) {
-            currentRoom.killEnemy();
+            currentRoom.removeEnemy();
             attackResults.add(KillEnemyEvent.of(character, currentEnemy));
         }
 

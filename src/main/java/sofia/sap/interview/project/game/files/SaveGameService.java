@@ -8,8 +8,9 @@ import sofia.sap.interview.project.game.exceptions.SaveGameException;
 import sofia.sap.interview.project.game.user.User;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
+
+import static java.nio.file.Files.createDirectories;
 
 @Service
 @AllArgsConstructor
@@ -21,9 +22,9 @@ public class SaveGameService {
         Path path = pathResolver.userFile(user, user.getCurrentGameSessionName());
 
         try {
-            Files.createDirectories(path.getParent());
+            createDirectories(path.getParent());
             mapper.writerWithDefaultPrettyPrinter()
-                .writeValue(path.toFile(), GameDataFactory.save(user.getSession(), user.getLog()));
+                    .writeValue(path.toFile(), GameDataFactory.save(user.getSession(), user.getLog()));
         } catch (IOException e) {
             throw new SaveGameException("Failed to auto save game", e);
         }

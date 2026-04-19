@@ -9,7 +9,7 @@ import sofia.sap.interview.project.game.gameplay.Campaign;
 public class GameSessionFactory {
     public static GameSession createGameSession(CharacterData characterData, MapData mapData) {
         Character character = CharacterFactory.create(characterData);
-        Campaign campaign = MapFactory.create(mapData);
+        Campaign campaign = MapFactory.createCampaign(mapData);
 
         return new GameSession(campaign, character);
     }

@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import static sofia.sap.interview.project.game.quests.QuestRegistry.*;
+import static sofia.sap.interview.project.game.quests.QuestRegistry.createQuests;
 
 @AllArgsConstructor
 public class QuestLog {
