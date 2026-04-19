@@ -2,7 +2,6 @@ package sofia.sap.interview.project.game.inventory;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import sofia.sap.interview.project.game.exceptions.ItemNotAvailableException;
 import sofia.sap.interview.project.game.items.Item;
 import sofia.sap.interview.project.game.items.ItemType;
 
@@ -24,7 +23,7 @@ public class Inventory {
 
     public void addAllItems(Map<ItemType, Integer> items) {
         items.forEach((type, count) ->
-            this.items.merge(type, count, Integer::sum));
+                this.items.merge(type, count, Integer::sum));
     }
 
     public void removeItem(Item item) {

@@ -81,7 +81,7 @@ public class CommandRegistry {
     }
 
     public Command createCommand(String input) {
-        String[] commandSplit = input.split(" ", 2);
+        String[] commandSplit = input.strip().split(" ", 2);
         CommandOption command = fromString(commandSplit[0]);
         CommandParser parser = commands.get(command);
 

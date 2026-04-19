@@ -3,12 +3,14 @@ package sofia.sap.interview.project.game.items.consumable;
 import sofia.sap.interview.project.game.characters.ally.Character;
 import sofia.sap.interview.project.game.items.ItemType;
 
+import static sofia.sap.interview.project.game.items.ItemType.MANA_POTION;
+
 public class ManaPotion implements Consumable {
     private static final int EFFECT = 10;
 
     @Override
     public ItemType getType() {
-        return ItemType.MANA_POTION;
+        return MANA_POTION;
     }
 
     @Override

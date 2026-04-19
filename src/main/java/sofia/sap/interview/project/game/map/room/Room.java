@@ -1,5 +1,6 @@
 package sofia.sap.interview.project.game.map.room;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import sofia.sap.interview.project.game.characters.enemy.Enemy;
 import sofia.sap.interview.project.game.exceptions.ChestNotAvailableException;
@@ -8,18 +9,12 @@ import sofia.sap.interview.project.game.items.ItemType;
 import java.util.Map;
 
 @Getter
+@AllArgsConstructor
 public class Room {
     private final String name;
     private Enemy enemy;
     private Chest chest;
     private SpecialItem specialItem;
-
-    public Room(String name, Enemy enemy, Chest chest, SpecialItem specialItem) {
-        this.enemy = enemy;
-        this.chest = chest;
-        this.specialItem = specialItem;
-        this.name = name;
-    }
 
     public Map<ItemType, Integer> collectItems() {
         if (this.chest == null) {
