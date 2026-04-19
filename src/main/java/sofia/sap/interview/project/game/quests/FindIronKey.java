@@ -1,12 +1,12 @@
 package sofia.sap.interview.project.game.quests;
 
 import sofia.sap.interview.project.game.dto.data.QuestData;
+import sofia.sap.interview.project.game.map.room.SpecialItem;
 import sofia.sap.interview.project.game.results.events.CollectSpecialItemEvent;
 import sofia.sap.interview.project.game.results.events.GameEvent;
-import sofia.sap.interview.project.game.map.room.SpecialItem;
 
-import static sofia.sap.interview.project.game.map.room.SpecialItem.*;
-import static sofia.sap.interview.project.game.quests.QuestType.*;
+import static sofia.sap.interview.project.game.map.room.SpecialItem.IRON_KEY;
+import static sofia.sap.interview.project.game.quests.QuestType.FIND_IRON_KEY;
 
 public class FindIronKey extends QuestBase {
     private static final SpecialItem SPECIAL_ITEM = IRON_KEY;

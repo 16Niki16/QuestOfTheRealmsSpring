@@ -1,13 +1,13 @@
 package sofia.sap.interview.project.game.quests;
 
 import sofia.sap.interview.project.game.dto.data.QuestData;
+import sofia.sap.interview.project.game.items.ItemType;
 import sofia.sap.interview.project.game.results.events.CollectItemsEvent;
 import sofia.sap.interview.project.game.results.events.GameEvent;
-import sofia.sap.interview.project.game.items.ItemType;
 
-import static sofia.sap.interview.project.game.items.ItemType.*;
-import static sofia.sap.interview.project.game.quests.QuestType.*;
-import static sofia.sap.interview.project.game.quests.Reward.*;
+import static sofia.sap.interview.project.game.items.ItemType.HEALING_HERB;
+import static sofia.sap.interview.project.game.quests.QuestType.COLLECT_THREE_HERBS;
+import static sofia.sap.interview.project.game.quests.Reward.GRAND;
 
 public class CollectThreeHerbs extends QuestBase {
     private static final ItemType ITEM = HEALING_HERB;

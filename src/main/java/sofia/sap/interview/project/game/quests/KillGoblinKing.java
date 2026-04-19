@@ -5,9 +5,9 @@ import sofia.sap.interview.project.game.dto.data.QuestData;
 import sofia.sap.interview.project.game.results.events.GameEvent;
 import sofia.sap.interview.project.game.results.events.KillEnemyEvent;
 
-import static sofia.sap.interview.project.game.characters.enemy.type.EnemyType.*;
-import static sofia.sap.interview.project.game.quests.QuestType.*;
-import static sofia.sap.interview.project.game.quests.Reward.*;
+import static sofia.sap.interview.project.game.characters.enemy.type.EnemyType.GOBLIN_KING;
+import static sofia.sap.interview.project.game.quests.QuestType.KILL_GOBLIN_KING;
+import static sofia.sap.interview.project.game.quests.Reward.MEDIUM;
 
 public class KillGoblinKing extends QuestBase {
     private static final EnemyType TARGET = GOBLIN_KING;
