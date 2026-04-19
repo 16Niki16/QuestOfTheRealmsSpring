@@ -42,6 +42,7 @@ import static sofia.sap.interview.project.game.command.CommandOption.SAVE;
 import static sofia.sap.interview.project.game.command.CommandOption.UNEQUIP;
 import static sofia.sap.interview.project.game.command.CommandOption.USE_ITEM;
 import static sofia.sap.interview.project.game.command.CommandOption.fromString;
+import static sofia.sap.interview.project.game.items.ItemType.getByName;
 import static sofia.sap.interview.project.game.map.Direction.getDirection;
 
 @Component
@@ -107,6 +108,6 @@ public class CommandRegistry {
     }
 
     private ItemType itemType(String itemName) {
-        return ItemType.getByName(itemName);
+        return getByName(itemName);
     }
 }
