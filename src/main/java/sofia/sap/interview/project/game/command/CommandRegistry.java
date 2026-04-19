@@ -25,7 +25,6 @@ import sofia.sap.interview.project.game.items.ItemType;
 
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.function.Function;
 
 import static sofia.sap.interview.project.game.command.CommandOption.ATTACK;
 import static sofia.sap.interview.project.game.command.CommandOption.EQUIP;
@@ -47,7 +46,7 @@ import static sofia.sap.interview.project.game.map.Direction.getDirection;
 
 @Component
 public class CommandRegistry {
-    private final Map<CommandOption, Function<String, Command>> commands = new EnumMap<>(CommandOption.class);
+    private final Map<CommandOption, CommandParser> commands = new EnumMap<>(CommandOption.class);
 
     public CommandRegistry(GameSessionService gameSessionService,
                            CombatService combatService,
@@ -84,23 +83,23 @@ public class CommandRegistry {
     public Command createCommand(String input) {
         String[] commandSplit = input.split(" ", 2);
         CommandOption command = fromString(commandSplit[0]);
-        Function<String, Command> parser = commands.get(command);
+        CommandParser parser = commands.get(command);
 
         String args = commandSplit.length > 1 ? commandSplit[1] : "";
-        return parser.apply(args);
+        return parser.parse(args);
     }
 
     public Command getCommand(CommandOption commandOption, String argument) {
         if (argument == null) {
             throw new CommandArgumentException("The provided command argument can not be null!");
         }
-        Function<String, Command> parser = commands.get(commandOption);
+        CommandParser parser = commands.get(commandOption);
 
         if (parser == null) {
             throw new IllegalArgumentException("Unknown command: " + commandOption);
         }
 
-        return parser.apply(argument);
+        return parser.parse(argument);
     }
 
     public Command getCommand(CommandOption commandOption) {
