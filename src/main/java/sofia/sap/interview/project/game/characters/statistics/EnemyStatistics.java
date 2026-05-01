@@ -1,13 +1,13 @@
 package sofia.sap.interview.project.game.characters.statistics;
 
-import sofia.sap.interview.project.game.characters.enemy.type.EnemyType;
+import sofia.sap.interview.project.game.characters.statistics.attack.AttackRange;
 
 import java.util.concurrent.ThreadLocalRandom;
 
 public class EnemyStatistics extends BaseStatistics {
 
-    public EnemyStatistics(EnemyType type) {
-        super(type.getHealth(), type.getAttackRange());
+    public EnemyStatistics(int health, AttackRange attackRange) {
+        super(health, attackRange);
     }
 
     @Override

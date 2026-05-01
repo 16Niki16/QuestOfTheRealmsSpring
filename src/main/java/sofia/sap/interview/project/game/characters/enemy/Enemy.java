@@ -12,7 +12,7 @@ public abstract class Enemy {
     private final EnemyStatistics enemyStats;
 
     public Enemy(EnemyType type) {
-        this.enemyStats = new EnemyStatistics(type);
+        this.enemyStats = new EnemyStatistics(type.getHealth(), type.getAttackRange());
         this.type = type;
     }
 

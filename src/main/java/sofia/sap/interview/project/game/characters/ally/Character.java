@@ -15,7 +15,6 @@ import sofia.sap.interview.project.game.items.gear.Gear;
 
 import java.util.Map;
 
-import static sofia.sap.interview.project.game.characters.statistics.CharacterStatistics.newCharacterStatistics;
 import static sofia.sap.interview.project.game.inventory.Equipment.newCharacterEquipment;
 import static sofia.sap.interview.project.game.inventory.Inventory.newCharacterInventory;
 
@@ -29,8 +28,10 @@ public class Character {
     private final Equipment equipment;
 
     public static Character createNewCharacter(String characterName, CharacterType type) {
-        return new Character(characterName, type,
-            newCharacterStatistics(type),
+        CharacterStatistics characterStats = new CharacterStatistics(type.getHealth(), type.getAttackRange(),
+            type.getMana(), type.getManaCost());
+
+        return new Character(characterName, type, characterStats,
             newCharacterInventory(),
             newCharacterEquipment());
     }

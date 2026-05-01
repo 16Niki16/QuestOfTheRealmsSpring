@@ -1,7 +1,6 @@
 package sofia.sap.interview.project.game.characters.statistics;
 
 import lombok.Getter;
-import sofia.sap.interview.project.game.characters.ally.type.CharacterType;
 import sofia.sap.interview.project.game.characters.statistics.attack.AttackRange;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -16,11 +15,6 @@ public class CharacterStatistics extends BaseStatistics {
         super(health, attackRange);
         this.mana = mana;
         this.manaCost = manaCost;
-    }
-
-    public static CharacterStatistics newCharacterStatistics(CharacterType type) {
-        return new CharacterStatistics(type.getHealth(), type.getAttackRange(),
-                type.getMana(), type.getManaCost());
     }
 
     public boolean decreaseMana(int amount) {
