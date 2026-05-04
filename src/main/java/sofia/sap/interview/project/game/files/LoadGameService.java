@@ -4,13 +4,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import sofia.sap.interview.project.game.dto.data.GameData;
-import sofia.sap.interview.project.game.dto.loadgame.GameSessionFactory;
 import sofia.sap.interview.project.game.exceptions.LoadGameException;
 import sofia.sap.interview.project.game.gameplay.GameSession;
 import sofia.sap.interview.project.game.user.User;
 
 import java.io.IOException;
 import java.nio.file.Path;
+
+import static sofia.sap.interview.project.game.dto.loadgame.GameSessionFactory.createGameSession;
 
 @Service
 @AllArgsConstructor
@@ -23,7 +24,7 @@ public class LoadGameService {
 
         try {
             GameData data = mapper.readValue(path.toFile(), GameData.class);
-            return GameSessionFactory.createGameSession(data);
+            return createGameSession(data);
 
         } catch (IOException e) {
             throw new LoadGameException("Failed to load game!", e);
