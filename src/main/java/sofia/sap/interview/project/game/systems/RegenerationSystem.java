@@ -9,10 +9,12 @@ import java.util.Collection;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import static java.time.Duration.ofSeconds;
+
 @Service
 public class RegenerationSystem implements GameSystem {
     private static final int AMOUNT = 5;
-    private static final Duration TIMER = Duration.ofSeconds(5);
+    private static final Duration TIMER = ofSeconds(5);
 
     @Override
     public void start(ScheduledExecutorService scheduler, Collection<User> activeUsers) {

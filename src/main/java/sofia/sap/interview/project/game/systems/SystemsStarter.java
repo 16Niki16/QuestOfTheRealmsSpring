@@ -14,6 +14,8 @@ import java.util.concurrent.TimeUnit;
 @Component
 @RequiredArgsConstructor
 public class SystemsStarter {
+    private static final int TIMEOUT = 5;
+
     private final AutoSaveSystem autoSaveSystem;
     private final RegenerationSystem regenerationSystem;
     private final UserRegistry userRegistry;
@@ -34,7 +36,7 @@ public class SystemsStarter {
             scheduler.shutdown();
 
             try {
-                if (!scheduler.awaitTermination(5, TimeUnit.SECONDS)) {
+                if (!scheduler.awaitTermination(TIMEOUT, TimeUnit.SECONDS)) {
                     scheduler.shutdownNow();
                 }
             } catch (InterruptedException e) {

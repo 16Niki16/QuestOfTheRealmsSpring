@@ -20,7 +20,7 @@ public class EventsProcessor {
 
     public List<CommandResult> process(User user, List<CommandResult> commandResults) {
         List<CommandResult> allResults = new ArrayList<>(commandResults);
-        QuestLog questLog = user.getLog();
+        QuestLog questLog = user.getSession().log();
 
         for (CommandResult result : commandResults) {
 

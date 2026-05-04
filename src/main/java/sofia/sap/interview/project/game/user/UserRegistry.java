@@ -10,11 +10,11 @@ import java.util.concurrent.ConcurrentHashMap;
 public class UserRegistry {
     private final Map<String, User> users = new ConcurrentHashMap<>();
 
-    public User putIfAbsent(String username, User user) {
+    public User connectUser(String username, User user) {
         return users.putIfAbsent(username, user);
     }
 
-    public User get(String username) {
+    public User getUser(String username) {
         return users.get(username);
     }
 

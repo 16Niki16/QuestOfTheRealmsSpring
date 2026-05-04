@@ -18,6 +18,6 @@ public class SaveCommand implements Command {
     public List<CommandResult> execute(User user) {
         gameSessionService.saveGame(user);
 
-        return List.of(SaveInformation.of(user.getCurrentGameSessionName()));
+        return List.of(SaveInformation.of(user.getSession().sessionName()));
     }
 }

@@ -3,10 +3,7 @@ package sofia.sap.interview.project.game.gameplay;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import sofia.sap.interview.project.game.characters.ally.type.CharacterType;
-import sofia.sap.interview.project.game.dto.loadgame.LoadedSessionInformation;
 import sofia.sap.interview.project.game.files.GameRepositoryService;
-import sofia.sap.interview.project.game.gameplay.GameFactory;
-import sofia.sap.interview.project.game.gameplay.GameSession;
 import sofia.sap.interview.project.game.quests.QuestLog;
 import sofia.sap.interview.project.game.user.User;
 
@@ -20,19 +17,19 @@ public class GameSessionService {
 
     public void newGame(User user, String characterName, CharacterType characterType) {
         synchronized (user) {
-            String fileName = gameRepositoryService.getNewGameFilename(user);
-            GameSession session = gameFactory.createSession(characterName, characterType);
+            String sessionName = gameRepositoryService.getNewGameFilename(user);
+            GameSession session = gameFactory.createSession(sessionName, characterName, characterType);
             QuestLog log = createNewQuestLog();
 
-            user.createSession(fileName, session, log);
+            user.createSession(session);
             saveGame(user);
         }
     }
 
     public void resumeGame(User user, String filename) {
         synchronized (user) {
-            LoadedSessionInformation info = gameRepositoryService.getPreviousGameSession(user, filename);
-            user.createSession(filename, info.session(), info.log());
+            GameSession session = gameRepositoryService.getPreviousGameSession(user, filename);
+            user.createSession(session);
         }
     }
 
@@ -46,7 +43,7 @@ public class GameSessionService {
 
     public void endGame(User user) {
         synchronized (user) {
-            gameRepositoryService.deleteGame(user, user.getCurrentGameSessionName());
+            gameRepositoryService.deleteGame(user, user.getSession().sessionName());
             user.clearSession();
         }
     }

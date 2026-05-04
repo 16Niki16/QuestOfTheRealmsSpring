@@ -19,12 +19,12 @@ public class SaveGameService {
     private final PathResolver pathResolver;
 
     public void saveGame(User user) {
-        Path path = pathResolver.userFile(user, user.getCurrentGameSessionName());
+        Path path = pathResolver.userFile(user, user.getSession().sessionName());
 
         try {
             createDirectories(path.getParent());
             mapper.writerWithDefaultPrettyPrinter()
-                    .writeValue(path.toFile(), GameDataFactory.save(user.getSession(), user.getLog()));
+                    .writeValue(path.toFile(), GameDataFactory.save(user.getSession()));
         } catch (IOException e) {
             throw new SaveGameException("Failed to auto save game", e);
         }

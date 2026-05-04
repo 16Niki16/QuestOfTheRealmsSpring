@@ -2,7 +2,7 @@ package sofia.sap.interview.project.game.files;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import sofia.sap.interview.project.game.dto.loadgame.LoadedSessionInformation;
+import sofia.sap.interview.project.game.gameplay.GameSession;
 import sofia.sap.interview.project.game.user.User;
 
 import java.util.List;
@@ -26,7 +26,7 @@ public class GameRepositoryService {
         return fileGameService.getSavedFiles(user);
     }
 
-    public LoadedSessionInformation getPreviousGameSession(User user, String filename) {
+    public GameSession getPreviousGameSession(User user, String filename) {
         return loadGameService.load(user, filename);
     }
 

@@ -10,10 +10,12 @@ import java.util.Collection;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import static java.time.Duration.ofSeconds;
+
 @Service
 @AllArgsConstructor
 public class AutoSaveSystem implements GameSystem {
-    private static final Duration TIME_INTERVAL = Duration.ofSeconds(60);
+    private static final Duration TIME_INTERVAL = ofSeconds(60);
     private final GameSessionService gameSessionService;
 
     @Override

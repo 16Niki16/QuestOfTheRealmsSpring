@@ -13,7 +13,7 @@ public class CheckQuestsCommand implements Command {
 
     @Override
     public List<CommandResult> execute(User user) {
-        QuestLog questLog = user.getLog();
+        QuestLog questLog = user.getSession().log();
 
         return List.of(QuestInformation.of(questLog));
     }

@@ -31,15 +31,15 @@ public class GameService {
     private final UserRegistry userRegistry;
 
     public void registerUser(String username) {
-        User existing = userRegistry.putIfAbsent(username, createUser(username));
+        User user = userRegistry.connectUser(username, createUser(username));
 
-        if (existing != null) {
+        if (user != null) {
             throw new UsernameAlreadyExistException("Username already taken: " + username);
         }
     }
 
     public User getUser(String username) {
-        User user = userRegistry.get(username);
+        User user = userRegistry.getUser(username);
 
         if (user == null) {
             throw new UserNotFoundException("User not found: " + username);
