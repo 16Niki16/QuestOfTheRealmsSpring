@@ -19,6 +19,10 @@ public class EventsProcessor {
     private final GameSessionService gameSessionService;
 
     public List<CommandResult> process(User user, List<CommandResult> commandResults) {
+        if (!user.isActiveSession()) {
+            return commandResults;
+        }
+
         List<CommandResult> allResults = new ArrayList<>(commandResults);
         QuestLog questLog = user.getSession().log();
 
