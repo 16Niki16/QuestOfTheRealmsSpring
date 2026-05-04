@@ -29,7 +29,6 @@ import sofia.sap.interview.project.game.exceptions.UsernameAlreadyExistException
 import sofia.sap.interview.project.game.results.ErrorResponseDTO;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GameExceptionHandler {

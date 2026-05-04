@@ -28,12 +28,12 @@ public class Character {
     private final Equipment equipment;
 
     public static Character createNewCharacter(String characterName, CharacterType type) {
-        CharacterStatistics characterStats = new CharacterStatistics
-            (type.getHealth(), type.getAttackRange(), type.getMana(), type.getManaCost());
+        CharacterStatistics characterStats = new CharacterStatistics(type.getHealth(),
+                type.getAttackRange(), type.getMana(), type.getManaCost());
 
         return new Character(characterName, type, characterStats,
-            newCharacterInventory(),
-            newCharacterEquipment());
+                newCharacterInventory(),
+                newCharacterEquipment());
     }
 
     public int attackEnemy() {
