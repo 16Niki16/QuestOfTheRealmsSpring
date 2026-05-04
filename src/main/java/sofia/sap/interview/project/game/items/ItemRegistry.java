@@ -14,19 +14,21 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
+import static sofia.sap.interview.project.game.items.ItemType.*;
+
 public class ItemRegistry {
 
     private static final Map<ItemType, Supplier<Consumable>> CONSUMABLES = new EnumMap<>(ItemType.class);
     private static final Map<ItemType, Supplier<Gear>> GEAR = new EnumMap<>(ItemType.class);
 
     static {
-        CONSUMABLES.put(ItemType.HEALING_HERB, HealingHerb::new);
-        CONSUMABLES.put(ItemType.MANA_POTION, ManaPotion::new);
+        CONSUMABLES.put(HEALING_HERB, HealingHerb::new);
+        CONSUMABLES.put(MANA_POTION, ManaPotion::new);
 
-        GEAR.put(ItemType.IRON_DAGGER, IronDagger::new);
-        GEAR.put(ItemType.IRON_SWORD, IronSword::new);
-        GEAR.put(ItemType.GOLDEN_DAGGER, GoldenDagger::new);
-        GEAR.put(ItemType.GOLDEN_SWORD, GoldenSword::new);
+        GEAR.put(IRON_DAGGER, IronDagger::new);
+        GEAR.put(IRON_SWORD, IronSword::new);
+        GEAR.put(GOLDEN_DAGGER, GoldenDagger::new);
+        GEAR.put(GOLDEN_SWORD, GoldenSword::new);
     }
 
     public static Item create(ItemType itemType) {
