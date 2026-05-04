@@ -26,6 +26,10 @@ import sofia.sap.interview.project.game.exceptions.SessionInProgressException;
 import sofia.sap.interview.project.game.exceptions.UnknownResultTypeException;
 import sofia.sap.interview.project.game.exceptions.UserNotFoundException;
 import sofia.sap.interview.project.game.exceptions.UsernameAlreadyExistException;
+import sofia.sap.interview.project.game.results.ErrorResponseDTO;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GameExceptionHandler {
@@ -37,28 +41,27 @@ public class GameExceptionHandler {
         NoActiveSessionException.class,
         CommandArgumentException.class
     })
-    public ResponseEntity<String> handleInvalidInput(RuntimeException e) {
+    public ResponseEntity<ErrorResponseDTO> handleInvalidInput(RuntimeException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-            .body(e.getMessage());
+            .body(new ErrorResponseDTO(List.of(e.getMessage())));
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<String> handleInvalidJson(HttpMessageNotReadableException e) {
+    public ResponseEntity<ErrorResponseDTO> handleInvalidJson(HttpMessageNotReadableException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-            .body("Invalid request format!");
+            .body(new ErrorResponseDTO(List.of("Invalid request format!")));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<String> handleValidation(MethodArgumentNotValidException e) {
-        String errorMessage = e.getBindingResult()
+    public ResponseEntity<ErrorResponseDTO> handleValidation(MethodArgumentNotValidException e) {
+        List<String> errorMessages = e.getBindingResult()
             .getFieldErrors()
             .stream()
             .map(DefaultMessageSourceResolvable::getDefaultMessage)
-            .findFirst()
-            .orElse("Invalid request");
+            .toList();
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-            .body(errorMessage);
+            .body(new ErrorResponseDTO(errorMessages));
     }
 
     @ExceptionHandler({
@@ -72,15 +75,15 @@ public class GameExceptionHandler {
         QuestTypeNotFoundException.class,
         UnknownResultTypeException.class
     })
-    public ResponseEntity<String> handleNotFound(RuntimeException e) {
+    public ResponseEntity<ErrorResponseDTO> handleNotFound(RuntimeException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-            .body(e.getMessage());
+            .body(new ErrorResponseDTO(List.of(e.getMessage())));
     }
 
     @ExceptionHandler(ItemTypeAlreadyEquippedException.class)
-    public ResponseEntity<String> handleAlreadyEquipped(ItemTypeAlreadyEquippedException e) {
+    public ResponseEntity<ErrorResponseDTO> handleAlreadyEquipped(ItemTypeAlreadyEquippedException e) {
         return ResponseEntity.status(HttpStatus.CONFLICT)
-            .body(e.getMessage());
+            .body(new ErrorResponseDTO(List.of(e.getMessage())));
     }
 
     @ExceptionHandler({
@@ -89,14 +92,14 @@ public class GameExceptionHandler {
         SaveGameException.class,
         EndGameFileException.class
     })
-    public ResponseEntity<String> handleFileErrors(RuntimeException e) {
+    public ResponseEntity<ErrorResponseDTO> handleFileErrors(RuntimeException e) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-            .body(e.getMessage());
+            .body(new ErrorResponseDTO(List.of(e.getMessage())));
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleUnexpected(Exception e) {
+    public ResponseEntity<ErrorResponseDTO> handleUnexpected(Exception e) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-            .body("Unexpected error occurred");
+            .body(new ErrorResponseDTO(List.of("Unexpected error occurred")));
     }
 }
