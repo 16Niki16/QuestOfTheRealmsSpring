@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public class SystemsStarter {
     private static final int TIMEOUT = 5;
+    private static final int NUMBER_OF_THREADS = 2;
 
     private final AutoSaveSystem autoSaveSystem;
     private final RegenerationSystem regenerationSystem;
@@ -24,10 +25,10 @@ public class SystemsStarter {
 
     @PostConstruct
     public void start() {
-        scheduler = Executors.newScheduledThreadPool(2);
+        scheduler = Executors.newScheduledThreadPool(NUMBER_OF_THREADS);
 
-        autoSaveSystem.start(scheduler, userRegistry.getAllUsers());
-        regenerationSystem.start(scheduler, userRegistry.getAllUsers());
+        autoSaveSystem.start(scheduler);
+        regenerationSystem.start(scheduler);
     }
 
     @PreDestroy

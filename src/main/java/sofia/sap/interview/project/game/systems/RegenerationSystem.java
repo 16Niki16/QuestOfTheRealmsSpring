@@ -1,8 +1,10 @@
 package sofia.sap.interview.project.game.systems;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import sofia.sap.interview.project.game.characters.statistics.CharacterStatistics;
 import sofia.sap.interview.project.game.user.User;
+import sofia.sap.interview.project.game.user.UserRegistry;
 
 import java.time.Duration;
 import java.util.Collection;
@@ -12,15 +14,17 @@ import java.util.concurrent.TimeUnit;
 import static java.time.Duration.ofSeconds;
 
 @Service
+@AllArgsConstructor
 public class RegenerationSystem implements GameSystem {
     private static final int AMOUNT = 5;
     private static final Duration TIMER = ofSeconds(5);
+    private final UserRegistry userRegistry;
 
     @Override
-    public void start(ScheduledExecutorService scheduler, Collection<User> activeUsers) {
+    public void start(ScheduledExecutorService scheduler) {
         scheduler.scheduleAtFixedRate(
                 () -> {
-                    for (User user : activeUsers) {
+                    for (User user : userRegistry.getAllUsers()) {
                         synchronized (user) {
                             if (user.isActiveSession()) {
                                 CharacterStatistics stats = user.getSession().character().getCharacterStats();

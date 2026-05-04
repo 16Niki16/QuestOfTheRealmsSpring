@@ -6,5 +6,5 @@ import java.util.Collection;
 import java.util.concurrent.ScheduledExecutorService;
 
 public interface GameSystem {
-    void start(ScheduledExecutorService scheduler, Collection<User> activeUsers);
+    void start(ScheduledExecutorService scheduler);
 }

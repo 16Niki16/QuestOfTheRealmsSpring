@@ -19,7 +19,6 @@ public class GameSessionService {
         synchronized (user) {
             String sessionName = gameRepositoryService.getNewGameFilename(user);
             GameSession session = gameFactory.createSession(sessionName, characterName, characterType);
-            QuestLog log = createNewQuestLog();
 
             user.createSession(session);
             saveGame(user);
