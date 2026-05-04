@@ -9,6 +9,7 @@ import sofia.sap.interview.project.game.quests.QuestLog;
 
 import static sofia.sap.interview.project.game.characters.ally.Character.createNewCharacter;
 import static sofia.sap.interview.project.game.gameplay.Campaign.createNewCampaign;
+import static sofia.sap.interview.project.game.quests.QuestLog.createNewQuestLog;
 
 @Component
 @AllArgsConstructor
@@ -18,7 +19,7 @@ public class GameFactory {
     public GameSession createSession(String sessionName, String characterName, CharacterType characterType) {
         Campaign campaign = createNewCampaign(mapService.createPlayground());
         Character character = createNewCharacter(characterName, characterType);
-        QuestLog questLog = QuestLog.createNewQuestLog();
+        QuestLog questLog = createNewQuestLog();
 
         return new GameSession(sessionName, campaign, character, questLog);
     }
