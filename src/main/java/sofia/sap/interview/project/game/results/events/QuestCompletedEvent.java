@@ -4,10 +4,10 @@ import sofia.sap.interview.project.game.quests.Quest;
 import sofia.sap.interview.project.game.quests.QuestType;
 import sofia.sap.interview.project.game.quests.Reward;
 
-import static sofia.sap.interview.project.game.results.events.EventType.*;
+import static sofia.sap.interview.project.game.results.events.EventType.QUEST_COMPLETED;
 
 public record QuestCompletedEvent(EventType eventType, QuestType type, String questDescription, Reward questReward)
-    implements GameEvent {
+        implements GameEvent {
     public static QuestCompletedEvent of(Quest quest) {
         return new QuestCompletedEvent(QUEST_COMPLETED, quest.getType(),
                 quest.questDescription(), quest.getReward());

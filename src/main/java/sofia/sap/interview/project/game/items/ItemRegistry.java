@@ -14,7 +14,12 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-import static sofia.sap.interview.project.game.items.ItemType.*;
+import static sofia.sap.interview.project.game.items.ItemType.GOLDEN_DAGGER;
+import static sofia.sap.interview.project.game.items.ItemType.GOLDEN_SWORD;
+import static sofia.sap.interview.project.game.items.ItemType.HEALING_HERB;
+import static sofia.sap.interview.project.game.items.ItemType.IRON_DAGGER;
+import static sofia.sap.interview.project.game.items.ItemType.IRON_SWORD;
+import static sofia.sap.interview.project.game.items.ItemType.MANA_POTION;
 
 public class ItemRegistry {
 

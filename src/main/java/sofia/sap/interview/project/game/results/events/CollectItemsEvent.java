@@ -4,7 +4,7 @@ import sofia.sap.interview.project.game.items.ItemType;
 
 import java.util.Map;
 
-import static sofia.sap.interview.project.game.results.events.EventType.*;
+import static sofia.sap.interview.project.game.results.events.EventType.COLLECT_ITEMS;
 
 public record CollectItemsEvent(EventType eventType, Map<ItemType, Integer> items) implements GameEvent {
     public static CollectItemsEvent collectEvent(Map<ItemType, Integer> items) {

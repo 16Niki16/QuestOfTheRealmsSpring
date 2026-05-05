@@ -7,10 +7,11 @@ import sofia.sap.interview.project.game.results.events.GameEvent;
 
 import static sofia.sap.interview.project.game.map.room.SpecialItem.IRON_KEY;
 import static sofia.sap.interview.project.game.quests.QuestType.FIND_IRON_KEY;
+import static sofia.sap.interview.project.game.quests.Reward.BIG;
 
 public class FindIronKey extends QuestBase {
     private static final SpecialItem SPECIAL_ITEM = IRON_KEY;
-    private static final Reward REWARD = Reward.BIG;
+    private static final Reward REWARD = BIG;
 
     public FindIronKey() {
         super(REWARD);

@@ -1,6 +1,6 @@
 package sofia.sap.interview.project.game.results.information;
 
-import static sofia.sap.interview.project.game.results.information.ViewType.*;
+import static sofia.sap.interview.project.game.results.information.ViewType.EXIT;
 
 public record ExitInformation(ViewType viewType, String filename) implements ViewInformation {
     public static ExitInformation of(String filename) {

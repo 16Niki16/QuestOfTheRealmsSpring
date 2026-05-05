@@ -4,7 +4,7 @@ import sofia.sap.interview.project.game.characters.ally.Character;
 import sofia.sap.interview.project.game.characters.enemy.Enemy;
 import sofia.sap.interview.project.game.characters.enemy.type.EnemyType;
 
-import static sofia.sap.interview.project.game.results.events.EventType.*;
+import static sofia.sap.interview.project.game.results.events.EventType.GAME_OVER;
 
 public record GameOverEvent(EventType eventType, String characterName, EnemyType enemyType) implements GameEvent {
     public static GameOverEvent of(Character character, Enemy enemy) {

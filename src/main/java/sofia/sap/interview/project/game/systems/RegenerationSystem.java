@@ -7,7 +7,6 @@ import sofia.sap.interview.project.game.user.User;
 import sofia.sap.interview.project.game.user.UserRegistry;
 
 import java.time.Duration;
-import java.util.Collection;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 

@@ -1,6 +1,6 @@
 package sofia.sap.interview.project.game.results.information;
 
-import static sofia.sap.interview.project.game.results.information.ViewType.*;
+import static sofia.sap.interview.project.game.results.information.ViewType.SAVE;
 
 public record SaveInformation(ViewType viewType, String filename) implements ViewInformation {
     public static SaveInformation of(String filename) {
