@@ -83,8 +83,7 @@ public class GameExceptionHandler {
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ResponseEntity<ErrorResponseDTO> handleMethodNotSupported(HttpRequestMethodNotSupportedException e) {
 
-        String message = String.format(
-                "Method %s is not supported for this endpoint. Supported methods: %s",
+        String message = String.format("Method %s is not supported for this endpoint. Supported methods: %s",
                 e.getMethod(), e.getSupportedHttpMethods());
 
         return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED)

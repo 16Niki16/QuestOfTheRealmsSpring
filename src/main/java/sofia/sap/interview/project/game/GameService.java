@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import sofia.sap.interview.project.game.command.CommandRegistry;
 import sofia.sap.interview.project.game.command.commands.Command;
 import sofia.sap.interview.project.game.command.commands.NewGameCommand;
+import sofia.sap.interview.project.game.command.commands.ResumeCommand;
 import sofia.sap.interview.project.game.exceptions.UserNotFoundException;
 import sofia.sap.interview.project.game.exceptions.UsernameAlreadyExistException;
 import sofia.sap.interview.project.game.gameplay.GameSessionService;
@@ -19,7 +20,6 @@ import sofia.sap.interview.project.game.user.UserRegistry;
 import java.util.List;
 
 import static sofia.sap.interview.project.game.command.CommandOption.LOAD;
-import static sofia.sap.interview.project.game.command.CommandOption.RESUME;
 import static sofia.sap.interview.project.game.user.User.createUser;
 
 @Service
@@ -62,7 +62,7 @@ public class GameService {
     }
 
     public List<CommandResult> resumeSavedGame(User user, ResumeGameRequest request) {
-        Command resumeCommand = commandRegistry.getCommand(RESUME, request.filename());
+        Command resumeCommand = new ResumeCommand(gameSessionService, request.filename());
 
         return resumeCommand.execute(user);
     }

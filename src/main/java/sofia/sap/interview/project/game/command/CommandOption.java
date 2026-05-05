@@ -20,8 +20,7 @@ public enum CommandOption {
     INVENTORY("inventory"),
     SAVE("save"),
     EXIT("exit"),
-    LOAD("load"),
-    RESUME("resume");
+    LOAD("load");
 
     private final String command;
 

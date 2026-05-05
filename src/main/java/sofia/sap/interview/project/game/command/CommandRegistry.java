@@ -13,7 +13,6 @@ import sofia.sap.interview.project.game.command.commands.LookCommand;
 import sofia.sap.interview.project.game.command.commands.MoveCommand;
 import sofia.sap.interview.project.game.command.commands.OpenChestCommand;
 import sofia.sap.interview.project.game.command.commands.PathsCommand;
-import sofia.sap.interview.project.game.command.commands.ResumeCommand;
 import sofia.sap.interview.project.game.command.commands.SaveCommand;
 import sofia.sap.interview.project.game.command.commands.UnequipGearCommand;
 import sofia.sap.interview.project.game.command.commands.UseItemCommand;
@@ -37,7 +36,6 @@ import static sofia.sap.interview.project.game.command.CommandOption.MOVE;
 import static sofia.sap.interview.project.game.command.CommandOption.OPEN;
 import static sofia.sap.interview.project.game.command.CommandOption.PATHS;
 import static sofia.sap.interview.project.game.command.CommandOption.QUESTS;
-import static sofia.sap.interview.project.game.command.CommandOption.RESUME;
 import static sofia.sap.interview.project.game.command.CommandOption.SAVE;
 import static sofia.sap.interview.project.game.command.CommandOption.UNEQUIP;
 import static sofia.sap.interview.project.game.command.CommandOption.USE_ITEM;
@@ -78,7 +76,6 @@ public class CommandRegistry {
         commands.put(UNEQUIP, args -> new UnequipGearCommand(itemsService, itemType(args)));
         commands.put(USE_ITEM, args -> new UseItemCommand(itemsService, itemType(args)));
         commands.put(MOVE, args -> new MoveCommand(getDirection(args)));
-        commands.put(RESUME, args -> new ResumeCommand(gameSessionService, args));
     }
 
     public Command createCommand(String input) {
